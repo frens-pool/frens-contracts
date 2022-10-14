@@ -1,0 +1,10 @@
+**node_modules
+
+hardhat/deployments
+hardhat/cache*
+
+
+
+
+# dependencies
+/node_modules

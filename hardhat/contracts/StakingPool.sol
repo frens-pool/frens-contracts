@@ -57,6 +57,7 @@ contract StakingPool is ERC721Enumerable, Ownable {
 
   function deposit(address userAddress) public payable {
     require(currentState == State.acceptingDeposits);
+    require(msg.value != 0, "must deposit ether");
     _tokenId++;
     uint256 id = _tokenId;
     depositAmount[id] = msg.value;
@@ -83,6 +84,7 @@ contract StakingPool is ERC721Enumerable, Ownable {
   function distribute() public {
     require(currentState == State.staked, "use withdraw when not staked");
     uint contractBalance = address(this).balance;
+    require(contractBalance > 100, "minimum of 100 wei to distribute");
     for(uint i=1; i<=totalSupply(); i++) {
       address tokenOwner = ownerOf(i);
       uint share = _getShare(i, contractBalance);
@@ -91,7 +93,11 @@ contract StakingPool is ERC721Enumerable, Ownable {
   }
 
   function _getShare(uint _id, uint _contractBalance) internal view returns(uint) {
-    return _contractBalance * depositAmount[_id] / totalDeposits - 1; //steal 1 wei
+    if(depositAmount[_id] == 0) return 0;
+    uint calcedShare =  _contractBalance * depositAmount[_id] / totalDeposits;
+    if(calcedShare > 1){
+      return(calcedShare - 1); //steal 1 wei to avoid rounding errors drawing balance negative
+    }else return 0;
   }
 
   function getShare(uint _id) public view returns(uint) {
@@ -115,7 +121,7 @@ contract StakingPool is ERC721Enumerable, Ownable {
     bytes calldata signature,
     bytes32 deposit_data_root
   ) public onlyOwner{
-    require(address(this).balance >= 32, "not enough eth");
+    require(address(this).balance >= 32 ether, "not enough eth");
     currentState = State.staked;
     uint value = 32 ether;
     //get expected withdrawal_credentials based on contract address

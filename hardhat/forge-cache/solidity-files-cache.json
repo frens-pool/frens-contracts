@@ -13,8 +13,8 @@
   },
   "files": {
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1667150773887,
-      "contentHash": "37bed57940a5a1f8be1ad57ad12ba565",
+      "lastModificationDate": 1668209385549,
+      "contentHash": "27c2a4241f61cefb09626e986a382066",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -45,33 +45,25 @@
         }
       },
       "imports": [
+        "contracts/interfaces/DepositContractInterface.sol",
+        "contracts/interfaces/StakingPoolFactoryInterface.sol",
         "node_modules/@openzeppelin/contracts/access/Ownable.sol",
-        "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
         "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
-        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
-        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
         "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
-        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
-        "node_modules/@openzeppelin/contracts/utils/Address.sol",
         "node_modules/@openzeppelin/contracts/utils/Context.sol",
-        "node_modules/@openzeppelin/contracts/utils/Strings.sol",
-        "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
-        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
-        "node_modules/base64-sol/base64.sol"
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol"
       ],
       "versionRequirement": ">=0.8.0, <0.9.0",
       "artifacts": {
-        "IDepositContract": {
-          "0.8.17+commit.8df45f5f.Linux.gcc": "StakingPool.sol/IDepositContract.json"
-        },
         "StakingPool": {
           "0.8.17+commit.8df45f5f.Linux.gcc": "StakingPool.sol/StakingPool.json"
         }
       }
     },
     "contracts/StakingPoolFactory.sol": {
-      "lastModificationDate": 1667084426060,
-      "contentHash": "f9d768fcdaca21cc4273cb1ef86e2907",
+      "lastModificationDate": 1668211172429,
+      "contentHash": "8f369fc1033468ba4df7dedaace6155d",
       "sourceName": "contracts/StakingPoolFactory.sol",
       "solcConfig": {
         "settings": {
@@ -103,7 +95,10 @@
       },
       "imports": [
         "contracts/StakingPool.sol",
+        "contracts/interfaces/DepositContractInterface.sol",
+        "contracts/interfaces/StakingPoolFactoryInterface.sol",
         "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
         "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
         "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
         "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
@@ -121,6 +116,91 @@
       "artifacts": {
         "StakingPoolFactory": {
           "0.8.17+commit.8df45f5f.Linux.gcc": "StakingPoolFactory.sol/StakingPoolFactory.json"
+        }
+      }
+    },
+    "contracts/interfaces/DepositContractInterface.sol": {
+      "lastModificationDate": 1668206028785,
+      "contentHash": "4dceed4ee9dbf736d7509d2609d2e4e5",
+      "sourceName": "contracts/interfaces/DepositContractInterface.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs"
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "DepositContractInterface": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "DepositContractInterface.sol/DepositContractInterface.json"
+        }
+      }
+    },
+    "contracts/interfaces/StakingPoolFactoryInterface.sol": {
+      "lastModificationDate": 1668210765642,
+      "contentHash": "810f1b47ddc4a23c119db332065288b3",
+      "sourceName": "contracts/interfaces/StakingPoolFactoryInterface.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs"
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol"
+      ],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "StakingPoolFactoryInterface": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "StakingPoolFactoryInterface.sol/StakingPoolFactoryInterface.json"
         }
       }
     },
@@ -466,6 +546,50 @@
       "artifacts": {
         "Ownable": {
           "0.8.17+commit.8df45f5f.Linux.gcc": "Ownable.sol/Ownable.json"
+        }
+      }
+    },
+    "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol": {
+      "lastModificationDate": 1667084427732,
+      "contentHash": "ff727125a84ba8d0dd642f6ab0632435",
+      "sourceName": "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs"
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol"
+      ],
+      "versionRequirement": "^0.8.0",
+      "artifacts": {
+        "IERC721Enumerable": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "IERC721Enumerable.sol/IERC721Enumerable.json"
         }
       }
     },
@@ -980,8 +1104,8 @@
       }
     },
     "test/foundry/StakingPool.t.sol": {
-      "lastModificationDate": 1667687286026,
-      "contentHash": "0fcc64107a5d547c92394a31d801d870",
+      "lastModificationDate": 1668212646974,
+      "contentHash": "b4b7eeabfa0e4606c8bfc6853be136a2",
       "sourceName": "test/foundry/StakingPool.t.sol",
       "solcConfig": {
         "settings": {
@@ -1013,6 +1137,9 @@
       },
       "imports": [
         "contracts/StakingPool.sol",
+        "contracts/StakingPoolFactory.sol",
+        "contracts/interfaces/DepositContractInterface.sol",
+        "contracts/interfaces/StakingPoolFactoryInterface.sol",
         "lib/forge-std/lib/ds-test/src/test.sol",
         "lib/forge-std/src/Script.sol",
         "lib/forge-std/src/StdJson.sol",
@@ -1021,6 +1148,7 @@
         "lib/forge-std/src/console.sol",
         "lib/forge-std/src/console2.sol",
         "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
         "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
         "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
         "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",

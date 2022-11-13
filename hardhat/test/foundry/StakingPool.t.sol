@@ -20,8 +20,8 @@ contract StakingPoolTest is Test {
     bytes32 deposit_data_root = 0xb60b0cd349fe1048322cd8fe3d35d10e7f937837da3a2afaf0433444da1d8618;
 
     function setUp() public {
-      stakingPoolFactory = new StakingPoolFactory();
-      (address pool,) = stakingPoolFactory.create(depCont, contOwner);
+      stakingPoolFactory = new StakingPoolFactory(depCont);
+      (address pool,) = stakingPoolFactory.create(contOwner);
       stakingPool = StakingPool(payable(pool));
       //stakingPool = new StakingPool(depCont, contOwner);
       //return(address(stakingPool).balance);

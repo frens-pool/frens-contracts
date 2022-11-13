@@ -7,7 +7,7 @@ yarn forge test --via-ir --fork-url https://mainnet.infura.io/v3/7b367f3e8f1d48e
 ./deposit new-mnemonic --chain mainnet --eth1_withdrawal_address 0xd119D184628e094322007cEa4F2535Ec3A06E6b1
 
 TODO: research unstake functions in the wild
-TODO: make the factory contract the ERC721 (so all ownership NFTs are on the same contract)
+
 TODO: research/determine functionality for collateralizing the NFT
   -can each pool decide if it can be used for this?
   -what are the requirements for this (only certain operators approved?)

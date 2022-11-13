@@ -88,15 +88,30 @@ contract StakingPoolFactory is ERC721Enumerable, Ownable{
 
 
   //art stuff
+
+  function getEthDecimalString(uint amountInWei) public pure returns(string memory){
+    string memory leftOfDecimal = uint2str(amountInWei / 1 ether);
+    uint rightOfDecimal = (amountInWei % 1 ether) / 10**14;
+    string memory rod = uint2str(rightOfDecimal);
+    if(rightOfDecimal < 1000) rod = string.concat("0", rod);
+    if(rightOfDecimal < 100) rod = string.concat("0", rod);
+    if(rightOfDecimal < 10) rod = string.concat("0", rod);
+    return string.concat(leftOfDecimal, ".", rod);
+  }
+
   function tokenURI(uint256 id) public view override returns (string memory) {
     require(_exists(id), "not exist");
     address poolAddress = getPoolById(id);
     StakingPool stakingPool = StakingPool(payable(poolAddress));
-    uint depositForAddress = stakingPool.depositAmount(id);
-    uint shareForAddress = stakingPool.getDistributableShare(id);
+    uint depositForId = stakingPool.depositAmount(id);
+    string memory depositString = getEthDecimalString(depositForId);
+    uint shareForId = stakingPool.getDistributableShare(id);
+    string memory shareString = getEthDecimalString(shareForId);
     string memory stakingPoolAddress = Strings.toHexString(uint160(poolAddress), 20);
     string memory name = string(abi.encodePacked('fren pool share #',id.toString()));
-    string memory description = string(abi.encodePacked('this fren has a deposit of ',uint2str(depositForAddress / 1 ether),' Eth in pool ', stakingPoolAddress, ' with claimable balance of ',uint2str(shareForAddress), 'Wei'));
+    string memory description = string(abi.encodePacked(
+      'this fren has a deposit of ',depositString,
+      ' Eth in pool ', stakingPoolAddress, ' with claimable balance of ', shareString, ' Eth'));
     string memory image = Base64.encode(bytes(generateSVGofTokenById(id)));
 
           return
@@ -114,10 +129,10 @@ contract StakingPoolFactory is ERC721Enumerable, Ownable{
                                   id.toString(),
                                   '", "attributes": [{"trait_type": "pool", "value":"',
                                   stakingPoolAddress,
-                                  '"},{"trait_type": "deposit", "value": "Eth: ',
-                                  uint2str(depositForAddress / 1 ether), //TODO: include the decimals - this sucks for someone depositing <1 eth
-                                  '"},{"trait_type": "claimable", "value": "Wei: ',
-                                  uint2str(shareForAddress), //TODO: probably a better way to display this than in wei???
+                                  '"},{"trait_type": "deposit", "value": "',
+                                  depositString, ' Eth',
+                                  '"},{"trait_type": "claimable", "value": "',
+                                  shareString, ' Eth'
                                   '"}], "image": "',
                                   'data:image/svg+xml;base64,',
                                   image,
@@ -144,6 +159,10 @@ contract StakingPoolFactory is ERC721Enumerable, Ownable{
   function renderTokenById(uint256 id) public view returns (string memory) {
 
     StakingPool stakingPool = StakingPool(payable(getPoolById(id)));
+    uint depositForId = stakingPool.depositAmount(id);
+    string memory depositString = getEthDecimalString(depositForId);
+    uint shareForId = stakingPool.getDistributableShare(id);
+    string memory shareString = getEthDecimalString(shareForId);
 
     string memory render = string(abi.encodePacked(
       '<svg viewBox="-100 -100 1000 1000">',
@@ -166,13 +185,13 @@ contract StakingPoolFactory is ERC721Enumerable, Ownable{
           'Deposit:',
         '</text>',
         '<text font-size="80" font-weight="bold" x="250" y="460" fill="blue" stroke="#000" stroke-width="1" font-family="sans-serif">',
-          uint2str(stakingPool.depositAmount(id) / 1 ether), ' Eth',
+          depositString, ' Eth',
         '</text>',
         '<text font-size="120" font-weight="bold" x="80" y="620" fill="green" stroke="#000" stroke-width="1" font-family="sans-serif">',
           'Claimable:',
         '</text>',
         '<text font-size="80" font-weight="bold" x="250" y="730" fill="green" stroke="#000" stroke-width="1" font-family="sans-serif">',
-          uint2str(stakingPool.getDistributableShare(id)), ' Wei',
+          shareString, ' Eth',
         '</text>',
       '</svg>'
       /*

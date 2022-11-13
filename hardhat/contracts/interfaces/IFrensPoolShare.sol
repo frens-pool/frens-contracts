@@ -3,7 +3,8 @@ pragma solidity >=0.8.0 <0.9.0;
 
 import "@openzeppelin/contracts/interfaces/IERC721Enumerable.sol";
 
-interface StakingPoolFactoryInterface is IERC721Enumerable{
+
+interface IFrensPoolShare is IERC721Enumerable{
   function incrementTokenId() external returns(uint);
 
   function mint(address userAddress, uint id, address _pool) external;

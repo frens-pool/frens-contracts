@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "DepositContractInterface",
-  "sourceName": "contracts/interfaces/DepositContractInterface.sol",
+  "contractName": "IDepositContract",
+  "sourceName": "contracts/interfaces/IDepositContract.sol",
   "abi": [
     {
       "inputs": [

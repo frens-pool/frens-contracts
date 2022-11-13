@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "StakingPoolFactoryInterface",
-  "sourceName": "contracts/interfaces/StakingPoolFactoryInterface.sol",
+  "contractName": "IFrensPoolShare",
+  "sourceName": "contracts/interfaces/IFrensPoolShare.sol",
   "abi": [
     {
       "anonymous": false,

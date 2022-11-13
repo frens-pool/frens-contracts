@@ -4,8 +4,9 @@ pragma solidity >=0.8.0 <0.9.0;
 //import "hardhat/console.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/interfaces/IERC721Enumerable.sol";
-import "./interfaces/StakingPoolFactoryInterface.sol";
-import "./interfaces/DepositContractInterface.sol";
+import "./interfaces/IStakingPoolFactory.sol";
+import "./interfaces/IDepositContract.sol";
+import "./interfaces/IFrensPoolShare.sol";
 
 
 contract StakingPool is Ownable {
@@ -21,40 +22,34 @@ contract StakingPool is Ownable {
 
   address public depositContractAddress;
   address private rightfulOwner;
+  bytes public validatorPubKey;
 
-  DepositContractInterface depositContract;
-  StakingPoolFactoryInterface factoryContract;
+  IDepositContract depositContract;
+  IStakingPoolFactory factoryContract;
+  IFrensPoolShare frensPoolShare;
 
-  constructor(address depositContractAddress_, address owner_, address factory_) {
+  constructor(address depositContractAddress_, address factory_, address frensPoolShareAddress_) {
     currentState = State.acceptingDeposits;
     depositContractAddress = depositContractAddress_;
-    depositContract = DepositContractInterface(depositContractAddress);
-    factoryContract = StakingPoolFactoryInterface(factory_);
-    rightfulOwner = owner_;
-  }
+    depositContract = IDepositContract(depositContractAddress);
+    factoryContract = IStakingPoolFactory(factory_);
+    frensPoolShare = IFrensPoolShare(frensPoolShareAddress_);
 
-  function getOwner() public view returns(address){
-    return rightfulOwner;
-  }
-
-  function sendToOwner() public {
-    require(owner() != rightfulOwner, "already done");
-    _transferOwnership(rightfulOwner);
   }
 
   function deposit(address userAddress) public payable {
     require(currentState == State.acceptingDeposits);
     require(msg.value != 0, "must deposit ether");
-    uint id = factoryContract.incrementTokenId();
+    uint id = frensPoolShare.incrementTokenId();
     depositAmount[id] = msg.value;
     totalDeposits += msg.value;
     idsInThisPool.push(id);
-    factoryContract.mint(userAddress, id, address(this));
+    frensPoolShare.mint(userAddress, id, address(this));
   }
 
   function addToDeposit(uint _id) public payable {
-    require(factoryContract.exists(_id), "not exist");
-    require(factoryContract.getPoolById(_id) == address(this), "wrong staking pool");
+    require(frensPoolShare.exists(_id), "not exist");
+    require(frensPoolShare.getPoolById(_id) == address(this), "wrong staking pool");
     require(currentState == State.acceptingDeposits);
     depositAmount[_id] += msg.value;
     totalDeposits += msg.value;
@@ -62,7 +57,7 @@ contract StakingPool is Ownable {
 
   function withdraw(uint _id, uint _amount) public {
     require(currentState != State.staked, "cannot withdraw once staked");
-    require(msg.sender == factoryContract.ownerOf(_id), "not the owner");
+    require(msg.sender == frensPoolShare.ownerOf(_id), "not the owner");
     require(depositAmount[_id] >= _amount, "not enough deposited");
     depositAmount[_id] -= _amount;
     totalDeposits -= _amount;
@@ -75,7 +70,7 @@ contract StakingPool is Ownable {
     require(contractBalance > 100, "minimum of 100 wei to distribute");
     for(uint i=0; i<idsInThisPool.length; i++) {
       uint id = idsInThisPool[i];
-      address tokenOwner = factoryContract.ownerOf(id);
+      address tokenOwner = frensPoolShare.ownerOf(id);
       uint share = _getShare(id, contractBalance);
       payable(tokenOwner).transfer(share);
     }
@@ -100,7 +95,21 @@ contract StakingPool is Ownable {
     } else {
       return getShare(_id);
     }
+  }
 
+  function getPubKey() public view returns(bytes memory){
+    return validatorPubKey;
+  }
+
+  function getState() public view returns(string memory){
+    if(currentState == State.staked) return "staked";
+    if(currentState == State.acceptingDeposits) return "accepting deposits";
+    if(currentState == State.exited) return "exited";
+    return "state failure"; //should never happen
+  }
+
+  function getDepositAmount(uint _id) public view returns(uint){
+    return depositAmount[_id];
   }
 
 
@@ -111,6 +120,7 @@ contract StakingPool is Ownable {
     bytes32 deposit_data_root
   ) public onlyOwner{
     require(address(this).balance >= 32 ether, "not enough eth");
+    require(currentState == State.acceptingDeposits, "wrong state");
     currentState = State.staked;
     uint value = 32 ether;
     //get expected withdrawal_credentials based on contract address
@@ -118,6 +128,7 @@ contract StakingPool is Ownable {
     //compare expected withdrawal_credentials to provided
     require(keccak256(withdrawal_credentials) == keccak256(withdrawalCredFromAddr), "withdrawal credential mismatch");
     depositContract.deposit{value: value}(pubkey, withdrawal_credentials, signature, deposit_data_root);
+    validatorPubKey = pubkey;
     emit Deposit(depositContractAddress, msg.sender);
   }
 

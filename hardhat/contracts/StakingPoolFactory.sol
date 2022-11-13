@@ -3,11 +3,11 @@ pragma solidity >=0.8.0 <0.9.0;
 
 import "./StakingPool.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import 'base64-sol/base64.sol';
 
-contract StakingPoolFactory is ERC721Enumerable{
+contract StakingPoolFactory is ERC721Enumerable, Ownable{
 
   using Strings for uint256;
 
@@ -15,6 +15,7 @@ contract StakingPoolFactory is ERC721Enumerable{
   mapping(address => bool) existsStakingPool;
   mapping(uint => address) poolById;
   uint private _tokenId;
+  address depositContractAddress;
 
   event Create(
     uint indexed contractId, //do we use this for anything?
@@ -36,20 +37,21 @@ contract StakingPoolFactory is ERC721Enumerable{
   }
 
 
-  constructor() ERC721("staking con amigos", "FRENS") {}
+  constructor(address depContAddress_) ERC721("staking con amigos", "FRENS") {
+    depositContractAddress = depContAddress_;
+  }
 
 
   function create(
-    address depositContractAddress_,
     address owner_
   ) public returns(address, uint) {
     uint id = numberOfStakingPools();
 
-    StakingPool stakingPool = new StakingPool(depositContractAddress_, owner_,address(this));
+    StakingPool stakingPool = new StakingPool(depositContractAddress, owner_,address(this));
     stakingPools.push(stakingPool);
     existsStakingPool[address(stakingPool)] = true;
     StakingPool(stakingPool).sendToOwner();
-    emit Create(id, address(stakingPool), msg.sender, owner_, depositContractAddress_);
+    emit Create(id, address(stakingPool), msg.sender, owner_, depositContractAddress);
     return(address(stakingPool), id);
   }
 
@@ -91,9 +93,10 @@ contract StakingPoolFactory is ERC721Enumerable{
     address poolAddress = getPoolById(id);
     StakingPool stakingPool = StakingPool(payable(poolAddress));
     uint depositForAddress = stakingPool.depositAmount(id);
+    uint shareForAddress = stakingPool.getDistributableShare(id);
     string memory stakingPoolAddress = Strings.toHexString(uint160(poolAddress), 20);
     string memory name = string(abi.encodePacked('fren pool share #',id.toString()));
-    string memory description = string(abi.encodePacked('this fren has a deposit of ',uint2str(depositForAddress / 1 ether),' Eth in pool ', stakingPoolAddress, ' with claimable balance of ',stakingPool.getDistributableShare(id), 'Wei'));
+    string memory description = string(abi.encodePacked('this fren has a deposit of ',uint2str(depositForAddress / 1 ether),' Eth in pool ', stakingPoolAddress, ' with claimable balance of ',uint2str(shareForAddress), 'Wei'));
     string memory image = Base64.encode(bytes(generateSVGofTokenById(id)));
 
           return
@@ -109,12 +112,12 @@ contract StakingPoolFactory is ERC721Enumerable{
                                   description,
                                   '", "external_url":"https://frens.fun/token/',
                                   id.toString(),
-                                  '", "attributes": [{"trait_type": "pool", "value": "address: ',
+                                  '", "attributes": [{"trait_type": "pool", "value":"',
                                   stakingPoolAddress,
                                   '"},{"trait_type": "deposit", "value": "Eth: ',
-                                  uint2str(depositForAddress / 1 ether),
+                                  uint2str(depositForAddress / 1 ether), //TODO: include the decimals - this sucks for someone depositing <1 eth
                                   '"},{"trait_type": "claimable", "value": "Wei: ',
-                                  uint2str(stakingPool.getDistributableShare(id)),
+                                  uint2str(shareForAddress), //TODO: probably a better way to display this than in wei???
                                   '"}], "image": "',
                                   'data:image/svg+xml;base64,',
                                   image,

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
+import "hardhat/console.sol";
 import "./interfaces/IStakingPool.sol";
 import "./interfaces/ISSVRegistry.sol";
 import "./interfaces/IStakingPoolFactory.sol";
@@ -26,7 +27,7 @@ contract FrensPoolShare is ERC721Enumerable, Ownable {
   }
 
   modifier onlyStakingPools(address _stakingPoolAddress) {
-    require(factoryContract.doesStakingPoolExist(_stakingPoolAddress));
+    require(factoryContract.doesStakingPoolExist(_stakingPoolAddress), "must be a staking pool");
     _;
   }
 
@@ -61,6 +62,7 @@ contract FrensPoolShare is ERC721Enumerable, Ownable {
     string memory shareString = getEthDecimalString(shareForId);
     string memory stakingPoolAddress = Strings.toHexString(uint160(poolAddress), 20);
     uint32[] memory poolOperators = getOperatorsForPool(poolAddress);
+    bool operatorsSet = poolOperators.length == 0 ? false : true;
     string memory poolState = stakingPool.getState();
     string memory name = string(abi.encodePacked('fren pool share #',id.toString()));
     string memory description = string(abi.encodePacked(
@@ -88,16 +90,16 @@ contract FrensPoolShare is ERC721Enumerable, Ownable {
                 depositString, ' Eth',
                 '"},{"trait_type": "claimable", "value": "',
                 shareString, ' Eth',
-                '"},{"trait_type": "operator1", "value": "',
-                uint2str(poolOperators[0]),
                 '"},{"trait_type": "pool state", "value": "',
                 poolState,
+                '"},{"trait_type": "operator1", "value": "',
+                operatorsSet ? uint2str(poolOperators[0]) : "Not Set",
                 '"},{"trait_type": "operator2", "value": "',
-                uint2str(poolOperators[1]),
+                operatorsSet ? uint2str(poolOperators[1]) : "Not Set",
                 '"},{"trait_type": "operator3", "value": "',
-                uint2str(poolOperators[2]),
+                operatorsSet ? uint2str(poolOperators[2]) : "Not Set",
                 '"},{"trait_type": "operator4", "value": "',
-                uint2str(poolOperators[3]),
+                operatorsSet ? uint2str(poolOperators[4]) : "Not Set",
                 '"}], "image": "',
                 'data:image/svg+xml;base64,',
                 image,

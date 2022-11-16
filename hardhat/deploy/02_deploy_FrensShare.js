@@ -31,10 +31,12 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   });
 
   // Getting a previously deployed contract
-
+  
+  const FrensPoolShare = await ethers.getContract("FrensPoolShare", deployer);
+  await StakingPoolFactory.setFrensPoolShare(FrensPoolShare.address);
   await StakingPoolFactory.transferOwnership("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6");
 
-  const FrensPoolShare = await ethers.getContract("StakingPoolFactory", deployer);
+
   await FrensPoolShare.transferOwnership("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6");
     //const stakingPool = await ethers.getContractAt('StakingPool', "0xaAC799eC2d00C013f1F11c37E654e59B0429DF6A") //<-- if you want to instantiate a version of a contract at a specific address!
 

@@ -1,7 +1,7 @@
 pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 
-//import "hardhat/console.sol";
+import "hardhat/console.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/interfaces/IERC721Enumerable.sol";
 import "./interfaces/IStakingPoolFactory.sol";
@@ -38,7 +38,7 @@ contract StakingPool is Ownable {
   }
 
   function deposit(address userAddress) public payable {
-    require(currentState == State.acceptingDeposits);
+    require(currentState == State.acceptingDeposits, "not accepting deposits");
     require(msg.value != 0, "must deposit ether");
     uint id = frensPoolShare.incrementTokenId();
     depositAmount[id] = msg.value;
@@ -50,6 +50,7 @@ contract StakingPool is Ownable {
   function addToDeposit(uint _id) public payable {
     require(frensPoolShare.exists(_id), "not exist");
     require(frensPoolShare.getPoolById(_id) == address(this), "wrong staking pool");
+    require(currentState == State.acceptingDeposits, "not accepting deposits");
     require(currentState == State.acceptingDeposits);
     depositAmount[_id] += msg.value;
     totalDeposits += msg.value;

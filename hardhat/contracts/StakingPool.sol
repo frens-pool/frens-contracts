@@ -102,6 +102,10 @@ contract StakingPool is Ownable {
     return validatorPubKey;
   }
 
+  function setPubKey(bytes memory publicKey) public onlyOwner{
+    validatorPubKey = publicKey;
+  }
+
   function getState() public view returns(string memory){
     if(currentState == State.staked) return "staked";
     if(currentState == State.acceptingDeposits) return "accepting deposits";
@@ -122,6 +126,10 @@ contract StakingPool is Ownable {
   ) public onlyOwner{
     require(address(this).balance >= 32 ether, "not enough eth");
     require(currentState == State.acceptingDeposits, "wrong state");
+    bytes memory zero;
+    if(keccak256(validatorPubKey) != keccak256(zero)){
+      require(keccak256(validatorPubKey) == keccak256(pubkey), "pubkey does not match stored value");
+    } else validatorPubKey = pubkey;
     currentState = State.staked;
     uint value = 32 ether;
     //get expected withdrawal_credentials based on contract address
@@ -129,7 +137,6 @@ contract StakingPool is Ownable {
     //compare expected withdrawal_credentials to provided
     require(keccak256(withdrawal_credentials) == keccak256(withdrawalCredFromAddr), "withdrawal credential mismatch");
     depositContract.deposit{value: value}(pubkey, withdrawal_credentials, signature, deposit_data_root);
-    validatorPubKey = pubkey;
     emit Deposit(depositContractAddress, msg.sender);
   }
 

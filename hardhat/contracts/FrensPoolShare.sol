@@ -99,7 +99,7 @@ contract FrensPoolShare is ERC721Enumerable, Ownable {
                 '"},{"trait_type": "operator3", "value": "',
                 operatorsSet ? uint2str(poolOperators[2]) : "Not Set",
                 '"},{"trait_type": "operator4", "value": "',
-                operatorsSet ? uint2str(poolOperators[4]) : "Not Set",
+                operatorsSet ? uint2str(poolOperators[3]) : "Not Set",
                 '"}], "image": "',
                 'data:image/svg+xml;base64,',
                 image,
@@ -121,6 +121,7 @@ contract FrensPoolShare is ERC721Enumerable, Ownable {
 
     return svg;
   }
+
 
   // Visibility is `public` to enable it being called by other contracts for composition.
   function renderTokenById(uint256 id) public view returns (string memory) {

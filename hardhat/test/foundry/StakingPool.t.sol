@@ -4,12 +4,15 @@ pragma solidity ^0.8.13;
 import "forge-std/Test.sol";
 import "../../contracts/StakingPool.sol";
 import "../../contracts/StakingPoolFactory.sol";
+import "../../contracts/FrensPoolShare.sol";
 
 contract StakingPoolTest is Test {
     StakingPoolFactory public stakingPoolFactory;
     StakingPool public stakingPool;
+    FrensPoolShare public frensPoolShare;
 
     address payable public depCont = payable(0x00000000219ab540356cBB839Cbe05303d7705Fa);
+    address public ssvRegistryAddress = 0xb9e155e65B5c4D66df28Da8E9a0957f06F11Bc04;
     address public contOwner = 0x0000000000000000000000000000000001111738;
     address payable public alice = payable(0x00000000000000000000000000000000000A11cE);
     address payable public bob = payable(0x0000000000000000000000000000000000000B0b);
@@ -20,11 +23,13 @@ contract StakingPoolTest is Test {
     bytes32 deposit_data_root = 0xb60b0cd349fe1048322cd8fe3d35d10e7f937837da3a2afaf0433444da1d8618;
 
     function setUp() public {
-      stakingPoolFactory = new StakingPoolFactory(depCont);
+      stakingPoolFactory = new StakingPoolFactory(depCont, ssvRegistryAddress);
+      frensPoolShare = new FrensPoolShare(stakingPoolFactory.address, ssvRegistryAddress);
+      stakingPoolFactory.setFrensPoolShare(frensPoolShare.address);
       (address pool,) = stakingPoolFactory.create(contOwner);
+
       stakingPool = StakingPool(payable(pool));
-      //stakingPool = new StakingPool(depCont, contOwner);
-      //return(address(stakingPool).balance);
+
     }
 
     function testOwner() public {

@@ -24,8 +24,8 @@ contract StakingPoolTest is Test {
 
     function setUp() public {
       stakingPoolFactory = new StakingPoolFactory(depCont, ssvRegistryAddress);
-      frensPoolShare = new FrensPoolShare(stakingPoolFactory.address, ssvRegistryAddress);
-      stakingPoolFactory.setFrensPoolShare(frensPoolShare.address);
+      frensPoolShare = new FrensPoolShare(address(stakingPoolFactory), ssvRegistryAddress);
+      stakingPoolFactory.setFrensPoolShare(address(frensPoolShare));
       (address pool,) = stakingPoolFactory.create(contOwner);
 
       stakingPool = StakingPool(payable(pool));
@@ -47,7 +47,7 @@ contract StakingPoolTest is Test {
       if(x > 0){
         startHoax(alice);
         stakingPool.deposit{value: x}(alice);
-        uint id = stakingPoolFactory.tokenOfOwnerByIndex(alice, 0);
+        uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
         assertTrue(id != 0 );
         uint depAmt = stakingPool.depositAmount(id);
         assertEq(x, depAmt);
@@ -60,7 +60,7 @@ contract StakingPoolTest is Test {
       if(x > 0 && y > 0){
         startHoax(alice);
         stakingPool.deposit{value: x}(alice);
-        uint id = stakingPoolFactory.tokenOfOwnerByIndex(alice, 0);
+        uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
         assertTrue(id != 0 );
         uint depAmt = stakingPool.depositAmount(id);
         assertEq(x, depAmt);
@@ -75,7 +75,7 @@ contract StakingPoolTest is Test {
       if(x > 0){
         startHoax(alice);
         stakingPool.deposit{value: x}(bob);
-        uint id = stakingPoolFactory.tokenOfOwnerByIndex(bob, 0);
+        uint id = frensPoolShare.tokenOfOwnerByIndex(bob, 0);
         assertTrue(id != 0 );
         uint depAmt = stakingPool.depositAmount(id);
         assertEq(x, depAmt);
@@ -88,7 +88,7 @@ contract StakingPoolTest is Test {
       if(x >= y && x > 0){
         startHoax(alice);
         stakingPool.deposit{value: x}(alice);
-        uint id = stakingPoolFactory.tokenOfOwnerByIndex(alice, 0);
+        uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
         assertTrue(id != 0 );
         uint depAmt = stakingPool.depositAmount(id);
         assertEq(x, depAmt);

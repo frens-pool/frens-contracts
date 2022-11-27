@@ -146,9 +146,13 @@ contract StakingPool is Ownable {
     return withdralDesired;
   }
 
-//rugpull is for testing only and should not be in the mainnet version
+//REMOVE rugpull is for testing only and should not be in the mainnet version
   function rugpull() public onlyOwner{
     payable(msg.sender).transfer(address(this).balance);
+  }
+//REMOVE setFrensPoolShare is for testing only and should not be in the mainnet version
+  function setFrensPoolShare(address frensPoolShareAddress_) public onlyOwner {
+    frensPoolShare = IFrensPoolShare(frensPoolShareAddress_);
   }
 
   function unstake() public {

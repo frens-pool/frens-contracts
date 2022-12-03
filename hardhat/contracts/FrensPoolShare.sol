@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
-//import "hardhat/console.sol";
+import "hardhat/console.sol";
 import "./interfaces/IStakingPool.sol";
 import "./interfaces/ISSVRegistry.sol";
 import "./interfaces/IStakingPoolFactory.sol";
@@ -63,14 +63,13 @@ contract FrensPoolShare is ERC721Enumerable, Ownable {
     uint shareForId = stakingPool.getDistributableShare(id);
     string memory shareString = getEthDecimalString(shareForId);
     string memory stakingPoolAddress = Strings.toHexString(uint160(poolAddress), 20);
-    (uint32[] memory poolOperators, bytes memory pubKey) = getOperatorsForPool(poolAddress);
-    //string memory pubKeyString = string(abi.encodePacked(pubKey));
+    (uint32[] memory poolOperators, string memory pubKeyString) = getOperatorsForPool(poolAddress);
     string memory poolState = stakingPool.getState();
     string memory name = string(abi.encodePacked('fren pool share #',id.toString()));
     string memory description = string(abi.encodePacked(
       'this fren has a deposit of ',depositString,
       ' Eth in pool ', stakingPoolAddress,
-      ' with claimable balance of ', shareString, ' Eth'));
+      ', with claimable balance of ', shareString, ' Eth'));
     string memory image = Base64.encode(bytes(generateSVGofTokenById(id)));
 
     return
@@ -88,6 +87,8 @@ contract FrensPoolShare is ERC721Enumerable, Ownable {
                 id.toString(),
                 '", "attributes": [{"trait_type": "pool", "value":"',
                 stakingPoolAddress,
+                '"},{"trait_type": "validator public key", "value": "',
+                pubKeyString, 
                 '"},{"trait_type": "deposit", "value": "',
                 depositString, ' Eth',
                 '"},{"trait_type": "claimable", "value": "',
@@ -130,7 +131,6 @@ contract FrensPoolShare is ERC721Enumerable, Ownable {
     string memory color = colorBytes.toColor();
     return color;
   }
-
 
   // Visibility is `public` to enable it being called by other contracts for composition.
   function renderTokenById(uint256 id) public view returns (string memory) {
@@ -193,13 +193,24 @@ contract FrensPoolShare is ERC721Enumerable, Ownable {
     return string.concat(leftOfDecimal, ".", rod);
   }
 
-  function getOperatorsForPool(address poolAddress) public view returns (uint32[] memory, bytes memory) {
+  function getOperatorsForPool(address poolAddress) public view returns (uint32[] memory, string memory) {
     IStakingPool stakingPool = IStakingPool(payable(poolAddress));
     bytes memory poolPubKey = stakingPool.getPubKey();
+    string memory pubKeyString = iToHex(poolPubKey);
     uint32[] memory poolOperators = ssvRegistry.getOperatorsByValidator(poolPubKey);
-    return(poolOperators, poolPubKey);
+    return(poolOperators, pubKeyString);
   }
 
+  function iToHex(bytes memory buffer) public pure returns (string memory) {
+      // Fixed buffer size for hexadecimal convertion
+      bytes memory converted = new bytes(buffer.length * 2);
+      bytes memory _base = "0123456789abcdef";
+      for (uint256 i = 0; i < buffer.length; i++) {
+          converted[i * 2] = _base[uint8(buffer[i]) / _base.length];
+          converted[i * 2 + 1] = _base[uint8(buffer[i]) % _base.length];
+      }
+      return string(abi.encodePacked("0x", converted));
+  }
 
   function uint2str(uint _i) internal pure returns (string memory _uintAsString) {
       if (_i == 0) {

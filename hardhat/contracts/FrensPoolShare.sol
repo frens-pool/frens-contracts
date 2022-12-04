@@ -71,6 +71,8 @@ contract FrensPoolShare is ERC721Enumerable, Ownable {
       ' Eth in pool ', stakingPoolAddress,
       ', with claimable balance of ', shareString, ' Eth'));
     string memory image = Base64.encode(bytes(generateSVGofTokenById(id)));
+
+
 //TODO: add pool owner to traits and possibly art (Add ENS integration for art - only display if ENS exists for address)
     return
       string(

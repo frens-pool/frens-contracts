@@ -45,6 +45,4 @@ contract StakingPoolFactory is Ownable{
     return(existsStakingPool[_stakingPoolAddress]);
   }
 
-
-
 }

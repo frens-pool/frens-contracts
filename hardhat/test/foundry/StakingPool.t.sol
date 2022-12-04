@@ -26,7 +26,7 @@ contract StakingPoolTest is Test {
       stakingPoolFactory = new StakingPoolFactory(depCont, ssvRegistryAddress);
       frensPoolShare = new FrensPoolShare(address(stakingPoolFactory), ssvRegistryAddress);
       stakingPoolFactory.setFrensPoolShare(address(frensPoolShare));
-      (address pool,) = stakingPoolFactory.create(contOwner);
+      (address pool) = stakingPoolFactory.create(contOwner);
 
       stakingPool = StakingPool(payable(pool));
 
@@ -46,7 +46,7 @@ contract StakingPoolTest is Test {
     function testDeposit(uint128 x) public {
       if(x > 0){
         startHoax(alice);
-        stakingPool.deposit{value: x}(alice);
+        stakingPool.depositToPool{value: x}();
         uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
         assertTrue(id != 0 );
         uint depAmt = stakingPool.depositAmount(id);
@@ -59,7 +59,7 @@ contract StakingPoolTest is Test {
     function testAddToDeposit(uint96 x, uint96 y) public {
       if(x > 0 && y > 0){
         startHoax(alice);
-        stakingPool.deposit{value: x}(alice);
+        stakingPool.depositToPool{value: x}();
         uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
         assertTrue(id != 0 );
         uint depAmt = stakingPool.depositAmount(id);
@@ -71,23 +71,10 @@ contract StakingPoolTest is Test {
       }
     }
 
-    function testDepositToBob(uint128 x) public {
-      if(x > 0){
-        startHoax(alice);
-        stakingPool.deposit{value: x}(bob);
-        uint id = frensPoolShare.tokenOfOwnerByIndex(bob, 0);
-        assertTrue(id != 0 );
-        uint depAmt = stakingPool.depositAmount(id);
-        assertEq(x, depAmt);
-        uint totDep = stakingPool.totalDeposits();
-        assertEq(x, totDep);
-      }
-    }
-
     function testWithdraw(uint128 x, uint128 y) public {
       if(x >= y && x > 0){
         startHoax(alice);
-        stakingPool.deposit{value: x}(alice);
+        stakingPool.depositToPool{value: x}();
         uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
         assertTrue(id != 0 );
         uint depAmt = stakingPool.depositAmount(id);
@@ -103,7 +90,7 @@ contract StakingPoolTest is Test {
       //stakingPool.sendToOwner();
       uint initialBalance = address(stakingPool).balance; //bc someone sent eth to this address on mainnet.
       hoax(alice);
-      stakingPool.deposit{value: 32000000000000000000}(alice);
+      stakingPool.depositToPool{value: 32000000000000000000}();
       assertEq(initialBalance + 32000000000000000000, address(stakingPool).balance);
       hoax(contOwner);
       //for this test to pass, it must be run on a mainnet fork,
@@ -121,9 +108,9 @@ contract StakingPoolTest is Test {
           uint bobDeposit = 32000000000000000000 - aliceDeposit;
           //stakingPool.sendToOwner();
           hoax(alice);
-          stakingPool.deposit{value: aliceDeposit}(alice);
+          stakingPool.depositToPool{value: aliceDeposit}();
           hoax(bob);
-          stakingPool.deposit{value: bobDeposit}(bob);
+          stakingPool.depositToPool{value: bobDeposit}();
           startHoax(contOwner);
           stakingPool.stake(pubkey, withdrawal_credentials, signature, deposit_data_root);
           uint aliceBalance = address(alice).balance;

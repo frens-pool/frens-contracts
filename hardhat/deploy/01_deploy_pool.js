@@ -20,7 +20,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   await deploy("StakingPool", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
-    args: [ "0x00000000219ab540356cBB839Cbe05303d7705Fa", "0x521B2cE927FD6d0D473789Bd3c70B296BBce613e", "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0" ],
+    args: [ "0x00000000219ab540356cBB839Cbe05303d7705Fa", "0x521B2cE927FD6d0D473789Bd3c70B296BBce613e", "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0", "0x521B2cE927FD6d0D473789Bd3c70B296BBce613e" ],
     log: true,
     waitConfirmations: 5,
   });

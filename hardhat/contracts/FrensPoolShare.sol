@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
-import "hardhat/console.sol";
+//import "hardhat/console.sol";
 import "./interfaces/IStakingPool.sol";
 import "./interfaces/ISSVRegistry.sol";
 import "./interfaces/IStakingPoolFactory.sol";
@@ -71,7 +71,7 @@ contract FrensPoolShare is ERC721Enumerable, Ownable {
       ' Eth in pool ', stakingPoolAddress,
       ', with claimable balance of ', shareString, ' Eth'));
     string memory image = Base64.encode(bytes(generateSVGofTokenById(id)));
-
+//TODO: add pool owner to traits and possibly art (Add ENS integration for art - only display if ENS exists for address)
     return
       string(
         abi.encodePacked(
@@ -88,7 +88,7 @@ contract FrensPoolShare is ERC721Enumerable, Ownable {
                 '", "attributes": [{"trait_type": "pool", "value":"',
                 stakingPoolAddress,
                 '"},{"trait_type": "validator public key", "value": "',
-                pubKeyString, 
+                pubKeyString,
                 '"},{"trait_type": "deposit", "value": "',
                 depositString, ' Eth',
                 '"},{"trait_type": "claimable", "value": "',

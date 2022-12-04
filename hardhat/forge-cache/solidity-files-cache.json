@@ -13,8 +13,8 @@
   },
   "files": {
     "contracts/FrensPoolShare.sol": {
-      "lastModificationDate": 1669311311650,
-      "contentHash": "ffc718b946a0694e7f5b266b491ba01f",
+      "lastModificationDate": 1670112446877,
+      "contentHash": "5c5f2bcd46cd4116cadf112a975f107e",
       "sourceName": "contracts/FrensPoolShare.sol",
       "solcConfig": {
         "settings": {
@@ -45,6 +45,7 @@
         }
       },
       "imports": [
+        "contracts/ToColor.sol",
         "contracts/interfaces/ISSVRegistry.sol",
         "contracts/interfaces/IStakingPool.sol",
         "contracts/interfaces/IStakingPoolFactory.sol",
@@ -70,8 +71,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1669311322390,
-      "contentHash": "b4104f74d5dd549a318af5c8495d53d4",
+      "lastModificationDate": 1670112446877,
+      "contentHash": "d51a32b7654050bda55993e1a3949ae6",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -120,8 +121,8 @@
       }
     },
     "contracts/StakingPoolFactory.sol": {
-      "lastModificationDate": 1668380345888,
-      "contentHash": "f016e4415582f664f36e036ff8fb458b",
+      "lastModificationDate": 1670112446877,
+      "contentHash": "277c059800fd995eaaa0bae178f329ac",
       "sourceName": "contracts/StakingPoolFactory.sol",
       "solcConfig": {
         "settings": {
@@ -167,6 +168,46 @@
       "artifacts": {
         "StakingPoolFactory": {
           "0.8.17+commit.8df45f5f.Linux.gcc": "StakingPoolFactory.sol/StakingPoolFactory.json"
+        }
+      }
+    },
+    "contracts/ToColor.sol": {
+      "lastModificationDate": 1670112446877,
+      "contentHash": "c94ca048e799d036de7d79e18036f097",
+      "sourceName": "contracts/ToColor.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs"
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "ToColor": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "ToColor.sol/ToColor.json"
         }
       }
     },
@@ -1278,8 +1319,8 @@
       }
     },
     "test/foundry/StakingPool.t.sol": {
-      "lastModificationDate": 1669311585132,
-      "contentHash": "36fda0cc2a0a9b73226f35a227f19764",
+      "lastModificationDate": 1670113093117,
+      "contentHash": "fc8628db10df803f5c41e42bd1797f45",
       "sourceName": "test/foundry/StakingPool.t.sol",
       "solcConfig": {
         "settings": {
@@ -1313,6 +1354,7 @@
         "contracts/FrensPoolShare.sol",
         "contracts/StakingPool.sol",
         "contracts/StakingPoolFactory.sol",
+        "contracts/ToColor.sol",
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IFrensPoolShare.sol",
         "contracts/interfaces/ISSVRegistry.sol",

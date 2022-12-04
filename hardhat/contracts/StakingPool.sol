@@ -11,7 +11,8 @@ import "./interfaces/IFrensPoolShare.sol";
 
 contract StakingPool is Ownable {
 
-  event Deposit(address depositContractAddress, address caller);
+  event Stake(address depositContractAddress, address caller);
+  event DepositToPool(uint amount, address depositer);
 
   mapping (uint => uint) public depositAmount;
   uint public totalDeposits;
@@ -21,30 +22,31 @@ contract StakingPool is Ownable {
   State currentState;
 
   address public depositContractAddress;
-  address private rightfulOwner;
   bytes public validatorPubKey;
 
   IDepositContract depositContract;
   IStakingPoolFactory factoryContract;
   IFrensPoolShare frensPoolShare;
 
-  constructor(address depositContractAddress_, address factory_, address frensPoolShareAddress_) {
+  constructor(address depositContractAddress_, address factory_, address frensPoolShareAddress_, address owner_) {
     currentState = State.acceptingDeposits;
     depositContractAddress = depositContractAddress_;
     depositContract = IDepositContract(depositContractAddress);
     factoryContract = IStakingPoolFactory(factory_);
     frensPoolShare = IFrensPoolShare(frensPoolShareAddress_);
+    _transferOwnership(owner_);
 
   }
 
-  function deposit(address userAddress) public payable {
+  function depositToPool() public payable {
     require(currentState == State.acceptingDeposits, "not accepting deposits");
     require(msg.value != 0, "must deposit ether");
     uint id = frensPoolShare.incrementTokenId();
     depositAmount[id] = msg.value;
     totalDeposits += msg.value;
     idsInThisPool.push(id);
-    frensPoolShare.mint(userAddress, id, address(this));
+    frensPoolShare.mint(msg.sender, id, address(this));
+    emit DepositToPool(msg.value, msg.sender);
   }
 
   function addToDeposit(uint _id) public payable {
@@ -137,7 +139,7 @@ contract StakingPool is Ownable {
     //compare expected withdrawal_credentials to provided
     require(keccak256(withdrawal_credentials) == keccak256(withdrawalCredFromAddr), "withdrawal credential mismatch");
     depositContract.deposit{value: value}(pubkey, withdrawal_credentials, signature, deposit_data_root);
-    emit Deposit(depositContractAddress, msg.sender);
+    emit Stake(depositContractAddress, msg.sender);
   }
 
   function _toWithdrawalCred(address a) private pure returns (bytes memory) {

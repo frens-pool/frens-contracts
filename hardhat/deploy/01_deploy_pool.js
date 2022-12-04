@@ -20,21 +20,22 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   await deploy("StakingPool", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
-    args: [ "0x00000000219ab540356cBB839Cbe05303d7705Fa", "0x521B2cE927FD6d0D473789Bd3c70B296BBce613e" ],
+    args: [ "0x00000000219ab540356cBB839Cbe05303d7705Fa", "0x521B2cE927FD6d0D473789Bd3c70B296BBce613e", "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0", "0x521B2cE927FD6d0D473789Bd3c70B296BBce613e" ],
     log: true,
     waitConfirmations: 5,
   });
 
   // Getting a previously deployed contract
   const StakingPool = await ethers.getContract("StakingPool", deployer);
-  /*  await StakingPool.setPurpose("Hello");
-
+  //await StakingPool.setPurpose("Hello");
+  /*
     To take ownership of stakingPool using the ownable library uncomment next line and add the
     address you want to be the owner.
-    // await stakingPool.transferOwnership(YOUR_ADDRESS_HERE);
+  */
+    //await StakingPool.transferOwnership("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6");
 
     //const stakingPool = await ethers.getContractAt('StakingPool', "0xaAC799eC2d00C013f1F11c37E654e59B0429DF6A") //<-- if you want to instantiate a version of a contract at a specific address!
-  */
+
 
   /*
   //If you want to send value to an address from the deployer

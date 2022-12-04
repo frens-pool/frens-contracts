@@ -1,0 +1,244 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "stakingPoolAddress",
+          "type": "address"
+        }
+      ],
+      "name": "doesStakingPoolExist",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "doesStakingPoolExist(address)": "76f42f8a"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"stakingPoolAddress\",\"type\":\"address\"}],\"name\":\"doesStakingPoolExist\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interfaces/IStakingPoolFactory.sol\":\"IStakingPoolFactory\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":base64-sol/=node_modules/base64-sol/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\"],\"viaIR\":true},\"sources\":{\"contracts/interfaces/IStakingPoolFactory.sol\":{\"keccak256\":\"0x5291fed439a327be5ddb12cce60acf5641d4e04109c5d2c8bdcdc5098d9fa58f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0a8be6502b8f4e57dcaca5eaa669d3a0cdb582f27bb838b767f90a06ff956b97\",\"dweb:/ipfs/QmY9zR7pgYeBzh7mnjJARQSuAzxREPfCnQSXcUWwD6FYeJ\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.17+commit.8df45f5f"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "stakingPoolAddress",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "doesStakingPoolExist",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":@ensdomains/=node_modules/@ensdomains/",
+        ":@openzeppelin/=node_modules/@openzeppelin/",
+        ":base64-sol/=node_modules/base64-sol/",
+        ":ds-test/=lib/forge-std/lib/ds-test/src/",
+        ":eth-gas-reporter/=node_modules/eth-gas-reporter/",
+        ":forge-std/=lib/forge-std/src/",
+        ":hardhat-deploy/=node_modules/hardhat-deploy/",
+        ":hardhat/=node_modules/hardhat/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/interfaces/IStakingPoolFactory.sol": "IStakingPoolFactory"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/interfaces/IStakingPoolFactory.sol": {
+        "keccak256": "0x5291fed439a327be5ddb12cce60acf5641d4e04109c5d2c8bdcdc5098d9fa58f",
+        "urls": [
+          "bzz-raw://0a8be6502b8f4e57dcaca5eaa669d3a0cdb582f27bb838b767f90a06ff956b97",
+          "dweb:/ipfs/QmY9zR7pgYeBzh7mnjJARQSuAzxREPfCnQSXcUWwD6FYeJ"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/interfaces/IStakingPoolFactory.sol",
+    "id": 1822,
+    "exportedSymbols": {
+      "IStakingPoolFactory": [
+        1821
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "0:189:7",
+    "nodes": [
+      {
+        "id": 1813,
+        "nodeType": "PragmaDirective",
+        "src": "0:31:7",
+        "literals": [
+          "solidity",
+          ">=",
+          "0.8",
+          ".0",
+          "<",
+          "0.9",
+          ".0"
+        ]
+      },
+      {
+        "id": 1821,
+        "nodeType": "ContractDefinition",
+        "src": "64:124:7",
+        "nodes": [
+          {
+            "id": 1820,
+            "nodeType": "FunctionDefinition",
+            "src": "99:86:7",
+            "functionSelector": "76f42f8a",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "doesStakingPoolExist",
+            "nameLocation": "108:20:7",
+            "parameters": {
+              "id": 1816,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1815,
+                  "mutability": "mutable",
+                  "name": "stakingPoolAddress",
+                  "nameLocation": "137:18:7",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1820,
+                  "src": "129:26:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1814,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "129:7:7",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "128:28:7"
+            },
+            "returnParameters": {
+              "id": 1819,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1818,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1820,
+                  "src": "179:4:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1817,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "179:4:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "178:6:7"
+            },
+            "scope": 1821,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IStakingPoolFactory",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          1821
+        ],
+        "name": "IStakingPoolFactory",
+        "nameLocation": "74:19:7",
+        "scope": 1822,
+        "usedErrors": []
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 7
+}

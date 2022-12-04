@@ -2,57 +2,47 @@
 pragma solidity >=0.8.0 <0.9.0;
 
 import "./StakingPool.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 
-contract StakingPoolFactory {
-  StakingPool[] public stakingPools;
+contract StakingPoolFactory is Ownable{
+
   mapping(address => bool) existsStakingPool;
 
+  //this is used for testing may be removed for deployment
+  address public lastContract;
+
+  address depositContractAddress;
+  address ssvRegistryAddress;
+  address frensPoolShareAddress;
+
   event Create(
-    uint indexed contractId,
     address indexed contractAddress,
     address creator,
     address owner,
     address depositContractAddress
   );
 
-  event Owners(
-    address indexed contractAddress,
-    address[] owners,
-    uint256 indexed signaturesRequired
-  );
-
-
-  constructor() {}
-
+  constructor(address depContAddress_, address ssvRegistryAddress_) {
+    depositContractAddress = depContAddress_;
+    ssvRegistryAddress = ssvRegistryAddress_;
+  }
+  function setFrensPoolShare(address frensPoolShareAddress_) public onlyOwner {
+    frensPoolShareAddress = frensPoolShareAddress_;
+  }
 
   function create(
-    address depositContractAddress_,
     address owner_
-  ) public returns(address, uint) {
-    uint id = numberOfStakingPools();
-
-    StakingPool stakingPool = (new StakingPool)(depositContractAddress_, owner_);
-    stakingPools.push(stakingPool);
+  ) public returns(address) {
+    StakingPool stakingPool = new StakingPool(depositContractAddress, address(this), frensPoolShareAddress, owner_);
     existsStakingPool[address(stakingPool)] = true;
-    StakingPool(stakingPool).sendToOwner();
-    emit Create(id, address(stakingPool), msg.sender, owner_, depositContractAddress_);
-    return(address(stakingPool), id);
+    lastContract = address(stakingPool); //used for testing can be removed
+    emit Create(address(stakingPool), msg.sender, owner_, depositContractAddress);
+    return(address(stakingPool));
   }
 
-  function numberOfStakingPools() public view returns(uint) {
-    return stakingPools.length;
+  function doesStakingPoolExist(address _stakingPoolAddress) public view returns(bool){
+    return(existsStakingPool[_stakingPoolAddress]);
   }
 
-  function getStakingPool(uint256 _index)
-    public
-    view
-    returns (
-      address stakingPoolAddress,
-      uint balance,
-      address owner
-    ) {
-      StakingPool stakingPool = stakingPools[_index];
-      return (address(stakingPool), address(stakingPool).balance, stakingPool.owner());
-    }
 }

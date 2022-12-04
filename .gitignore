@@ -2,6 +2,9 @@
 
 hardhat/deployments
 hardhat/cache*
+hardhat/node_modules
+*txt
+
 
 
 

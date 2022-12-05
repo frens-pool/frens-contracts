@@ -217,11 +217,6 @@
           "type": "address"
         },
         {
-          "internalType": "uint256",
-          "name": "id",
-          "type": "uint256"
-        },
-        {
           "internalType": "address",
           "name": "_pool",
           "type": "address"

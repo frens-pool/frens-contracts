@@ -17,7 +17,6 @@ contract StakingPool is Ownable, FrensBase {
   event DepositToPool(uint amount, address depositer);
 
 //move to storage contract
-  mapping (uint => uint) public depositAmount;
   uint public totalDeposits;
   uint[] public idsInThisPool;//should this stay locally?
   enum State { acceptingDeposits, staked, exited }//should this stay locally? if not, need to think of all possible states: pending, frozen, underReview, exiting, etc. - maybe this gets its own contract?
@@ -41,7 +40,7 @@ contract StakingPool is Ownable, FrensBase {
     require(msg.value != 0, "must deposit ether");
     addUint(keccak256(abi.encodePacked("token.id")), 1);
     uint id = getUint(keccak256(abi.encodePacked("token.id")));
-    depositAmount[id] = msg.value;//move this to storage
+    setUint(keccak256(abi.encodePacked("deposit.amount", id)), msg.value);
     totalDeposits += msg.value;
     idsInThisPool.push(id);//and this
     frensPoolShare.mint(msg.sender, address(this));
@@ -53,19 +52,19 @@ contract StakingPool is Ownable, FrensBase {
     require(frensPoolShare.getPoolById(_id) == address(this), "wrong staking pool");
     require(currentState == State.acceptingDeposits, "not accepting deposits");
     require(currentState == State.acceptingDeposits);
-    depositAmount[_id] += msg.value;
+    addUint(keccak256(abi.encodePacked("deposit.amount", _id)), msg.value);
     totalDeposits += msg.value;
   }
 
   function withdraw(uint _id, uint _amount) public {
-    require(currentState != State.staked, "cannot withdraw once staked");
+    require(currentState != State.staked, "cannot withdraw once staked");//TODO: this needs to be more restrictive
     require(msg.sender == frensPoolShare.ownerOf(_id), "not the owner");
-    require(depositAmount[_id] >= _amount, "not enough deposited");
-    depositAmount[_id] -= _amount;
+    require(getUint(keccak256(abi.encodePacked("deposit.amount", _id))) >= _amount, "not enough deposited");
+    subUint(keccak256(abi.encodePacked("deposit.amount", _id)), _amount);
     totalDeposits -= _amount;
     payable(msg.sender).transfer(_amount);
   }
-
+  //TODO think about other options for distribution
   function distribute() public {
     require(currentState == State.staked, "use withdraw when not staked");
     uint contractBalance = address(this).balance;
@@ -79,8 +78,9 @@ contract StakingPool is Ownable, FrensBase {
   }
 
   function _getShare(uint _id, uint _contractBalance) internal view returns(uint) {
-    if(depositAmount[_id] == 0) return 0;
-    uint calcedShare =  _contractBalance * depositAmount[_id] / totalDeposits;
+    uint depAmt = getUint(keccak256(abi.encodePacked("deposit.amount", _id)));
+    if(depAmt == 0) return 0;
+    uint calcedShare =  _contractBalance * depAmt / totalDeposits;
     if(calcedShare > 1){
       return(calcedShare - 1); //steal 1 wei to avoid rounding errors drawing balance negative
     }else return 0;
@@ -115,10 +115,10 @@ contract StakingPool is Ownable, FrensBase {
     return "state failure"; //should never happen
   }
 
+//this can move to FrensShare
   function getDepositAmount(uint _id) public view returns(uint){
-    return depositAmount[_id];
+    return getUint(keccak256(abi.encodePacked("deposit.amount", _id)));
   }
-
 
   function stake(
     bytes calldata pubkey,
@@ -158,21 +158,17 @@ contract StakingPool is Ownable, FrensBase {
     frensPoolShare = IFrensPoolShare(frensPoolShareAddress_);
   }
 
-  function unstake() public {
+  function unstake() public onlyOwner{
     distribute();
     currentState = State.exited;
     //TODO what else needs to be in here (probably a limiting modifier and/or some requires)
+    //TODO: is this where we extract fees?
   }
 
 
   // to support receiving ETH by default
   receive() external payable {
-    /*
-    _tokenId++;
-    uint256 id = _tokenId;
-    depositAmount[id] = msg.value;
-    _mint(msg.sender, id);
-    */
+  
   }
 
   fallback() external payable {}

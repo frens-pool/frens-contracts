@@ -17,8 +17,6 @@ contract StakingPool is Ownable, FrensBase {
   event DepositToPool(uint amount, address depositer);
 
 //move to storage contract
-  uint public totalDeposits;
-  uint[] public idsInThisPool;//should this stay locally?
   enum State { acceptingDeposits, staked, exited }//should this stay locally? if not, need to think of all possible states: pending, frozen, underReview, exiting, etc. - maybe this gets its own contract?
   State currentState;//should this stay locally?
 
@@ -34,6 +32,7 @@ contract StakingPool is Ownable, FrensBase {
     _transferOwnership(owner_);
 
   }
+//TODO: needs to interact with SSVtoken (via amm, check balance, check minimum amount needed in contract etc)
 //TODO: need a cap on deposits
   function depositToPool() public payable {
     require(currentState == State.acceptingDeposits, "not accepting deposits");
@@ -41,8 +40,8 @@ contract StakingPool is Ownable, FrensBase {
     addUint(keccak256(abi.encodePacked("token.id")), 1);
     uint id = getUint(keccak256(abi.encodePacked("token.id")));
     setUint(keccak256(abi.encodePacked("deposit.amount", id)), msg.value);
-    totalDeposits += msg.value;
-    idsInThisPool.push(id);//and this
+    addUint(keccak256(abi.encodePacked("total.deposits", address(this))), msg.value);
+    pushUint(keccak256(abi.encodePacked("ids.in.pool", address(this))), id);
     frensPoolShare.mint(msg.sender, address(this));
     emit DepositToPool(msg.value,  msg.sender);
   }
@@ -53,7 +52,7 @@ contract StakingPool is Ownable, FrensBase {
     require(currentState == State.acceptingDeposits, "not accepting deposits");
     require(currentState == State.acceptingDeposits);
     addUint(keccak256(abi.encodePacked("deposit.amount", _id)), msg.value);
-    totalDeposits += msg.value;
+    addUint(keccak256(abi.encodePacked("total.deposits", address(this))), msg.value);
   }
 
   function withdraw(uint _id, uint _amount) public {
@@ -61,26 +60,32 @@ contract StakingPool is Ownable, FrensBase {
     require(msg.sender == frensPoolShare.ownerOf(_id), "not the owner");
     require(getUint(keccak256(abi.encodePacked("deposit.amount", _id))) >= _amount, "not enough deposited");
     subUint(keccak256(abi.encodePacked("deposit.amount", _id)), _amount);
-    totalDeposits -= _amount;
+    subUint(keccak256(abi.encodePacked("total.deposits", address(this))), _amount);
     payable(msg.sender).transfer(_amount);
   }
   //TODO think about other options for distribution
   function distribute() public {
     require(currentState == State.staked, "use withdraw when not staked");
     uint contractBalance = address(this).balance;
+    uint[] memory idsInPool = getArray(keccak256(abi.encodePacked("total.deposits", address(this))));
     require(contractBalance > 100, "minimum of 100 wei to distribute");
-    for(uint i=0; i<idsInThisPool.length; i++) {
-      uint id = idsInThisPool[i];
+    for(uint i=0; i<idsInPool.length; i++) {
+      uint id = idsInPool[i];
       address tokenOwner = frensPoolShare.ownerOf(id);
       uint share = _getShare(id, contractBalance);
       payable(tokenOwner).transfer(share);
     }
   }
 
+  function getIdsInThisPool() public view returns(uint[] memory) {
+    return getArray(keccak256(abi.encodePacked("ids.in.pool", address(this))));
+  }
+
   function _getShare(uint _id, uint _contractBalance) internal view returns(uint) {
     uint depAmt = getUint(keccak256(abi.encodePacked("deposit.amount", _id)));
+    uint totDeps = getUint(keccak256(abi.encodePacked("total.deposits", address(this))));
     if(depAmt == 0) return 0;
-    uint calcedShare =  _contractBalance * depAmt / totalDeposits;
+    uint calcedShare =  _contractBalance * depAmt / totDeps;
     if(calcedShare > 1){
       return(calcedShare - 1); //steal 1 wei to avoid rounding errors drawing balance negative
     }else return 0;
@@ -168,7 +173,7 @@ contract StakingPool is Ownable, FrensBase {
 
   // to support receiving ETH by default
   receive() external payable {
-  
+
   }
 
   fallback() external payable {}

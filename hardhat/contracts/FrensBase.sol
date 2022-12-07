@@ -145,6 +145,7 @@ abstract contract FrensBase {
     function getBool(bytes32 _key) internal view returns (bool) { return frensStorage.getBool(_key); }
     function getInt(bytes32 _key) internal view returns (int) { return frensStorage.getInt(_key); }
     function getBytes32(bytes32 _key) internal view returns (bytes32) { return frensStorage.getBytes32(_key); }
+    function getArray(bytes32 _key) internal view returns (uint[] memory) { return frensStorage.getArray(_key); }
 
     /// @dev Storage set methods
     function setAddress(bytes32 _key, address _value) internal { frensStorage.setAddress(_key, _value); }
@@ -154,6 +155,7 @@ abstract contract FrensBase {
     function setBool(bytes32 _key, bool _value) internal { frensStorage.setBool(_key, _value); }
     function setInt(bytes32 _key, int _value) internal { frensStorage.setInt(_key, _value); }
     function setBytes32(bytes32 _key, bytes32 _value) internal { frensStorage.setBytes32(_key, _value); }
+    function setArray(bytes32 _key, uint[] memory _value) internal { frensStorage.setArray(_key, _value); }
 
     /// @dev Storage delete methods
     function deleteAddress(bytes32 _key) internal { frensStorage.deleteAddress(_key); }
@@ -163,6 +165,7 @@ abstract contract FrensBase {
     function deleteBool(bytes32 _key) internal { frensStorage.deleteBool(_key); }
     function deleteInt(bytes32 _key) internal { frensStorage.deleteInt(_key); }
     function deleteBytes32(bytes32 _key) internal { frensStorage.deleteBytes32(_key); }
+    function deleteArray(bytes32 _key) internal { frensStorage.deleteArray(_key); }
 
     /// @dev Storage arithmetic methods - push added by 0xWildhare
     function addUint(bytes32 _key, uint256 _amount) internal { frensStorage.addUint(_key, _amount); }

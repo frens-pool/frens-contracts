@@ -18,18 +18,13 @@ contract FrensPoolShare is ERC721Enumerable, Ownable, FrensBase {
   using Strings for uint256;
   using ToColor for bytes3;
 
-//these move to storage contract
-  uint private _tokenId;
-  mapping(uint => address) poolById;
-//^^^^^
-
   constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage) ERC721("staking con amigos", "FRENS") {
     //hi fren
   }
 
   function mint(address userAddress, address _pool) public onlyStakingPool(msg.sender) {
     uint id = getUint(keccak256(abi.encodePacked("token.id")));
-    poolById[id] = _pool; //move to storage
+    setAddress(keccak256(abi.encodePacked("pool.for.id", id)), _pool);
     _safeMint(userAddress, id);
   }
 
@@ -38,15 +33,15 @@ contract FrensPoolShare is ERC721Enumerable, Ownable, FrensBase {
   }
 
   function getPoolById(uint _id) public view returns(address){
-    return poolById[_id];
+    return getAddress(keccak256(abi.encodePacked("pool.for.id", _id)));
   }
 
   //art stuff move to its own contract (possibly two contracts)
   function tokenURI(uint256 id) public view override returns (string memory) {
-    require(_exists(id), "not exist");
-    address poolAddress = poolById[id];
+    require(_exists(id), "id does not exist");
+    address poolAddress = getAddress(keccak256(abi.encodePacked("pool.for.id", id)));
     IStakingPool stakingPool = IStakingPool(payable(poolAddress));
-    uint depositForId = stakingPool.getDepositAmount(id);
+    uint depositForId = getUint(keccak256(abi.encodePacked("deposit.amount", id)));
     string memory depositString = getEthDecimalString(depositForId);
     uint shareForId = stakingPool.getDistributableShare(id);
     string memory shareString = getEthDecimalString(shareForId);
@@ -125,8 +120,8 @@ contract FrensPoolShare is ERC721Enumerable, Ownable, FrensBase {
   // Visibility is `public` to enable it being called by other contracts for composition.
   function renderTokenById(uint256 id) public view returns (string memory) {
 
-    IStakingPool stakingPool = IStakingPool(payable(poolById[id]));
-    uint depositForId = stakingPool.getDepositAmount(id);
+    IStakingPool stakingPool = IStakingPool(payable(getAddress(keccak256(abi.encodePacked("pool.for.id", id)))));
+    uint depositForId = getUint(keccak256(abi.encodePacked("deposit.amount", id)));
     string memory depositString = getEthDecimalString(depositForId);
     uint shareForId = stakingPool.getDistributableShare(id);
     string memory shareString = getEthDecimalString(shareForId);
@@ -184,8 +179,7 @@ contract FrensPoolShare is ERC721Enumerable, Ownable, FrensBase {
   }
 
   function getOperatorsForPool(address poolAddress) public view returns (uint32[] memory, string memory) {
-    IStakingPool stakingPool = IStakingPool(payable(poolAddress));
-    bytes memory poolPubKey = stakingPool.getPubKey();
+    bytes memory poolPubKey = getBytes(keccak256(abi.encodePacked("validator.public.key", poolAddress)));
     string memory pubKeyString = iToHex(poolPubKey);
     ISSVRegistry ssvRegistry = ISSVRegistry(getAddress(keccak256(abi.encodePacked("external.contract.address", "SSVRegistry"))));
     uint32[] memory poolOperators = ssvRegistry.getOperatorsByValidator(poolPubKey);

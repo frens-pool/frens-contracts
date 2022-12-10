@@ -16,27 +16,24 @@ contract StakingPool is Ownable, FrensBase {
   event Stake(address depositContractAddress, address caller);
   event DepositToPool(uint amount, address depositer);
 
-//move to storage contract
-  enum State { acceptingDeposits, staked, exited }//should this stay locally? if not, need to think of all possible states: pending, frozen, underReview, exiting, etc. - maybe this gets its own contract?
-  State currentState;//should this stay locally?
-
-  bytes public validatorPubKey;
-//^^^^
+//should this stay locally? Need to think of all possible states: pending, frozen, underReview, exiting, etc. - maybe this gets its own contract?
+  enum State { acceptingDeposits, staked, exited }
+  State currentState;
 
   IFrensPoolShare frensPoolShare;
 
   constructor(address owner_, IFrensStorage frensStorage_) FrensBase(frensStorage_){
     currentState = State.acceptingDeposits;
     address frensPoolShareAddress = getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolShare")));
-    frensPoolShare = IFrensPoolShare(frensPoolShareAddress);
+    frensPoolShare = IFrensPoolShare(frensPoolShareAddress); //this hardcodes the nft to the pool
     _transferOwnership(owner_);
 
   }
 //TODO: needs to interact with SSVtoken (via amm, check balance, check minimum amount needed in contract etc)
-//TODO: need a cap on deposits
   function depositToPool() public payable {
     require(currentState == State.acceptingDeposits, "not accepting deposits");
     require(msg.value != 0, "must deposit ether");
+    require(getUint(keccak256(abi.encodePacked("total.deposits", address(this)))) + msg.value <= 32 ether, "total depostis cannot be more than 32 Eth");
     addUint(keccak256(abi.encodePacked("token.id")), 1);
     uint id = getUint(keccak256(abi.encodePacked("token.id")));
     setUint(keccak256(abi.encodePacked("deposit.amount", id)), msg.value);
@@ -45,12 +42,12 @@ contract StakingPool is Ownable, FrensBase {
     frensPoolShare.mint(msg.sender, address(this));
     emit DepositToPool(msg.value,  msg.sender);
   }
-//TODO: need a cap on deposits
+
   function addToDeposit(uint _id) public payable {
-    require(frensPoolShare.exists(_id), "not exist");
+    require(frensPoolShare.exists(_id), "id does not exist");
     require(frensPoolShare.getPoolById(_id) == address(this), "wrong staking pool");
     require(currentState == State.acceptingDeposits, "not accepting deposits");
-    require(currentState == State.acceptingDeposits);
+    require(getUint(keccak256(abi.encodePacked("total.deposits", address(this)))) + msg.value <= 32 ether, "total depostis cannot be more than 32 Eth");
     addUint(keccak256(abi.encodePacked("deposit.amount", _id)), msg.value);
     addUint(keccak256(abi.encodePacked("total.deposits", address(this))), msg.value);
   }
@@ -105,12 +102,13 @@ contract StakingPool is Ownable, FrensBase {
   }
 
   function getPubKey() public view returns(bytes memory){
-    return validatorPubKey;
+    return getBytes(keccak256(abi.encodePacked("validator.public.key", address(this))));
   }
 
-  function setPubKey(bytes memory publicKey) public onlyOwner{
+  function setPubKey(bytes memory _publicKey) public onlyOwner{
     require(currentState == State.acceptingDeposits, "wrong state");
-    validatorPubKey = publicKey;
+    //add checks for ssv operators?
+    setBytes(keccak256(abi.encodePacked("validator.public.key", address(this))), _publicKey);
   }
 
   function getState() public view returns(string memory){
@@ -120,13 +118,13 @@ contract StakingPool is Ownable, FrensBase {
     return "state failure"; //should never happen
   }
 
-//this can move to FrensShare
   function getDepositAmount(uint _id) public view returns(uint){
     return getUint(keccak256(abi.encodePacked("deposit.amount", _id)));
   }
 
+//should staking info be added to pool before depositing is enabled?
   function stake(
-    bytes calldata pubkey,
+    bytes calldata pubKey,
     bytes calldata withdrawal_credentials,
     bytes calldata signature,
     bytes32 deposit_data_root
@@ -134,9 +132,10 @@ contract StakingPool is Ownable, FrensBase {
     require(address(this).balance >= 32 ether, "not enough eth");
     require(currentState == State.acceptingDeposits, "wrong state");
     bytes memory zero;
-    if(keccak256(validatorPubKey) != keccak256(zero)){
-      require(keccak256(validatorPubKey) == keccak256(pubkey), "pubkey does not match stored value");
-    } else validatorPubKey = pubkey;
+    bytes memory validatorPublicKey = getBytes(keccak256(abi.encodePacked("validator.public.key", address(this))));
+    if(keccak256(validatorPublicKey) != keccak256(zero)){
+      require(keccak256(validatorPublicKey) == keccak256(pubKey), "pubkey does not match stored value");
+    } else setBytes(keccak256(abi.encodePacked("validator.public.key", address(this))), pubKey);
     currentState = State.staked;
     uint value = 32 ether;
     //get expected withdrawal_credentials based on contract address
@@ -144,7 +143,7 @@ contract StakingPool is Ownable, FrensBase {
     //compare expected withdrawal_credentials to provided
     require(keccak256(withdrawal_credentials) == keccak256(withdrawalCredFromAddr), "withdrawal credential mismatch");
     address depositContractAddress = getAddress(keccak256(abi.encodePacked("external.contract.address", "DepositContract")));
-    IDepositContract(depositContractAddress).deposit{value: value}(pubkey, withdrawal_credentials, signature, deposit_data_root);
+    IDepositContract(depositContractAddress).deposit{value: value}(pubKey, withdrawal_credentials, signature, deposit_data_root);
     emit Stake(depositContractAddress, msg.sender);
   }
 

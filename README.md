@@ -6,7 +6,6 @@ forge test --via-ir --fork-url https://mainnet.infura.io/v3/7b367f3e8f1d48e5b43e
 
 ./deposit new-mnemonic --chain mainnet --eth1_withdrawal_address 0xd119D184628e094322007cEa4F2535Ec3A06E6b1
 
-TODO: research unstake functions in the wild
 
 TODO: research/determine functionality for collateralizing the NFT
   -can each pool decide if it can be used for this?

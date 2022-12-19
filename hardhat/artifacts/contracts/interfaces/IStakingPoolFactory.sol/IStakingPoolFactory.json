@@ -7,19 +7,19 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "stakingPoolAddress",
+          "name": "owner_",
           "type": "address"
         }
       ],
-      "name": "doesStakingPoolExist",
+      "name": "create",
       "outputs": [
         {
-          "internalType": "bool",
+          "internalType": "address",
           "name": "",
-          "type": "bool"
+          "type": "address"
         }
       ],
-      "stateMutability": "view",
+      "stateMutability": "nonpayable",
       "type": "function"
     }
   ],

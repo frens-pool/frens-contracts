@@ -4,7 +4,7 @@ pragma solidity >=0.8.0 <0.9.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 interface IStakingPool{
-  function deposit(address userAddress) external payable;
+  function depositToPool() external payable;
 
   function addToDeposit(uint _id) external payable;
 
@@ -12,11 +12,15 @@ interface IStakingPool{
 
   function distribute() external;
 
+  function getIdsInThisPool() external view returns(uint[] memory);
+
   function getShare(uint _id) external view returns(uint);
 
   function getDistributableShare(uint _id) external view returns(uint);
 
   function getPubKey() external view returns(bytes memory);
+
+  function setPubKey(bytes memory _publicKey) external;
 
   function getState() external view returns(string memory);
 

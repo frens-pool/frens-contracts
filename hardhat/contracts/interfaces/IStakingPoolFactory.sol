@@ -3,6 +3,6 @@ pragma solidity >=0.8.0 <0.9.0;
 
 interface IStakingPoolFactory {
 
-  function doesStakingPoolExist(address stakingPoolAddress) external view returns(bool);
+  function create(address owner_) external returns(address);
 
 }

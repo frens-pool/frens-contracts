@@ -5,13 +5,15 @@ import "@openzeppelin/contracts/interfaces/IERC721Enumerable.sol";
 
 
 interface IFrensPoolShare is IERC721Enumerable{
-  function incrementTokenId() external returns(uint);
 
   function mint(address userAddress, address _pool) external;
 
-  function exists(uint _id) external returns(bool);
+  function exists(uint _id) external view returns(bool);
 
   function getPoolById(uint _id) external view returns(address);
 
+  function tokenURI(uint256 id) external view returns (string memory);
+
+  function renderTokenById(uint256 id) external view returns (string memory);
 
 }

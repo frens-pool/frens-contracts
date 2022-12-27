@@ -2,6 +2,8 @@
 
 npx hardhat node --fork https://mainnet.infura.io/v3/7b367f3e8f1d48e5b43e1b290a1fde16
 
+npx hardhat node --fork https://goerli.infura.io/v3/7b367f3e8f1d48e5b43e1b290a1fde16
+
 forge test --via-ir --fork-url https://mainnet.infura.io/v3/7b367f3e8f1d48e5b43e1b290a1fde16
 
 ./deposit new-mnemonic --chain mainnet --eth1_withdrawal_address 0xd119D184628e094322007cEa4F2535Ec3A06E6b1

@@ -18,6 +18,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   const chainId = await getChainId();
 
   var FrensPoolShareOld = 0;
+  var FactoryProxyOld = 0;
   var FrensInitialiserOld = 0;
   var FrensStorageOld = 0;
   var StakingPoolFactoryOld = 0;
@@ -27,6 +28,10 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
 
   try{
     FrensPoolShareOld = await ethers.getContract("FrensPoolShare", deployer);
+  } catch(e) {}
+
+  try{
+    FactoryProxyOld = await ethers.getContract("FactoryProxy", deployer);
   } catch(e) {}
 
   try{
@@ -71,6 +76,24 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     console.log('\x1b[33m%s\x1b[0m', "FrensStorage initialised", FrensStorage.address);
   } else if(FrensStorageOld.address != FrensStorage.address){
     console.log('\x1b[31m%s\x1b[0m', "FrensStorage updated", FrensStorage.address);
+  }
+
+  if(FactoryProxyOld == 0 || chainId == 31337){ //should not update proxy contract on testnet of mainnet
+    await deploy("FactoryProxy", {
+      // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+      from: deployer,
+      args: [  FrensStorage.address ],
+      log: true,
+      waitConfirmations: 5,
+    });
+  }
+
+  const FactoryProxy = await ethers.getContract("FactoryProxy", deployer);
+
+  if(FactoryProxyOld == 0){
+    console.log('\x1b[33m%s\x1b[0m', "FactoryProxy initialised", FactoryProxy.address);
+  } else if(FactoryProxyOld.address != FactoryProxy.address){
+    console.log('\x1b[31m%s\x1b[0m', "FactoryProxy updated", FactoryProxy.address);
   }
 
   await deploy("FrensInitialiser", {

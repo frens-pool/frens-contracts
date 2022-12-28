@@ -127,19 +127,20 @@
   },
   "ast": {
     "absolutePath": "contracts/interfaces/IDepositContract.sol",
-    "id": 1507,
+    "id": 3543,
     "exportedSymbols": {
       "IDepositContract": [
-        1506
+        3542
       ]
     },
     "nodeType": "SourceUnit",
-    "src": "1:290:3",
+    "src": "1:290:11",
     "nodes": [
       {
-        "id": 1494,
+        "id": 3530,
         "nodeType": "PragmaDirective",
-        "src": "1:31:3",
+        "src": "1:31:11",
+        "nodes": [],
         "literals": [
           "solidity",
           ">=",
@@ -151,33 +152,34 @@
         ]
       },
       {
-        "id": 1506,
+        "id": 3542,
         "nodeType": "ContractDefinition",
-        "src": "66:224:3",
+        "src": "66:224:11",
         "nodes": [
           {
-            "id": 1505,
+            "id": 3541,
             "nodeType": "FunctionDefinition",
-            "src": "100:187:3",
+            "src": "100:187:11",
+            "nodes": [],
             "functionSelector": "22895118",
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "deposit",
-            "nameLocation": "109:7:3",
+            "nameLocation": "109:7:11",
             "parameters": {
-              "id": 1503,
+              "id": 3539,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1496,
+                  "id": 3532,
                   "mutability": "mutable",
                   "name": "pubkey",
-                  "nameLocation": "141:6:3",
+                  "nameLocation": "141:6:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1505,
-                  "src": "126:21:3",
+                  "scope": 3541,
+                  "src": "126:21:11",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -185,10 +187,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1495,
+                    "id": 3531,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "126:5:3",
+                    "src": "126:5:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -198,13 +200,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1498,
+                  "id": 3534,
                   "mutability": "mutable",
                   "name": "withdrawal_credentials",
-                  "nameLocation": "172:22:3",
+                  "nameLocation": "172:22:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1505,
-                  "src": "157:37:3",
+                  "scope": 3541,
+                  "src": "157:37:11",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -212,10 +214,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1497,
+                    "id": 3533,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "157:5:3",
+                    "src": "157:5:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -225,13 +227,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1500,
+                  "id": 3536,
                   "mutability": "mutable",
                   "name": "signature",
-                  "nameLocation": "219:9:3",
+                  "nameLocation": "219:9:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1505,
-                  "src": "204:24:3",
+                  "scope": 3541,
+                  "src": "204:24:11",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -239,10 +241,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1499,
+                    "id": 3535,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "204:5:3",
+                    "src": "204:5:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -252,13 +254,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1502,
+                  "id": 3538,
                   "mutability": "mutable",
                   "name": "deposit_data_root",
-                  "nameLocation": "246:17:3",
+                  "nameLocation": "246:17:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1505,
-                  "src": "238:25:3",
+                  "scope": 3541,
+                  "src": "238:25:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -266,10 +268,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 1501,
+                    "id": 3537,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "238:7:3",
+                    "src": "238:7:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -278,15 +280,15 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "116:153:3"
+              "src": "116:153:11"
             },
             "returnParameters": {
-              "id": 1504,
+              "id": 3540,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "286:0:3"
+              "src": "286:0:11"
             },
-            "scope": 1506,
+            "scope": 3542,
             "stateMutability": "payable",
             "virtual": false,
             "visibility": "external"
@@ -299,15 +301,15 @@
         "contractKind": "interface",
         "fullyImplemented": false,
         "linearizedBaseContracts": [
-          1506
+          3542
         ],
         "name": "IDepositContract",
-        "nameLocation": "76:16:3",
-        "scope": 1507,
+        "nameLocation": "76:16:11",
+        "scope": 3543,
         "usedErrors": []
       }
     ],
     "license": "MIT"
   },
-  "id": 3
+  "id": 11
 }

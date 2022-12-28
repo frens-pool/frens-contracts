@@ -12,10 +12,10 @@
     ]
   },
   "files": {
-    "contracts/FrensPoolShare.sol": {
-      "lastModificationDate": 1670106600862,
-      "contentHash": "5c5f2bcd46cd4116cadf112a975f107e",
-      "sourceName": "contracts/FrensPoolShare.sol",
+    "contracts/FactoryProxy.sol": {
+      "lastModificationDate": 1672114057013,
+      "contentHash": "3f67bfb96036100aafdd04b65cbd5b3f",
+      "sourceName": "contracts/FactoryProxy.sol",
       "solcConfig": {
         "settings": {
           "optimizer": {
@@ -23,7 +23,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -45,11 +46,246 @@
         }
       },
       "imports": [
-        "contracts/ToColor.sol",
-        "contracts/interfaces/ISSVRegistry.sol",
+        "contracts/FrensBase.sol",
+        "contracts/interfaces/IFrensStorage.sol"
+      ],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "FactoryProxy": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "FactoryProxy.sol/FactoryProxy.json"
+        }
+      }
+    },
+    "contracts/FrensArt.sol": {
+      "lastModificationDate": 1672091492342,
+      "contentHash": "28c047c7d59abc714177a38186335249",
+      "sourceName": "contracts/FrensArt.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "contracts/FrensBase.sol",
+        "contracts/interfaces/IFrensArt.sol",
+        "contracts/interfaces/IFrensMetaHelper.sol",
+        "contracts/interfaces/IFrensPoolShare.sol",
+        "contracts/interfaces/IFrensStorage.sol",
         "contracts/interfaces/IStakingPool.sol",
-        "contracts/interfaces/IStakingPoolFactory.sol",
         "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/utils/Context.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol"
+      ],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "FrensArt": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "FrensArt.sol/FrensArt.json"
+        }
+      }
+    },
+    "contracts/FrensBase.sol": {
+      "lastModificationDate": 1672091492342,
+      "contentHash": "de2d3133a8042f3359a23c82d2fc57d3",
+      "sourceName": "contracts/FrensBase.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "contracts/interfaces/IFrensStorage.sol"
+      ],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "FrensBase": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "FrensBase.sol/FrensBase.json"
+        }
+      }
+    },
+    "contracts/FrensInitialiser.sol": {
+      "lastModificationDate": 1672091492342,
+      "contentHash": "bdc3044ca48c662cfcb16efec658b9a4",
+      "sourceName": "contracts/FrensInitialiser.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "contracts/FrensBase.sol",
+        "contracts/interfaces/IFrensStorage.sol"
+      ],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "FrensInitialiser": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "FrensInitialiser.sol/FrensInitialiser.json"
+        }
+      }
+    },
+    "contracts/FrensMetaHelper.sol": {
+      "lastModificationDate": 1672091492342,
+      "contentHash": "d7537c2fdf9f2445a8154c214235920c",
+      "sourceName": "contracts/FrensMetaHelper.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "contracts/FrensBase.sol",
+        "contracts/ToColor.sol",
+        "contracts/interfaces/IFrensMetaHelper.sol",
+        "contracts/interfaces/IFrensStorage.sol",
+        "contracts/interfaces/ISSVRegistry.sol",
+        "node_modules/@openzeppelin/contracts/utils/Strings.sol"
+      ],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "FrensMetaHelper": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "FrensMetaHelper.sol/FrensMetaHelper.json"
+        }
+      }
+    },
+    "contracts/FrensPoolShare.sol": {
+      "lastModificationDate": 1672091492342,
+      "contentHash": "1bbf09745d487f27fae65274d4b3f467",
+      "sourceName": "contracts/FrensPoolShare.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "contracts/FrensBase.sol",
+        "contracts/interfaces/IFrensArt.sol",
+        "contracts/interfaces/IFrensPoolShare.sol",
+        "contracts/interfaces/IFrensPoolShareTokenURI.sol",
+        "contracts/interfaces/IFrensStorage.sol",
+        "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
         "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
         "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
         "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
@@ -60,8 +296,7 @@
         "node_modules/@openzeppelin/contracts/utils/Context.sol",
         "node_modules/@openzeppelin/contracts/utils/Strings.sol",
         "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
-        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
-        "node_modules/base64-sol/base64.sol"
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol"
       ],
       "versionRequirement": ">=0.8.0, <0.9.0",
       "artifacts": {
@@ -70,10 +305,10 @@
         }
       }
     },
-    "contracts/StakingPool.sol": {
-      "lastModificationDate": 1670110457815,
-      "contentHash": "d51a32b7654050bda55993e1a3949ae6",
-      "sourceName": "contracts/StakingPool.sol",
+    "contracts/FrensPoolShareTokenURI.sol": {
+      "lastModificationDate": 1672091492342,
+      "contentHash": "e50518009bb0c6938f2b18cb88f626bd",
+      "sourceName": "contracts/FrensPoolShareTokenURI.sol",
       "solcConfig": {
         "settings": {
           "optimizer": {
@@ -81,7 +316,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -103,9 +339,111 @@
         }
       },
       "imports": [
+        "contracts/FrensBase.sol",
+        "contracts/interfaces/IFrensArt.sol",
+        "contracts/interfaces/IFrensMetaHelper.sol",
+        "contracts/interfaces/IFrensPoolShare.sol",
+        "contracts/interfaces/IFrensPoolShareTokenURI.sol",
+        "contracts/interfaces/IFrensStorage.sol",
+        "contracts/interfaces/IStakingPool.sol",
+        "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/utils/Context.sol",
+        "node_modules/@openzeppelin/contracts/utils/Strings.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/base64-sol/base64.sol"
+      ],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "FrensPoolShareTokenURI": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "FrensPoolShareTokenURI.sol/FrensPoolShareTokenURI.json"
+        }
+      }
+    },
+    "contracts/FrensStorage.sol": {
+      "lastModificationDate": 1672091492342,
+      "contentHash": "192d0c11fb4a1c7aee2acff3ab9b7935",
+      "sourceName": "contracts/FrensStorage.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "contracts/interfaces/IFrensStorage.sol"
+      ],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "FrensStorage": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "FrensStorage.sol/FrensStorage.json"
+        }
+      }
+    },
+    "contracts/StakingPool.sol": {
+      "lastModificationDate": 1672091492342,
+      "contentHash": "d5a9e989e9a2d943ee69986c4a14f0e5",
+      "sourceName": "contracts/StakingPool.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "contracts/FrensBase.sol",
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IFrensPoolShare.sol",
-        "contracts/interfaces/IStakingPoolFactory.sol",
+        "contracts/interfaces/IFrensStorage.sol",
+        "contracts/interfaces/IStakingPool.sol",
         "node_modules/@openzeppelin/contracts/access/Ownable.sol",
         "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
         "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
@@ -121,8 +459,8 @@
       }
     },
     "contracts/StakingPoolFactory.sol": {
-      "lastModificationDate": 1670111933865,
-      "contentHash": "277c059800fd995eaaa0bae178f329ac",
+      "lastModificationDate": 1672091492342,
+      "contentHash": "24538cc1e77f8cf3f932ef9f05383519",
       "sourceName": "contracts/StakingPoolFactory.sol",
       "solcConfig": {
         "settings": {
@@ -131,7 +469,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -153,9 +492,12 @@
         }
       },
       "imports": [
+        "contracts/FrensBase.sol",
         "contracts/StakingPool.sol",
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IFrensPoolShare.sol",
+        "contracts/interfaces/IFrensStorage.sol",
+        "contracts/interfaces/IStakingPool.sol",
         "contracts/interfaces/IStakingPoolFactory.sol",
         "node_modules/@openzeppelin/contracts/access/Ownable.sol",
         "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
@@ -172,7 +514,7 @@
       }
     },
     "contracts/ToColor.sol": {
-      "lastModificationDate": 1669584573885,
+      "lastModificationDate": 1672091492342,
       "contentHash": "c94ca048e799d036de7d79e18036f097",
       "sourceName": "contracts/ToColor.sol",
       "solcConfig": {
@@ -182,7 +524,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -212,7 +555,7 @@
       }
     },
     "contracts/interfaces/IDepositContract.sol": {
-      "lastModificationDate": 1668380104049,
+      "lastModificationDate": 1672091492342,
       "contentHash": "6fef6d8eef876d90faef391874626c78",
       "sourceName": "contracts/interfaces/IDepositContract.sol",
       "solcConfig": {
@@ -222,7 +565,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -251,9 +595,91 @@
         }
       }
     },
+    "contracts/interfaces/IFrensArt.sol": {
+      "lastModificationDate": 1672091492342,
+      "contentHash": "78e14eb5f1123a26a3186582d603ecff",
+      "sourceName": "contracts/interfaces/IFrensArt.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "IFrensArt": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "IFrensArt.sol/IFrensArt.json"
+        }
+      }
+    },
+    "contracts/interfaces/IFrensMetaHelper.sol": {
+      "lastModificationDate": 1672091492342,
+      "contentHash": "c9feb57342b7e38add005929e7b6e94b",
+      "sourceName": "contracts/interfaces/IFrensMetaHelper.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "IFrensMetaHelper": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "IFrensMetaHelper.sol/IFrensMetaHelper.json"
+        }
+      }
+    },
     "contracts/interfaces/IFrensPoolShare.sol": {
-      "lastModificationDate": 1668380744014,
-      "contentHash": "b3be2defae52f986853f700579d9afb4",
+      "lastModificationDate": 1672091492342,
+      "contentHash": "3b5f557267b2e6afb540410ab172611d",
       "sourceName": "contracts/interfaces/IFrensPoolShare.sol",
       "solcConfig": {
         "settings": {
@@ -262,7 +688,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -296,8 +723,90 @@
         }
       }
     },
+    "contracts/interfaces/IFrensPoolShareTokenURI.sol": {
+      "lastModificationDate": 1672091492342,
+      "contentHash": "b978dd79b2dba871c3a17a8fa7fcd7d4",
+      "sourceName": "contracts/interfaces/IFrensPoolShareTokenURI.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "IFrensPoolShareTokenURI": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "IFrensPoolShareTokenURI.sol/IFrensPoolShareTokenURI.json"
+        }
+      }
+    },
+    "contracts/interfaces/IFrensStorage.sol": {
+      "lastModificationDate": 1672091492342,
+      "contentHash": "eadf67e23b2461d788c0f94c16b15b44",
+      "sourceName": "contracts/interfaces/IFrensStorage.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "IFrensStorage": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "IFrensStorage.sol/IFrensStorage.json"
+        }
+      }
+    },
     "contracts/interfaces/ISSVRegistry.sol": {
-      "lastModificationDate": 1668358159010,
+      "lastModificationDate": 1672091492342,
       "contentHash": "ca86b7076b26b9e274fc7c1cb4707be5",
       "sourceName": "contracts/interfaces/ISSVRegistry.sol",
       "solcConfig": {
@@ -307,7 +816,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -337,8 +847,8 @@
       }
     },
     "contracts/interfaces/IStakingPool.sol": {
-      "lastModificationDate": 1668380568770,
-      "contentHash": "18250bab6c4e3d5cadc87e5e327780a2",
+      "lastModificationDate": 1672091492342,
+      "contentHash": "cee2551c583fd9fb300eb3de4e435afc",
       "sourceName": "contracts/interfaces/IStakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -347,7 +857,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -380,8 +891,8 @@
       }
     },
     "contracts/interfaces/IStakingPoolFactory.sol": {
-      "lastModificationDate": 1668379842494,
-      "contentHash": "038e67e9545fd34f72d79050201c6f55",
+      "lastModificationDate": 1672091492342,
+      "contentHash": "76623f04fb473ade1b8dd4f799a88347",
       "sourceName": "contracts/interfaces/IStakingPoolFactory.sol",
       "solcConfig": {
         "settings": {
@@ -390,7 +901,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -420,7 +932,7 @@
       }
     },
     "lib/forge-std/lib/ds-test/src/test.sol": {
-      "lastModificationDate": 1665682343775,
+      "lastModificationDate": 1672091492342,
       "contentHash": "962996f0e05d5218857a538a62d7c47e",
       "sourceName": "lib/forge-std/lib/ds-test/src/test.sol",
       "solcConfig": {
@@ -430,7 +942,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -460,7 +973,7 @@
       }
     },
     "lib/forge-std/src/Script.sol": {
-      "lastModificationDate": 1665682343775,
+      "lastModificationDate": 1672091492342,
       "contentHash": "571dde8775a6214a03d6772ee330ead5",
       "sourceName": "lib/forge-std/src/Script.sol",
       "solcConfig": {
@@ -470,7 +983,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -505,7 +1019,7 @@
       }
     },
     "lib/forge-std/src/StdJson.sol": {
-      "lastModificationDate": 1665682343775,
+      "lastModificationDate": 1672091492342,
       "contentHash": "75c782f20a301ab9827060a03da071e4",
       "sourceName": "lib/forge-std/src/StdJson.sol",
       "solcConfig": {
@@ -515,7 +1029,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -547,7 +1062,7 @@
       }
     },
     "lib/forge-std/src/Test.sol": {
-      "lastModificationDate": 1665682343775,
+      "lastModificationDate": 1672091492342,
       "contentHash": "6cab65c53a9548c2428a10697fd06dd1",
       "sourceName": "lib/forge-std/src/Test.sol",
       "solcConfig": {
@@ -557,7 +1072,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -603,7 +1119,7 @@
       }
     },
     "lib/forge-std/src/Vm.sol": {
-      "lastModificationDate": 1665682343775,
+      "lastModificationDate": 1672091492342,
       "contentHash": "bd4bde818b3c57b21e0601277b1d2dac",
       "sourceName": "lib/forge-std/src/Vm.sol",
       "solcConfig": {
@@ -613,7 +1129,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -643,7 +1160,7 @@
       }
     },
     "lib/forge-std/src/console.sol": {
-      "lastModificationDate": 1665682343775,
+      "lastModificationDate": 1672091492342,
       "contentHash": "100b8a33b917da1147740d7ab8b0ded3",
       "sourceName": "lib/forge-std/src/console.sol",
       "solcConfig": {
@@ -653,7 +1170,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -683,7 +1201,7 @@
       }
     },
     "lib/forge-std/src/console2.sol": {
-      "lastModificationDate": 1665682343775,
+      "lastModificationDate": 1672091492342,
       "contentHash": "5df91f8e93efbfcccf68973dc1b74a70",
       "sourceName": "lib/forge-std/src/console2.sol",
       "solcConfig": {
@@ -693,7 +1211,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -723,7 +1242,7 @@
       }
     },
     "node_modules/@openzeppelin/contracts/access/Ownable.sol": {
-      "lastModificationDate": 1649608610746,
+      "lastModificationDate": 1672089131099,
       "contentHash": "8398972af73b4e9e5ff3b31cad86234f",
       "sourceName": "node_modules/@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
@@ -733,7 +1252,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -765,7 +1285,7 @@
       }
     },
     "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol": {
-      "lastModificationDate": 1649608610746,
+      "lastModificationDate": 1672089131099,
       "contentHash": "ff727125a84ba8d0dd642f6ab0632435",
       "sourceName": "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
       "solcConfig": {
@@ -775,7 +1295,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -809,7 +1330,7 @@
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
-      "lastModificationDate": 1649608610746,
+      "lastModificationDate": 1672089131099,
       "contentHash": "ead7082e39cf31875ff89b22f473500d",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
       "solcConfig": {
@@ -819,7 +1340,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -858,7 +1380,7 @@
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
-      "lastModificationDate": 1649608610746,
+      "lastModificationDate": 1672089131099,
       "contentHash": "27d219ec6f69478d065fdbfa7931da68",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
       "solcConfig": {
@@ -868,7 +1390,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -900,7 +1423,7 @@
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
-      "lastModificationDate": 1649608610746,
+      "lastModificationDate": 1672089131099,
       "contentHash": "592df588492d45fdcf46b3cb608c0fbf",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
       "solcConfig": {
@@ -910,7 +1433,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -940,7 +1464,7 @@
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol": {
-      "lastModificationDate": 1649608610746,
+      "lastModificationDate": 1672089131099,
       "contentHash": "88095889e59d16821879a8083f906503",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
       "solcConfig": {
@@ -950,7 +1474,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -991,7 +1516,7 @@
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol": {
-      "lastModificationDate": 1649608610746,
+      "lastModificationDate": 1672089131099,
       "contentHash": "f69eb47f667b846a8698697d25eeff4e",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
       "solcConfig": {
@@ -1001,7 +1526,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -1034,7 +1560,7 @@
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
-      "lastModificationDate": 1649608610746,
+      "lastModificationDate": 1672089131099,
       "contentHash": "efbc0d15b80a74e34dbe8da0f3e879bb",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
       "solcConfig": {
@@ -1044,7 +1570,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -1077,7 +1604,7 @@
       }
     },
     "node_modules/@openzeppelin/contracts/utils/Address.sol": {
-      "lastModificationDate": 1649608610746,
+      "lastModificationDate": 1672089131099,
       "contentHash": "4cff8b2ea0d958750786b4e3ca308445",
       "sourceName": "node_modules/@openzeppelin/contracts/utils/Address.sol",
       "solcConfig": {
@@ -1087,7 +1614,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -1117,7 +1645,7 @@
       }
     },
     "node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1649608610746,
+      "lastModificationDate": 1672089131099,
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "node_modules/@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
@@ -1127,7 +1655,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -1157,7 +1686,7 @@
       }
     },
     "node_modules/@openzeppelin/contracts/utils/Strings.sol": {
-      "lastModificationDate": 1649608610746,
+      "lastModificationDate": 1672089131099,
       "contentHash": "9c54c6c065d9e590fdcdd72c451425b9",
       "sourceName": "node_modules/@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
@@ -1167,7 +1696,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -1197,7 +1727,7 @@
       }
     },
     "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
-      "lastModificationDate": 1649608610746,
+      "lastModificationDate": 1672089131099,
       "contentHash": "0e7db055ce108f9da7bb6686a00287c0",
       "sourceName": "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
       "solcConfig": {
@@ -1207,7 +1737,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -1239,7 +1770,7 @@
       }
     },
     "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
-      "lastModificationDate": 1649608610746,
+      "lastModificationDate": 1672089131099,
       "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
       "sourceName": "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
@@ -1249,7 +1780,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -1279,7 +1811,7 @@
       }
     },
     "node_modules/base64-sol/base64.sol": {
-      "lastModificationDate": 1652826546724,
+      "lastModificationDate": 1672089131095,
       "contentHash": "0d54cb6a748ddde95d92ed7802c9248d",
       "sourceName": "node_modules/base64-sol/base64.sol",
       "solcConfig": {
@@ -1289,7 +1821,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -1319,8 +1852,8 @@
       }
     },
     "test/foundry/StakingPool.t.sol": {
-      "lastModificationDate": 1670113010836,
-      "contentHash": "fc8628db10df803f5c41e42bd1797f45",
+      "lastModificationDate": 1672186171143,
+      "contentHash": "fd1dbdfc041bdb1cd2e98b31dab41ad7",
       "sourceName": "test/foundry/StakingPool.t.sol",
       "solcConfig": {
         "settings": {
@@ -1329,7 +1862,8 @@
             "runs": 200
           },
           "metadata": {
-            "bytecodeHash": "ipfs"
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
           },
           "outputSelection": {
             "*": {
@@ -1351,12 +1885,23 @@
         }
       },
       "imports": [
+        "contracts/FactoryProxy.sol",
+        "contracts/FrensArt.sol",
+        "contracts/FrensBase.sol",
+        "contracts/FrensInitialiser.sol",
+        "contracts/FrensMetaHelper.sol",
         "contracts/FrensPoolShare.sol",
+        "contracts/FrensPoolShareTokenURI.sol",
+        "contracts/FrensStorage.sol",
         "contracts/StakingPool.sol",
         "contracts/StakingPoolFactory.sol",
         "contracts/ToColor.sol",
         "contracts/interfaces/IDepositContract.sol",
+        "contracts/interfaces/IFrensArt.sol",
+        "contracts/interfaces/IFrensMetaHelper.sol",
         "contracts/interfaces/IFrensPoolShare.sol",
+        "contracts/interfaces/IFrensPoolShareTokenURI.sol",
+        "contracts/interfaces/IFrensStorage.sol",
         "contracts/interfaces/ISSVRegistry.sol",
         "contracts/interfaces/IStakingPool.sol",
         "contracts/interfaces/IStakingPoolFactory.sol",

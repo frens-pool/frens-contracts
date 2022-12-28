@@ -4,19 +4,19 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "stakingPoolAddress",
+          "name": "owner_",
           "type": "address"
         }
       ],
-      "name": "doesStakingPoolExist",
+      "name": "create",
       "outputs": [
         {
-          "internalType": "bool",
+          "internalType": "address",
           "name": "",
-          "type": "bool"
+          "type": "address"
         }
       ],
-      "stateMutability": "view",
+      "stateMutability": "nonpayable",
       "type": "function"
     }
   ],
@@ -31,9 +31,9 @@
     "linkReferences": {}
   },
   "methodIdentifiers": {
-    "doesStakingPoolExist(address)": "76f42f8a"
+    "create(address)": "9ed93318"
   },
-  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"stakingPoolAddress\",\"type\":\"address\"}],\"name\":\"doesStakingPoolExist\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interfaces/IStakingPoolFactory.sol\":\"IStakingPoolFactory\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":base64-sol/=node_modules/base64-sol/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\"],\"viaIR\":true},\"sources\":{\"contracts/interfaces/IStakingPoolFactory.sol\":{\"keccak256\":\"0x5291fed439a327be5ddb12cce60acf5641d4e04109c5d2c8bdcdc5098d9fa58f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0a8be6502b8f4e57dcaca5eaa669d3a0cdb582f27bb838b767f90a06ff956b97\",\"dweb:/ipfs/QmY9zR7pgYeBzh7mnjJARQSuAzxREPfCnQSXcUWwD6FYeJ\"]}},\"version\":1}",
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner_\",\"type\":\"address\"}],\"name\":\"create\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interfaces/IStakingPoolFactory.sol\":\"IStakingPoolFactory\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":base64-sol/=node_modules/base64-sol/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\"],\"viaIR\":true},\"sources\":{\"contracts/interfaces/IStakingPoolFactory.sol\":{\"keccak256\":\"0xa8eeec2c8b2394a9a15a1d938e80acc34216c5da5c0a275d6bea55d4959bee0b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6c42d08ab018028aa6da1b06c74891e6bbd9dd95bfcb39741f5c734d8406d3c5\",\"dweb:/ipfs/QmQNNupGSgU9PHTc7nAGEvrrxVBKYXEp35odmc5y76e5Xo\"]}},\"version\":1}",
   "metadata": {
     "compiler": {
       "version": "0.8.17+commit.8df45f5f"
@@ -45,18 +45,18 @@
           "inputs": [
             {
               "internalType": "address",
-              "name": "stakingPoolAddress",
+              "name": "owner_",
               "type": "address"
             }
           ],
-          "stateMutability": "view",
+          "stateMutability": "nonpayable",
           "type": "function",
-          "name": "doesStakingPoolExist",
+          "name": "create",
           "outputs": [
             {
-              "internalType": "bool",
+              "internalType": "address",
               "name": "",
-              "type": "bool"
+              "type": "address"
             }
           ]
         }
@@ -98,10 +98,10 @@
     },
     "sources": {
       "contracts/interfaces/IStakingPoolFactory.sol": {
-        "keccak256": "0x5291fed439a327be5ddb12cce60acf5641d4e04109c5d2c8bdcdc5098d9fa58f",
+        "keccak256": "0xa8eeec2c8b2394a9a15a1d938e80acc34216c5da5c0a275d6bea55d4959bee0b",
         "urls": [
-          "bzz-raw://0a8be6502b8f4e57dcaca5eaa669d3a0cdb582f27bb838b767f90a06ff956b97",
-          "dweb:/ipfs/QmY9zR7pgYeBzh7mnjJARQSuAzxREPfCnQSXcUWwD6FYeJ"
+          "bzz-raw://6c42d08ab018028aa6da1b06c74891e6bbd9dd95bfcb39741f5c734d8406d3c5",
+          "dweb:/ipfs/QmQNNupGSgU9PHTc7nAGEvrrxVBKYXEp35odmc5y76e5Xo"
         ],
         "license": "MIT"
       }
@@ -110,19 +110,20 @@
   },
   "ast": {
     "absolutePath": "contracts/interfaces/IStakingPoolFactory.sol",
-    "id": 1822,
+    "id": 4117,
     "exportedSymbols": {
       "IStakingPoolFactory": [
-        1821
+        4116
       ]
     },
     "nodeType": "SourceUnit",
-    "src": "0:189:7",
+    "src": "0:161:19",
     "nodes": [
       {
-        "id": 1813,
+        "id": 4108,
         "nodeType": "PragmaDirective",
-        "src": "0:31:7",
+        "src": "0:31:19",
+        "nodes": [],
         "literals": [
           "solidity",
           ">=",
@@ -134,33 +135,34 @@
         ]
       },
       {
-        "id": 1821,
+        "id": 4116,
         "nodeType": "ContractDefinition",
-        "src": "64:124:7",
+        "src": "64:96:19",
         "nodes": [
           {
-            "id": 1820,
+            "id": 4115,
             "nodeType": "FunctionDefinition",
-            "src": "99:86:7",
-            "functionSelector": "76f42f8a",
+            "src": "99:58:19",
+            "nodes": [],
+            "functionSelector": "9ed93318",
             "implemented": false,
             "kind": "function",
             "modifiers": [],
-            "name": "doesStakingPoolExist",
-            "nameLocation": "108:20:7",
+            "name": "create",
+            "nameLocation": "108:6:19",
             "parameters": {
-              "id": 1816,
+              "id": 4111,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1815,
+                  "id": 4110,
                   "mutability": "mutable",
-                  "name": "stakingPoolAddress",
-                  "nameLocation": "137:18:7",
+                  "name": "owner_",
+                  "nameLocation": "123:6:19",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1820,
-                  "src": "129:26:7",
+                  "scope": 4115,
+                  "src": "115:14:19",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -168,10 +170,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1814,
+                    "id": 4109,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "129:7:7",
+                    "src": "115:7:19",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -181,44 +183,45 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "128:28:7"
+              "src": "114:16:19"
             },
             "returnParameters": {
-              "id": 1819,
+              "id": 4114,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1818,
+                  "id": 4113,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1820,
-                  "src": "179:4:7",
+                  "scope": 4115,
+                  "src": "148:7:19",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_bool",
-                    "typeString": "bool"
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1817,
-                    "name": "bool",
+                    "id": 4112,
+                    "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "179:4:7",
+                    "src": "148:7:19",
+                    "stateMutability": "nonpayable",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_bool",
-                      "typeString": "bool"
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "178:6:7"
+              "src": "147:9:19"
             },
-            "scope": 1821,
-            "stateMutability": "view",
+            "scope": 4116,
+            "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
@@ -230,15 +233,15 @@
         "contractKind": "interface",
         "fullyImplemented": false,
         "linearizedBaseContracts": [
-          1821
+          4116
         ],
         "name": "IStakingPoolFactory",
-        "nameLocation": "74:19:7",
-        "scope": 1822,
+        "nameLocation": "74:19:19",
+        "scope": 4117,
         "usedErrors": []
       }
     ],
     "license": "MIT"
   },
-  "id": 7
+  "id": 19
 }

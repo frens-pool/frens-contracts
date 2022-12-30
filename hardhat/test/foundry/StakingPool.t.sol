@@ -1,6 +1,11 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
+/*
+ test command:
+ forge test --via-ir --fork-url https://mainnet.infura.io/v3/7b367f3e8f1d48e5b43e1b290a1fde16
+*/
+
 import "forge-std/Test.sol";
 
 //Frens Contracts
@@ -25,6 +30,7 @@ contract StakingPoolTest is Test {
     FactoryProxy public factoryProxy;
     StakingPoolFactory public stakingPoolFactory;
     StakingPool public stakingPool;
+    StakingPool public stakingPool2;
     FrensPoolShare public frensPoolShare;
     IStakingPoolFactory public proxy;
 
@@ -92,6 +98,14 @@ contract StakingPoolTest is Test {
       stakingPool = StakingPool(payable(pool));
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){
       console.log("pool", pool);
+
+      //create a second staking pool through proxy contract
+      (address pool2) = proxy.create(contOwner, false);
+      //connect to staking pool
+      stakingPool2 = StakingPool(payable(pool2));
+      //console.log the pool address for fun  if(FrensPoolShareOld == 0){
+      console.log("pool2", pool2);
+
     }
 
     function testOwner() public {
@@ -128,6 +142,39 @@ contract StakingPoolTest is Test {
         assertTrue(id != 0 );
         uint depAmt = stakingPool.getDepositAmount(id);
         assertEq(x, depAmt);
+        //should throw for non-existant id
+        vm.expectRevert("id does not exist");
+        stakingPool.addToDeposit{value: y}(0);
+        //existing id should work fine
+        stakingPool.addToDeposit{value: y}(id);
+        uint depAmt2 = stakingPool.getDepositAmount(id);
+        uint tot = uint(x) + uint(y);
+        assertEq(tot, depAmt2);
+      } else if(x == 0) {
+        vm.expectRevert("must deposit ether");
+        startHoax(alice);
+        stakingPool.depositToPool{value: x}();
+      } else { //uint64 cannot be > 32 ether (max 18,446,744,073,709,551,615 or ~18.45 ether)
+        startHoax(alice);
+        stakingPool.depositToPool{value: x}();
+        uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
+        vm.expectRevert("total deposits cannot be more than 32 Eth");
+        stakingPool.addToDeposit{value: y}(id);
+      }
+    }
+
+    function testAddToDepositWrongPool(uint64 x, uint64 y) public {
+      if(x > 0 && uint(x) + uint(y) <= 32 ether){
+        startHoax(alice);
+        stakingPool.depositToPool{value: x}();
+        uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
+        assertTrue(id != 0 );
+        uint depAmt = stakingPool.getDepositAmount(id);
+        assertEq(x, depAmt);
+        //should throw for wrong pool
+        vm.expectRevert("wrong staking pool");
+        stakingPool2.addToDeposit{value: y}(id);
+        //existing id should work fine (redundant with previous test)
         stakingPool.addToDeposit{value: y}(id);
         uint depAmt2 = stakingPool.getDepositAmount(id);
         uint tot = uint(x) + uint(y);
@@ -190,6 +237,12 @@ contract StakingPoolTest is Test {
       stakingPool.stake(pubkey, withdrawal_credentials, signature, deposit_data_root);
       assertEq(initialBalance, address(stakingPool).balance);
       assertFalse(keccak256(depositContract.get_deposit_count()) == deposit_count_hash);
+      //test reverts for trying to deposit when staked
+      startHoax(alice);
+      vm.expectRevert("not accepting deposits");
+      stakingPool.depositToPool{value: 1}();
+      vm.expectRevert("not accepting deposits");
+      stakingPool.addToDeposit{value: 1}(1);
     }
 
     function testStakeTwoStep() public { 
@@ -259,7 +312,15 @@ contract StakingPoolTest is Test {
       startHoax(contOwner);
       vm.expectRevert("withdrawal credential mismatch");
       stakingPool.setPubKey(pubkey, hex"01000000000000000000000000dead", signature, deposit_data_root);
+      vm.expectRevert("withdrawal credential mismatch");
+      stakingPool.stake(pubkey, hex"01000000000000000000000000dead", signature, deposit_data_root);
     }
 
+    function testPubKeyMismatch() public {
+      startHoax(contOwner);
+      stakingPool.setPubKey(pubkey, withdrawal_credentials, signature, deposit_data_root);
+      vm.expectRevert("pubKey mismatch");
+      stakingPool.stake(hex"dead", withdrawal_credentials, signature, deposit_data_root);
+    }
 
 }

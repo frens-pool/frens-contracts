@@ -4,6 +4,8 @@ pragma solidity >=0.8.0 <0.9.0;
 //import "hardhat/console.sol";
 import "./interfaces/ISSVRegistry.sol";
 import "./interfaces/IFrensMetaHelper.sol";
+import "./interfaces/IENS.sol";
+import "./interfaces/IReverseResolver.sol";
 import "./FrensBase.sol";
 import './ToColor.sol';
 import "@openzeppelin/contracts/utils/Strings.sol";
@@ -43,13 +45,47 @@ contract FrensMetaHelper is IFrensMetaHelper, FrensBase {
   }
 
   function _iToHex(bytes memory buffer) internal pure returns (string memory) {
-      // Fixed buffer size for hexadecimal convertion
-      bytes memory converted = new bytes(buffer.length * 2);
-      bytes memory _base = "0123456789abcdef";
-      for (uint256 i = 0; i < buffer.length; i++) {
-          converted[i * 2] = _base[uint8(buffer[i]) / _base.length];
-          converted[i * 2 + 1] = _base[uint8(buffer[i]) % _base.length];
-      }
-      return string(abi.encodePacked("0x", converted));
+    // Fixed buffer size for hexadecimal convertion
+    bytes memory converted = new bytes(buffer.length * 2);
+    bytes memory _base = "0123456789abcdef";
+    for (uint256 i = 0; i < buffer.length; i++) {
+        converted[i * 2] = _base[uint8(buffer[i]) / _base.length];
+        converted[i * 2 + 1] = _base[uint8(buffer[i]) % _base.length];
+    }
+    return string(abi.encodePacked("0x", converted));
   }
+
+  function getEns(address addr) public view returns(bool, string memory){
+    IENS ens = IENS(getAddress(keccak256(abi.encodePacked("external.contract.address", "ENS"))));
+    bytes32 node = _node(addr);
+    address revResAddr = ens.resolver(node);
+    if(revResAddr == address(0)) return(false,'');
+    IReverseResolver reverseResolver = IReverseResolver(revResAddr);
+    return(ens.recordExists(node), reverseResolver.name(node));
+  }
+
+  function _node(address addr) internal pure returns (bytes32) {
+    bytes32 ADDR_REVERSE_NODE = 0x91d1777781884d03a6757a803996e38de2a42967fb37eeaca72729271025a9e2;
+    return keccak256(abi.encodePacked(ADDR_REVERSE_NODE, sha3HexAddress(addr)));
+  }
+
+  function sha3HexAddress(address addr) private pure returns (bytes32 ret) {
+    addr;
+    ret; // Stop warning us about unused variables
+    assembly {
+      let lookup := 0x3031323334353637383961626364656600000000000000000000000000000000
+
+      for { let i := 40 } gt(i, 0) { } {
+          i := sub(i, 1)
+          mstore8(i, byte(and(addr, 0xf), lookup))
+          addr := div(addr, 0x10)
+          i := sub(i, 1)
+          mstore8(i, byte(and(addr, 0xf), lookup))
+          addr := div(addr, 0x10)
+      }
+
+      ret := keccak256(0, 40)
+    }
+  }
+
 }

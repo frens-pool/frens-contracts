@@ -9,4 +9,5 @@ interface IFrensMetaHelper {
 
   function getOperatorsForPool(address poolAddress) external view returns (uint32[] memory, string memory);
 
+  function getEns(address addr) external view returns(bool, string memory);
 }

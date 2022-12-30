@@ -9,6 +9,11 @@
           "internalType": "address",
           "name": "owner_",
           "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "validatorLocked",
+          "type": "bool"
         }
       ],
       "name": "create",

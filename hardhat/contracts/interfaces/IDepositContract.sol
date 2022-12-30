@@ -12,4 +12,6 @@ interface IDepositContract {
         bytes32 deposit_data_root
     ) external payable;
 
+    function get_deposit_count() external view returns (bytes memory);
+
 }

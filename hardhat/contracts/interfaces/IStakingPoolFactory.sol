@@ -3,6 +3,9 @@ pragma solidity >=0.8.0 <0.9.0;
 
 interface IStakingPoolFactory {
 
-  function create(address owner_) external returns(address);
+  function create(
+    address owner_, 
+    bool validatorLocked
+   ) external returns(address);
 
 }

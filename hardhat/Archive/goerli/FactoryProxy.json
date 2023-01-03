@@ -1,0 +1,102 @@
+{
+  "address": "0x8ECf3067cc29a79B0Ff51BA03C1e317d89e34076",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "contract IFrensStorage",
+          "name": "_frensStorage",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "fallback"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "receive"
+    }
+  ],
+  "transactionHash": "0xa738fcd2545ab87b855843d1e9daa16620de6c809cf84694b514ccf79fb5d66d",
+  "receipt": {
+    "to": null,
+    "from": "0xC50e6e6eee8d434a6Ee947DeFB04cBA4115d47b5",
+    "contractAddress": "0x8ECf3067cc29a79B0Ff51BA03C1e317d89e34076",
+    "transactionIndex": 46,
+    "gasUsed": "188798",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0xae5588c3f70530ed085bf9c85e89bf47a6fac85b666c02dbf97261dc768f381c",
+    "transactionHash": "0xa738fcd2545ab87b855843d1e9daa16620de6c809cf84694b514ccf79fb5d66d",
+    "logs": [],
+    "blockNumber": 8207643,
+    "cumulativeGasUsed": "6336313",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x3703511A5fa20Be3FdBAD50A0A84d5d87E7683F4"
+  ],
+  "solcInputHash": "a0505f92e15a82f74fa4449d880ec3a4",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.16+commit.07a7930e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IFrensStorage\",\"name\":\"_frensStorage\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"inputs\":[],\"name\":\"version\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/FactoryProxy.sol\":\"FactoryProxy\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[],\"viaIR\":true},\"sources\":{\"contracts/FactoryProxy.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity >=0.8.0 <0.9.0;\\n\\n\\nimport \\\"./FrensBase.sol\\\";\\n\\ncontract FactoryProxy is FrensBase {\\n\\n    constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage){\\n        //construct dn\\n    }\\n\\n    function _delegate(address implementation) internal {\\n        assembly {\\n            // Copy msg.data. We take full control of memory in this inline assembly\\n            // block because it will not return to Solidity code. We overwrite the\\n            // Solidity scratch pad at memory position 0.\\n            calldatacopy(0, 0, calldatasize())\\n\\n            // Call the implementation.\\n            // out and outsize are 0 because we don't know the size yet.\\n            // replaced delegatecall with call to be comptible with storageContract permissions\\n            let result := call(gas(), implementation, 0, 0, calldatasize(), 0, 0)\\n\\n            // Copy the returned data.\\n            returndatacopy(0, 0, returndatasize())\\n\\n            switch result\\n            // delegatecall returns 0 on error.\\n            case 0 {\\n                revert(0, returndatasize())\\n            }\\n            default {\\n                return(0, returndatasize())\\n            }\\n        }\\n    }\\n\\n    function _implementation() internal view returns (address) {\\n        return getAddress(keccak256(abi.encodePacked(\\\"contract.address\\\", \\\"StakingPoolFactory\\\")));\\n    }\\n\\n    /**\\n     * @dev Fallback function that delegates calls to the address returned by `_implementation()`. Will run if no other\\n     * function in the contract matches the call data.\\n     */\\n    fallback() external payable virtual {\\n        _delegate(_implementation());\\n    }\\n\\n    /**\\n     * @dev Fallback function that delegates calls to the address returned by `_implementation()`. Will run if call data\\n     * is empty.\\n     */\\n    receive() external payable virtual {\\n        _delegate(_implementation());\\n    }\\n}\",\"keccak256\":\"0x6b654252da0a42715cb27f7375c0c665678297ac897c71fa7feb8fd93f4617b2\",\"license\":\"MIT\"},\"contracts/FrensBase.sol\":{\"content\":\"pragma solidity >=0.8.0 <0.9.0;\\n\\n// SPDX-License-Identifier: GPL-3.0-only\\n\\nimport \\\"./interfaces/IFrensStorage.sol\\\";\\n\\n/// @title Base settings / modifiers for each contract in Frens Pool\\n/// @author modified 04-Dec-2022 by 0xWildhare originally by David Rugendyke (h/t David and Rocket Pool!)\\n/// this code is modified from the Rocket Pool RocketBase contract all \\\"Rocket\\\" replaced with \\\"Frens\\\"\\n\\nabstract contract FrensBase {\\n\\n    // Calculate using this as the base\\n    uint256 constant calcBase = 1 ether;\\n\\n    // Version of the contract\\n    uint8 public version;\\n\\n    // The main storage contract where primary persistant storage is maintained\\n    IFrensStorage frensStorage;\\n\\n\\n    /*** Modifiers **********************************************************/\\n\\n    /**\\n    * @dev Throws if called by any sender that doesn't match a Frens Pool network contract\\n    */\\n    modifier onlyLatestNetworkContract() {\\n        require(getBool(keccak256(abi.encodePacked(\\\"contract.exists\\\", msg.sender))), \\\"Invalid or outdated network contract\\\");\\n        _;\\n    }\\n\\n    /**\\n    * @dev Throws if called by any sender that doesn't match one of the supplied contract or is the latest version of that contract\\n    */\\n    modifier onlyLatestContract(string memory _contractName, address _contractAddress) {\\n        require(_contractAddress == getAddress(keccak256(abi.encodePacked(\\\"contract.address\\\", _contractName))), \\\"Invalid or outdated contract\\\");\\n        _;\\n    }\\n\\n    /**\\n    * @dev Throws if called by any sender that isn't a registered node\\n    */\\n    //removed  0xWildhare\\n    /*\\n    modifier onlyRegisteredNode(address _nodeAddress) {\\n        require(getBool(keccak256(abi.encodePacked(\\\"node.exists\\\", _nodeAddress))), \\\"Invalid node\\\");\\n        _;\\n    }\\n    */\\n    /**\\n    * @dev Throws if called by any sender that isn't a trusted node DAO member\\n    */\\n    //removed  0xWildhare\\n    /*\\n    modifier onlyTrustedNode(address _nodeAddress) {\\n        require(getBool(keccak256(abi.encodePacked(\\\"dao.trustednodes.\\\", \\\"member\\\", _nodeAddress))), \\\"Invalid trusted node\\\");\\n        _;\\n    }\\n    */\\n\\n    /**\\n    * @dev Throws if called by any sender that isn't a registered Frens StakingPool\\n    */\\n    modifier onlyStakingPool(address _stakingPoolAddress) {\\n        require(getBool(keccak256(abi.encodePacked(\\\"pool.exists\\\", _stakingPoolAddress))), \\\"Invalid Pool\\\");\\n        _;\\n    }\\n\\n\\n    /**\\n    * @dev Throws if called by any account other than a guardian account (temporary account allowed access to settings before DAO is fully enabled)\\n    */\\n    modifier onlyGuardian() {\\n        require(msg.sender == frensStorage.getGuardian(), \\\"Account is not a temporary guardian\\\");\\n        _;\\n    }\\n\\n\\n    \\n\\n\\n\\n\\n\\n    /*** Methods **********************************************************/\\n\\n    /// @dev Set the main Frens Storage address\\n    constructor(IFrensStorage _frensStorage) {\\n        // Update the contract address\\n        frensStorage = IFrensStorage(_frensStorage);\\n    }\\n\\n\\n    /// @dev Get the address of a network contract by name\\n    function getContractAddress(string memory _contractName) internal view returns (address) {\\n        // Get the current contract address\\n        address contractAddress = getAddress(keccak256(abi.encodePacked(\\\"contract.address\\\", _contractName)));\\n        // Check it\\n        require(contractAddress != address(0x0), \\\"Contract not found\\\");\\n        // Return\\n        return contractAddress;\\n    }\\n\\n\\n    /// @dev Get the address of a network contract by name (returns address(0x0) instead of reverting if contract does not exist)\\n    function getContractAddressUnsafe(string memory _contractName) internal view returns (address) {\\n        // Get the current contract address\\n        address contractAddress = getAddress(keccak256(abi.encodePacked(\\\"contract.address\\\", _contractName)));\\n        // Return\\n        return contractAddress;\\n    }\\n\\n\\n    /// @dev Get the name of a network contract by address\\n    function getContractName(address _contractAddress) internal view returns (string memory) {\\n        // Get the contract name\\n        string memory contractName = getString(keccak256(abi.encodePacked(\\\"contract.name\\\", _contractAddress)));\\n        // Check it\\n        require(bytes(contractName).length > 0, \\\"Contract not found\\\");\\n        // Return\\n        return contractName;\\n    }\\n\\n    /// @dev Get revert error message from a .call method\\n    function getRevertMsg(bytes memory _returnData) internal pure returns (string memory) {\\n        // If the _res length is less than 68, then the transaction failed silently (without a revert message)\\n        if (_returnData.length < 68) return \\\"Transaction reverted silently\\\";\\n        assembly {\\n            // Slice the sighash.\\n            _returnData := add(_returnData, 0x04)\\n        }\\n        return abi.decode(_returnData, (string)); // All that remains is the revert string\\n    }\\n\\n\\n\\n    /*** Frens Storage Methods ****************************************/\\n\\n    // Note: Unused helpers have been removed to keep contract sizes down\\n\\n    /// @dev Storage get methods\\n    function getAddress(bytes32 _key) internal view returns (address) { return frensStorage.getAddress(_key); }\\n    function getUint(bytes32 _key) internal view returns (uint) { return frensStorage.getUint(_key); }\\n    function getString(bytes32 _key) internal view returns (string memory) { return frensStorage.getString(_key); }\\n    function getBytes(bytes32 _key) internal view returns (bytes memory) { return frensStorage.getBytes(_key); }\\n    function getBool(bytes32 _key) internal view returns (bool) { return frensStorage.getBool(_key); }\\n    function getInt(bytes32 _key) internal view returns (int) { return frensStorage.getInt(_key); }\\n    function getBytes32(bytes32 _key) internal view returns (bytes32) { return frensStorage.getBytes32(_key); }\\n    function getArray(bytes32 _key) internal view returns (uint[] memory) { return frensStorage.getArray(_key); }\\n\\n    /// @dev Storage set methods\\n    function setAddress(bytes32 _key, address _value) internal { frensStorage.setAddress(_key, _value); }\\n    function setUint(bytes32 _key, uint _value) internal { frensStorage.setUint(_key, _value); }\\n    function setString(bytes32 _key, string memory _value) internal { frensStorage.setString(_key, _value); }\\n    function setBytes(bytes32 _key, bytes memory _value) internal { frensStorage.setBytes(_key, _value); }\\n    function setBool(bytes32 _key, bool _value) internal { frensStorage.setBool(_key, _value); }\\n    function setInt(bytes32 _key, int _value) internal { frensStorage.setInt(_key, _value); }\\n    function setBytes32(bytes32 _key, bytes32 _value) internal { frensStorage.setBytes32(_key, _value); }\\n    function setArray(bytes32 _key, uint[] memory _value) internal { frensStorage.setArray(_key, _value); }\\n\\n    /// @dev Storage delete methods\\n    function deleteAddress(bytes32 _key) internal { frensStorage.deleteAddress(_key); }\\n    function deleteUint(bytes32 _key) internal { frensStorage.deleteUint(_key); }\\n    function deleteString(bytes32 _key) internal { frensStorage.deleteString(_key); }\\n    function deleteBytes(bytes32 _key) internal { frensStorage.deleteBytes(_key); }\\n    function deleteBool(bytes32 _key) internal { frensStorage.deleteBool(_key); }\\n    function deleteInt(bytes32 _key) internal { frensStorage.deleteInt(_key); }\\n    function deleteBytes32(bytes32 _key) internal { frensStorage.deleteBytes32(_key); }\\n    function deleteArray(bytes32 _key) internal { frensStorage.deleteArray(_key); }\\n\\n    /// @dev Storage arithmetic methods - push added by 0xWildhare\\n    function addUint(bytes32 _key, uint256 _amount) internal { frensStorage.addUint(_key, _amount); }\\n    function subUint(bytes32 _key, uint256 _amount) internal { frensStorage.subUint(_key, _amount); }\\n    function pushUint(bytes32 _key, uint256 _amount) internal { frensStorage.pushUint(_key, _amount); }\\n}\\n\",\"keccak256\":\"0x7374e6a194a565712df6aa0f2e80fa9e4ab6a179b5ed331b830e14075907e88f\",\"license\":\"GPL-3.0-only\"},\"contracts/interfaces/IFrensStorage.sol\":{\"content\":\"pragma solidity >=0.8.0 <0.9.0;\\n\\n\\n// SPDX-License-Identifier: GPL-3.0-only\\n//modified from IRocketStorage on 03/12/2022 by 0xWildhare\\n\\ninterface IFrensStorage {\\n\\n    // Deploy status\\n    function getDeployedStatus() external view returns (bool);\\n\\n    // Guardian\\n    function getGuardian() external view returns(address);\\n    function setGuardian(address _newAddress) external;\\n    function confirmGuardian() external;\\n\\n    // Getters\\n    function getAddress(bytes32 _key) external view returns (address);\\n    function getUint(bytes32 _key) external view returns (uint);\\n    function getString(bytes32 _key) external view returns (string memory);\\n    function getBytes(bytes32 _key) external view returns (bytes memory);\\n    function getBool(bytes32 _key) external view returns (bool);\\n    function getInt(bytes32 _key) external view returns (int);\\n    function getBytes32(bytes32 _key) external view returns (bytes32);\\n    function getArray(bytes32 _key) external view returns (uint[] memory);\\n\\n    // Setters\\n    function setAddress(bytes32 _key, address _value) external;\\n    function setUint(bytes32 _key, uint _value) external;\\n    function setString(bytes32 _key, string calldata _value) external;\\n    function setBytes(bytes32 _key, bytes calldata _value) external;\\n    function setBool(bytes32 _key, bool _value) external;\\n    function setInt(bytes32 _key, int _value) external;\\n    function setBytes32(bytes32 _key, bytes32 _value) external;\\n    function setArray(bytes32 _key, uint[] calldata _value) external;\\n\\n    // Deleters\\n    function deleteAddress(bytes32 _key) external;\\n    function deleteUint(bytes32 _key) external;\\n    function deleteString(bytes32 _key) external;\\n    function deleteBytes(bytes32 _key) external;\\n    function deleteBool(bytes32 _key) external;\\n    function deleteInt(bytes32 _key) external;\\n    function deleteBytes32(bytes32 _key) external;\\n    function deleteArray(bytes32 _key) external;\\n\\n    // Arithmetic (and stuff) - push added by 0xWildhare\\n    function addUint(bytes32 _key, uint256 _amount) external;\\n    function subUint(bytes32 _key, uint256 _amount) external;\\n    function pushUint(bytes32 _key, uint256 _amount) external;\\n\\n    // Protected storage removed ~ 0xWildhare\\n    /*\\n    function getNodeWithdrawalAddress(address _nodeAddress) external view returns (address);\\n    function getNodePendingWithdrawalAddress(address _nodeAddress) external view returns (address);\\n    function setWithdrawalAddress(address _nodeAddress, address _newWithdrawalAddress, bool _confirm) external;\\n    function confirmWithdrawalAddress(address _nodeAddress) external;\\n    */\\n}\\n\",\"keccak256\":\"0x460c440b2f1de0c6a41fff71e5f2c38117217a8aae946f6856ac720fc555a203\",\"license\":\"GPL-3.0-only\"}},\"version\":1}",
+  "bytecode": "0x60803461008357601f6102a038819003918201601f19168301916001600160401b038311848410176100885780849260209460405283398101031261008357516001600160a01b03811681036100835760008054610100600160a81b03191660089290921b610100600160a81b0316919091179055604051610201908161009f8239f35b600080fd5b634e487b7160e01b600052604160045260246000fdfe6080604052600436101561002c575b361561001f575b61001d610064565b005b610027610064565b610015565b6000803560e01c6354fd4d5014610043575061000e565b3461006157806003193601126100615760ff90541660805260206080f35b80fd5b60405160208101906f636f6e74726163742e6164647265737360801b8252715374616b696e67506f6f6c466163746f727960701b6030820152602281526100aa81610153565b5190206000546040516321f8a72160e01b815260048101929092526020908290602490829060081c6001600160a01b03165afa8015610125576100f5916000916100f7575b50610131565b565b610118915060203d811161011e575b6101108183610185565b8101906101a7565b386100ef565b503d610106565b6040513d6000823e3d90fd5b9050600080809236828037818036925af13d82803e1561014f573d90f35b3d90fd5b6060810190811067ffffffffffffffff82111761016f57604052565b634e487b7160e01b600052604160045260246000fd5b90601f8019910116810190811067ffffffffffffffff82111761016f57604052565b908160209103126101c657516001600160a01b03811681036101c65790565b600080fdfea2646970667358221220e9c9796a5cea0cbb41b96cb8434121b0052f258b85a7c6d25db444c1d4275adf64736f6c63430008100033",
+  "deployedBytecode": "0x6080604052600436101561002c575b361561001f575b61001d610064565b005b610027610064565b610015565b6000803560e01c6354fd4d5014610043575061000e565b3461006157806003193601126100615760ff90541660805260206080f35b80fd5b60405160208101906f636f6e74726163742e6164647265737360801b8252715374616b696e67506f6f6c466163746f727960701b6030820152602281526100aa81610153565b5190206000546040516321f8a72160e01b815260048101929092526020908290602490829060081c6001600160a01b03165afa8015610125576100f5916000916100f7575b50610131565b565b610118915060203d811161011e575b6101108183610185565b8101906101a7565b386100ef565b503d610106565b6040513d6000823e3d90fd5b9050600080809236828037818036925af13d82803e1561014f573d90f35b3d90fd5b6060810190811067ffffffffffffffff82111761016f57604052565b634e487b7160e01b600052604160045260246000fd5b90601f8019910116810190811067ffffffffffffffff82111761016f57604052565b908160209103126101c657516001600160a01b03811681036101c65790565b600080fdfea2646970667358221220e9c9796a5cea0cbb41b96cb8434121b0052f258b85a7c6d25db444c1d4275adf64736f6c63430008100033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 2374,
+        "contract": "contracts/FactoryProxy.sol:FactoryProxy",
+        "label": "version",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_uint8"
+      },
+      {
+        "astId": 2377,
+        "contract": "contracts/FactoryProxy.sol:FactoryProxy",
+        "label": "frensStorage",
+        "offset": 1,
+        "slot": "0",
+        "type": "t_contract(IFrensStorage)5968"
+      }
+    ],
+    "types": {
+      "t_contract(IFrensStorage)5968": {
+        "encoding": "inplace",
+        "label": "contract IFrensStorage",
+        "numberOfBytes": "20"
+      },
+      "t_uint8": {
+        "encoding": "inplace",
+        "label": "uint8",
+        "numberOfBytes": "1"
+      }
+    }
+  }
+}

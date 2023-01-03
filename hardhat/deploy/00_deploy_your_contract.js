@@ -140,6 +140,8 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     await ENSInit.wait();
     console.log('\x1b[33m%s\x1b[0m', "initialiser initialised", FrensInitialiser.address);
   } else if(FrensInitialiserOld.address != FrensInitialiser.address) {
+    const newInitExist = await FrensInitialiserOld.setContractExists(FrensInitializer.address, true); //grants privileges to write to FrensStorage
+    await newInitExist.wait();
     const initialiserDel = await FrensInitialiser.deleteContract(FrensInitialiserOld.address,"FrensInitialiser");
     await initialiserDel.wait();
     const initialiserInit = await FrensInitialiser.setContract(FrensInitialiser.address, "FrensInitialiser");
@@ -167,6 +169,8 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     await poolShareXfer.wait();
     const poolShareInit = await FrensInitialiser.setContract(FrensPoolShare.address, "FrensPoolShare");
     await poolShareInit.wait();
+    const nftBoolFalse = await FrensInitialiser.setContractExists(FrensPoolShare.address, false); //removes privileges to write to FrensStorage
+    await nftBoolFalse.wait();
     console.log('\x1b[33m%s\x1b[0m', "FrensPoolShare initialised", FrensPoolShare.address);
   } else if(FrensPoolShareOld.address != FrensPoolShare.address){
     const poolShareXfer = await FrensPoolShare.transferOwnership("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6");
@@ -175,10 +179,14 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     await poolShareDel.wait();
     const poolShareInit = await FrensInitialiser.setContract(FrensPoolShare.address, "FrensPoolShare");
     await poolShareInit.wait();
+    const nftBoolFalse = await FrensInitialiser.setContractExists(FrensPoolShare.address, false); //removes privileges to write to FrensStorage
+    await nftBoolFalse.wait();
     console.log('\x1b[31m%s\x1b[0m', "FrensPoolShare updated", FrensPoolShare.address);
   }else if(reinitialiseEverything) {
     const poolShareInit = await FrensInitialiser.setContract(FrensPoolShare.address, "FrensPoolShare");
     await poolShareInit.wait();
+    const nftBoolFalse = await FrensInitialiser.setContractExists(FrensPoolShare.address, false); //removes privileges to write to FrensStorage
+    await nftBoolFalse.wait();
     console.log('\x1b[33m%s\x1b[0m', "FrensPoolShare (re)initialised", FrensPoolShare.address);
   }
 
@@ -222,12 +230,16 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   if(FrensMetaHelperOld == 0 || reinitialiseEverything){
     const meatInit = await FrensInitialiser.setContract(FrensMetaHelper.address, "FrensMetaHelper");
     await meatInit.wait();
+    const metaBoolFalse = await FrensInitialiser.setContractExists(FrensMetaHelper.address, false); //removes privileges to write to FrensStorage
+    await metaBoolFalse.wait();
     console.log('\x1b[33m%s\x1b[0m', "FrensMetaHelper initialised", FrensMetaHelper.address);
   } else if(FrensMetaHelperOld.address != FrensMetaHelper.address){
     const metaDel = await FrensInitialiser.deleteContract(FrensMetaHelperOld.address, "FrensMetaHelper");
     await metaDel.wait();
     const meatInit = await FrensInitialiser.setContract(FrensMetaHelper.address, "FrensMetaHelper");
     await meatInit.wait();
+    const metaBoolFalse = await FrensInitialiser.setContractExists(FrensMetaHelper.address, false); //removes privileges to write to FrensStorage
+    await metaBoolFalse.wait();
     console.log('\x1b[36m%s\x1b[0m', "FrensMetaHelper updated", FrensMetaHelper.address);
   }
 
@@ -244,12 +256,16 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   if(FrensPoolShareTokenURIOld == 0 || reinitialiseEverything){
     const tokUriInit = await FrensInitialiser.setContract(FrensPoolShareTokenURI.address, "FrensPoolShareTokenURI");
     await tokUriInit.wait();
+    const uriBoolFalse = await FrensInitialiser.setContractExists(FrensPoolShareTokenURI.address, false); //removes privileges to write to FrensStorage
+    await uriBoolFalse.wait();
     console.log('\x1b[33m%s\x1b[0m', "FrensPoolShareTokenURI initialised", FrensPoolShareTokenURI.address);
   } else if(FrensPoolShareTokenURIOld.address != FrensPoolShareTokenURI.address){
     const tokUriDel = await FrensInitialiser.deleteContract(FrensPoolShareTokenURIOld.address, "FrensPoolShareTokenURI");
     await tokUriDel.wait();
     const tokUriInit = await FrensInitialiser.setContract(FrensPoolShareTokenURI.address, "FrensPoolShareTokenURI");
     await tokUriInit.wait();
+    const uriBoolFalse = await FrensInitialiser.setContractExists(FrensPoolShareTokenURI.address, false); //removes privileges to write to FrensStorage
+    await uriBoolFalse.wait();
     console.log('\x1b[36m%s\x1b[0m', "FrensPoolShareTokenURI updated", FrensPoolShareTokenURI.address);
   }
 
@@ -268,12 +284,16 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   if(FrensArtOld == 0 || reinitialiseEverything){
     const artInit = await FrensInitialiser.setContract(FrensArt.address, "FrensArt");
     await artInit.wait();
+    const artBoolFalse = await FrensInitialiser.setContractExists(FrensArt.address, false); //removes privileges to write to FrensStorage
+    await artBoolFalse.wait();
     console.log('\x1b[33m%s\x1b[0m', "FrensArt initialised", FrensArt.address);
   } else if(FrensArtOld.address != FrensArt.address){
     const artDel = await FrensInitialiser.deleteContract(FrensArtOld.address, "FrensArt");
     await artDel.wait();
     const artInit = await FrensInitialiser.setContract(FrensArt.address, "FrensArt");
     await artInit.wait();
+    const artBoolFalse = await FrensInitialiser.setContractExists(FrensArt.address, false); //removes privileges to write to FrensStorage
+    await artBoolFalse.wait();
     console.log('\x1b[36m%s\x1b[0m', "FrensArt updated", FrensArt.address);
   }
 
@@ -288,6 +308,12 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     log: true,
     waitConfirmations: 5,
   });
+
+  if(reinitialiseEverything){
+    const setDeployed = await FrensStorage.setDeployedStatus();
+    await setDeployed.wait();
+    console.log('\x1b[33m%s\x1b[0m', "FRENS Group Contracts Deployed");
+  }
 
   const newPool = await StakingPoolFactory.create("0x521B2cE927FD6d0D473789Bd3c70B296BBce613e", false);
   

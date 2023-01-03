@@ -17,9 +17,8 @@ contract FrensPoolShare is IFrensPoolShare, ERC721Enumerable, Ownable, FrensBase
     //hi fren
   }
 
-  function mint(address userAddress, address _pool) public onlyStakingPool(msg.sender) {
+  function mint(address userAddress) public onlyStakingPool(msg.sender) {
     uint id = getUint(keccak256(abi.encodePacked("token.id")));
-    setAddress(keccak256(abi.encodePacked("pool.for.id", id)), _pool);
     _safeMint(userAddress, id);
   }
 

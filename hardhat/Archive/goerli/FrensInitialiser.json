@@ -1,0 +1,166 @@
+{
+  "address": "0x10B7522A2Fe86891e2739AAb817bb3185508Eaa1",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "contract IFrensStorage",
+          "name": "_frensStorage",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_contractAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "_contractName",
+          "type": "string"
+        }
+      ],
+      "name": "deleteContract",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_contractAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "_contractName",
+          "type": "string"
+        }
+      ],
+      "name": "setContract",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_contractAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "_exists",
+          "type": "bool"
+        }
+      ],
+      "name": "setContractExists",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_contractAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "_contractName",
+          "type": "string"
+        }
+      ],
+      "name": "setExternalContract",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x8c0dcd8469b122141e343d5aaec0fb189b5921d35dfbcc063504effd74a88f90",
+  "receipt": {
+    "to": null,
+    "from": "0xC50e6e6eee8d434a6Ee947DeFB04cBA4115d47b5",
+    "contractAddress": "0x10B7522A2Fe86891e2739AAb817bb3185508Eaa1",
+    "transactionIndex": 58,
+    "gasUsed": "576985",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x7d238385d28b79806fd189b43e7a40fabde63612ffab9743bb194b135be196de",
+    "transactionHash": "0x8c0dcd8469b122141e343d5aaec0fb189b5921d35dfbcc063504effd74a88f90",
+    "logs": [],
+    "blockNumber": 8163969,
+    "cumulativeGasUsed": "13073125",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x3703511A5fa20Be3FdBAD50A0A84d5d87E7683F4"
+  ],
+  "solcInputHash": "393b39a3444d044d1d4a4046fa7ca90d",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.16+commit.07a7930e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IFrensStorage\",\"name\":\"_frensStorage\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_contractAddress\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_contractName\",\"type\":\"string\"}],\"name\":\"deleteContract\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_contractAddress\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_contractName\",\"type\":\"string\"}],\"name\":\"setContract\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_contractAddress\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"_exists\",\"type\":\"bool\"}],\"name\":\"setContractExists\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_contractAddress\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_contractName\",\"type\":\"string\"}],\"name\":\"setExternalContract\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"version\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/FrensInitialiser.sol\":\"FrensInitialiser\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[],\"viaIR\":true},\"sources\":{\"contracts/FrensBase.sol\":{\"content\":\"pragma solidity >=0.8.0 <0.9.0;\\n\\n// SPDX-License-Identifier: GPL-3.0-only\\n\\nimport \\\"./interfaces/IFrensStorage.sol\\\";\\n\\n/// @title Base settings / modifiers for each contract in Frens Pool\\n/// @author modified 04-Dec-2022 by 0xWildhare originally by David Rugendyke (h/t David and Rocket Pool!)\\n/// this code is modified from the Rocket Pool RocketBase contract all \\\"Rocket\\\" replaced with \\\"Frens\\\"\\n\\nabstract contract FrensBase {\\n\\n    // Calculate using this as the base\\n    uint256 constant calcBase = 1 ether;\\n\\n    // Version of the contract\\n    uint8 public version;\\n\\n    // The main storage contract where primary persistant storage is maintained\\n    IFrensStorage frensStorage;\\n\\n\\n    /*** Modifiers **********************************************************/\\n\\n    /**\\n    * @dev Throws if called by any sender that doesn't match a Frens Pool network contract\\n    */\\n    modifier onlyLatestNetworkContract() {\\n        require(getBool(keccak256(abi.encodePacked(\\\"contract.exists\\\", msg.sender))), \\\"Invalid or outdated network contract\\\");\\n        _;\\n    }\\n\\n    /**\\n    * @dev Throws if called by any sender that doesn't match one of the supplied contract or is the latest version of that contract\\n    */\\n    modifier onlyLatestContract(string memory _contractName, address _contractAddress) {\\n        require(_contractAddress == getAddress(keccak256(abi.encodePacked(\\\"contract.address\\\", _contractName))), \\\"Invalid or outdated contract\\\");\\n        _;\\n    }\\n\\n    /**\\n    * @dev Throws if called by any sender that isn't a registered node\\n    */\\n    //removed  0xWildhare\\n    /*\\n    modifier onlyRegisteredNode(address _nodeAddress) {\\n        require(getBool(keccak256(abi.encodePacked(\\\"node.exists\\\", _nodeAddress))), \\\"Invalid node\\\");\\n        _;\\n    }\\n    */\\n    /**\\n    * @dev Throws if called by any sender that isn't a trusted node DAO member\\n    */\\n    //removed  0xWildhare\\n    /*\\n    modifier onlyTrustedNode(address _nodeAddress) {\\n        require(getBool(keccak256(abi.encodePacked(\\\"dao.trustednodes.\\\", \\\"member\\\", _nodeAddress))), \\\"Invalid trusted node\\\");\\n        _;\\n    }\\n    */\\n\\n    /**\\n    * @dev Throws if called by any sender that isn't a registered Frens StakingPool\\n    */\\n    modifier onlyStakingPool(address _stakingPoolAddress) {\\n        require(getBool(keccak256(abi.encodePacked(\\\"pool.exists\\\", _stakingPoolAddress))), \\\"Invalid Pool\\\");\\n        _;\\n    }\\n\\n\\n    /**\\n    * @dev Throws if called by any account other than a guardian account (temporary account allowed access to settings before DAO is fully enabled)\\n    */\\n    modifier onlyGuardian() {\\n        require(msg.sender == frensStorage.getGuardian(), \\\"Account is not a temporary guardian\\\");\\n        _;\\n    }\\n\\n\\n    \\n\\n\\n\\n\\n\\n    /*** Methods **********************************************************/\\n\\n    /// @dev Set the main Frens Storage address\\n    constructor(IFrensStorage _frensStorage) {\\n        // Update the contract address\\n        frensStorage = IFrensStorage(_frensStorage);\\n    }\\n\\n\\n    /// @dev Get the address of a network contract by name\\n    function getContractAddress(string memory _contractName) internal view returns (address) {\\n        // Get the current contract address\\n        address contractAddress = getAddress(keccak256(abi.encodePacked(\\\"contract.address\\\", _contractName)));\\n        // Check it\\n        require(contractAddress != address(0x0), \\\"Contract not found\\\");\\n        // Return\\n        return contractAddress;\\n    }\\n\\n\\n    /// @dev Get the address of a network contract by name (returns address(0x0) instead of reverting if contract does not exist)\\n    function getContractAddressUnsafe(string memory _contractName) internal view returns (address) {\\n        // Get the current contract address\\n        address contractAddress = getAddress(keccak256(abi.encodePacked(\\\"contract.address\\\", _contractName)));\\n        // Return\\n        return contractAddress;\\n    }\\n\\n\\n    /// @dev Get the name of a network contract by address\\n    function getContractName(address _contractAddress) internal view returns (string memory) {\\n        // Get the contract name\\n        string memory contractName = getString(keccak256(abi.encodePacked(\\\"contract.name\\\", _contractAddress)));\\n        // Check it\\n        require(bytes(contractName).length > 0, \\\"Contract not found\\\");\\n        // Return\\n        return contractName;\\n    }\\n\\n    /// @dev Get revert error message from a .call method\\n    function getRevertMsg(bytes memory _returnData) internal pure returns (string memory) {\\n        // If the _res length is less than 68, then the transaction failed silently (without a revert message)\\n        if (_returnData.length < 68) return \\\"Transaction reverted silently\\\";\\n        assembly {\\n            // Slice the sighash.\\n            _returnData := add(_returnData, 0x04)\\n        }\\n        return abi.decode(_returnData, (string)); // All that remains is the revert string\\n    }\\n\\n\\n\\n    /*** Frens Storage Methods ****************************************/\\n\\n    // Note: Unused helpers have been removed to keep contract sizes down\\n\\n    /// @dev Storage get methods\\n    function getAddress(bytes32 _key) internal view returns (address) { return frensStorage.getAddress(_key); }\\n    function getUint(bytes32 _key) internal view returns (uint) { return frensStorage.getUint(_key); }\\n    function getString(bytes32 _key) internal view returns (string memory) { return frensStorage.getString(_key); }\\n    function getBytes(bytes32 _key) internal view returns (bytes memory) { return frensStorage.getBytes(_key); }\\n    function getBool(bytes32 _key) internal view returns (bool) { return frensStorage.getBool(_key); }\\n    function getInt(bytes32 _key) internal view returns (int) { return frensStorage.getInt(_key); }\\n    function getBytes32(bytes32 _key) internal view returns (bytes32) { return frensStorage.getBytes32(_key); }\\n    function getArray(bytes32 _key) internal view returns (uint[] memory) { return frensStorage.getArray(_key); }\\n\\n    /// @dev Storage set methods\\n    function setAddress(bytes32 _key, address _value) internal { frensStorage.setAddress(_key, _value); }\\n    function setUint(bytes32 _key, uint _value) internal { frensStorage.setUint(_key, _value); }\\n    function setString(bytes32 _key, string memory _value) internal { frensStorage.setString(_key, _value); }\\n    function setBytes(bytes32 _key, bytes memory _value) internal { frensStorage.setBytes(_key, _value); }\\n    function setBool(bytes32 _key, bool _value) internal { frensStorage.setBool(_key, _value); }\\n    function setInt(bytes32 _key, int _value) internal { frensStorage.setInt(_key, _value); }\\n    function setBytes32(bytes32 _key, bytes32 _value) internal { frensStorage.setBytes32(_key, _value); }\\n    function setArray(bytes32 _key, uint[] memory _value) internal { frensStorage.setArray(_key, _value); }\\n\\n    /// @dev Storage delete methods\\n    function deleteAddress(bytes32 _key) internal { frensStorage.deleteAddress(_key); }\\n    function deleteUint(bytes32 _key) internal { frensStorage.deleteUint(_key); }\\n    function deleteString(bytes32 _key) internal { frensStorage.deleteString(_key); }\\n    function deleteBytes(bytes32 _key) internal { frensStorage.deleteBytes(_key); }\\n    function deleteBool(bytes32 _key) internal { frensStorage.deleteBool(_key); }\\n    function deleteInt(bytes32 _key) internal { frensStorage.deleteInt(_key); }\\n    function deleteBytes32(bytes32 _key) internal { frensStorage.deleteBytes32(_key); }\\n    function deleteArray(bytes32 _key) internal { frensStorage.deleteArray(_key); }\\n\\n    /// @dev Storage arithmetic methods - push added by 0xWildhare\\n    function addUint(bytes32 _key, uint256 _amount) internal { frensStorage.addUint(_key, _amount); }\\n    function subUint(bytes32 _key, uint256 _amount) internal { frensStorage.subUint(_key, _amount); }\\n    function pushUint(bytes32 _key, uint256 _amount) internal { frensStorage.pushUint(_key, _amount); }\\n}\\n\",\"keccak256\":\"0x7374e6a194a565712df6aa0f2e80fa9e4ab6a179b5ed331b830e14075907e88f\",\"license\":\"GPL-3.0-only\"},\"contracts/FrensInitialiser.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity >=0.8.0 <0.9.0;\\n\\nimport \\\"./FrensBase.sol\\\";\\n\\ncontract FrensInitialiser is FrensBase {\\n\\n  constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage) {\\n    //nothing?\\n  }\\n  //set boolean\\n  function setContractExists(address _contractAddress, bool _exists) public onlyGuardian{\\n    setBool(keccak256(abi.encodePacked(\\\"contract.exists\\\", _contractAddress)), _exists);\\n  }\\n  //set name and address\\n  function setContract(address _contractAddress, string memory _contractName) public onlyGuardian{\\n    setAddress(keccak256(abi.encodePacked(\\\"contract.address\\\", _contractName)), _contractAddress);\\n    setString(keccak256(abi.encodePacked(\\\"contract.name\\\", _contractAddress)), _contractName);\\n    setBool(keccak256(abi.encodePacked(\\\"contract.exists\\\", _contractAddress)), true);\\n  }\\n\\n  function deleteContract(address _contractAddress, string memory _contractName) public onlyGuardian {\\n    deleteAddress(keccak256(abi.encodePacked(\\\"contract.address\\\", _contractName)));\\n    deleteString(keccak256(abi.encodePacked(\\\"contract.name\\\", _contractAddress)));\\n    setBool(keccak256(abi.encodePacked(\\\"contract.exists\\\", _contractAddress)), false);\\n  }\\n\\n  function setExternalContract(address _contractAddress, string memory _contractName) public onlyGuardian {\\n    setAddress(keccak256(abi.encodePacked(\\\"external.contract.address\\\", _contractName)), _contractAddress);\\n    setString(keccak256(abi.encodePacked(\\\"external.contract.name\\\", _contractAddress)), _contractName);\\n  }\\n\\n  ///add deletes\\n\\n}\\n\",\"keccak256\":\"0x98857d91ad48e11ef56e719cb1dd7d585f509dcdb8c5c30ac2cd16810ed794dc\",\"license\":\"MIT\"},\"contracts/interfaces/IFrensStorage.sol\":{\"content\":\"pragma solidity >=0.8.0 <0.9.0;\\n\\n\\n// SPDX-License-Identifier: GPL-3.0-only\\n//modified from IRocketStorage on 03/12/2022 by 0xWildhare\\n\\ninterface IFrensStorage {\\n\\n    // Deploy status\\n    function getDeployedStatus() external view returns (bool);\\n\\n    // Guardian\\n    function getGuardian() external view returns(address);\\n    function setGuardian(address _newAddress) external;\\n    function confirmGuardian() external;\\n\\n    // Getters\\n    function getAddress(bytes32 _key) external view returns (address);\\n    function getUint(bytes32 _key) external view returns (uint);\\n    function getString(bytes32 _key) external view returns (string memory);\\n    function getBytes(bytes32 _key) external view returns (bytes memory);\\n    function getBool(bytes32 _key) external view returns (bool);\\n    function getInt(bytes32 _key) external view returns (int);\\n    function getBytes32(bytes32 _key) external view returns (bytes32);\\n    function getArray(bytes32 _key) external view returns (uint[] memory);\\n\\n    // Setters\\n    function setAddress(bytes32 _key, address _value) external;\\n    function setUint(bytes32 _key, uint _value) external;\\n    function setString(bytes32 _key, string calldata _value) external;\\n    function setBytes(bytes32 _key, bytes calldata _value) external;\\n    function setBool(bytes32 _key, bool _value) external;\\n    function setInt(bytes32 _key, int _value) external;\\n    function setBytes32(bytes32 _key, bytes32 _value) external;\\n    function setArray(bytes32 _key, uint[] calldata _value) external;\\n\\n    // Deleters\\n    function deleteAddress(bytes32 _key) external;\\n    function deleteUint(bytes32 _key) external;\\n    function deleteString(bytes32 _key) external;\\n    function deleteBytes(bytes32 _key) external;\\n    function deleteBool(bytes32 _key) external;\\n    function deleteInt(bytes32 _key) external;\\n    function deleteBytes32(bytes32 _key) external;\\n    function deleteArray(bytes32 _key) external;\\n\\n    // Arithmetic (and stuff) - push added by 0xWildhare\\n    function addUint(bytes32 _key, uint256 _amount) external;\\n    function subUint(bytes32 _key, uint256 _amount) external;\\n    function pushUint(bytes32 _key, uint256 _amount) external;\\n\\n    // Protected storage removed ~ 0xWildhare\\n    /*\\n    function getNodeWithdrawalAddress(address _nodeAddress) external view returns (address);\\n    function getNodePendingWithdrawalAddress(address _nodeAddress) external view returns (address);\\n    function setWithdrawalAddress(address _nodeAddress, address _newWithdrawalAddress, bool _confirm) external;\\n    function confirmWithdrawalAddress(address _nodeAddress) external;\\n    */\\n}\\n\",\"keccak256\":\"0x460c440b2f1de0c6a41fff71e5f2c38117217a8aae946f6856ac720fc555a203\",\"license\":\"GPL-3.0-only\"}},\"version\":1}",
+  "bytecode": "0x60803461008357601f6109a438819003918201601f19168301916001600160401b038311848410176100885780849260209460405283398101031261008357516001600160a01b03811681036100835760008054610100600160a81b03191660089290921b610100600160a81b0316919091179055604051610905908161009f8239f35b600080fd5b634e487b7160e01b600052604160045260246000fdfe6040608081526004908136101561001557600080fd5b600091823560e01c80631b1c2c7f1461050057806354fd4d50146104e05780636b742b93146102cb578063a3a8ceb0146101835763cd8ce31f1461005857600080fd5b3461017f578160031936011261017f578035906001600160a01b03808316830361013e576024359283151580940361017b578160208754858851809481936353adc3e960e11b835260081c165afa908115610171576100c39184918991610143575b50163314610741565b84516100e5816100d7602082019485610799565b03601f19810183528261067a565b5190209060005460081c16803b1561013e57600092836044928751968795869463abfdcced60e01b865285015260248401525af1801561013357610127575051f35b61013090610650565b51f35b82513d6000823e3d90fd5b600080fd5b610164915060203d811161016a575b61015c818361067a565b810190610722565b386100ba565b503d610152565b86513d89823e3d90fd5b8580fd5b8280fd5b509190346102c7576101943661069c565b835483516353adc3e960e11b81529192916020916001600160a01b039190839082908a90829060081c86165afa90811561017157906101dd929188916102b05750163314610741565b61023a828551838101907f65787465726e616c2e636f6e74726163742e616464726573730000000000000082526102326039828951610222818c8b86860191016107c8565b810103601981018452018261067a565b5190206107eb565b8351908101917565787465726e616c2e636f6e74726163742e6e616d6560501b83526001600160601b03199060601b166036820152602a81526060810181811067ffffffffffffffff82111761029b57846101309596975052519020610857565b604187634e487b7160e01b6000525260246000fd5b6101649150843d861161016a5761015c818361067a565b5080fd5b503461017f576102da3661069c565b845484516353adc3e960e11b81526001600160a01b03949392602092889260089190911c8716919084818881865afa9081156104d65761032591899186916104bf5750163314610741565b8751610369603082878101946f636f6e74726163742e6164647265737360801b8652610359815180928b86860191016107c8565b810103601081018452018261067a565b51902090803b1561017f57602483928951948593849263070a51bb60e11b84528a8401525af18015610171576104ac575b5084519086818301836103d586836021916c636f6e74726163742e6e616d6560981b82526001600160601b03199060601b16600d8201520190565b03936103e9601f199586810183528261067a565b51902086825460081c1690813b1561017f578291602483928b519485938492633daecf3160e21b84528c8401525af180156104a25761048a575b505061043b9161044791875193849182019586610799565b0390810183528261067a565b5190209160005460081c1691823b1561013e576044600092838651958694859363abfdcced60e01b85528401528160248401525af1801561013357610127575051f35b61049390610650565b61049e578638610423565b8680fd5b88513d84823e3d90fd5b6104b890969196610650565b943861039a565b6101649150873d891161016a5761015c818361067a565b89513d86823e3d90fd5b5050346102c757816003193601126102c75760ff60209254169051908152f35b503461017f57826105103661069c565b825485516353adc3e960e11b81526001600160a01b039392602092839083908990829060081c89165afa9283156106465761055c8661043b956105f9958a916102b05750163314610741565b610593858a51838101906f636f6e74726163742e6164647265737360801b82526102326030828851610359818484018b8d016107c8565b6105eb895192828401846105cf89836021916c636f6e74726163742e6e616d6560981b82526001600160601b03199060601b16600d8201520190565b03946105e3601f199687810183528261067a565b519020610857565b885193849182019586610799565b51902090825460081c1692833b1561017f57604490838651958694859363abfdcced60e01b8552840152600160248401525af1801561063a57610127575051f35b505051903d90823e3d90fd5b88513d88823e3d90fd5b67ffffffffffffffff811161066457604052565b634e487b7160e01b600052604160045260246000fd5b90601f8019910116810190811067ffffffffffffffff82111761066457604052565b90604060031983011261013e576004356001600160a01b038116810361013e579167ffffffffffffffff60243581811161013e578260238201121561013e57806004013591821161066457604051926106ff601f8401601f19166020018561067a565b8284526024838301011161013e5781600092602460209301838601378301015290565b9081602091031261013e57516001600160a01b038116810361013e5790565b1561074857565b60405162461bcd60e51b815260206004820152602360248201527f4163636f756e74206973206e6f7420612074656d706f7261727920677561726460448201526234b0b760e91b6064820152608490fd5b6023916e636f6e74726163742e65786973747360881b82526001600160601b03199060601b16600f8201520190565b60005b8381106107db5750506000910152565b81810151838201526020016107cb565b600080546001600160a01b039391929060081c8416803b156108535783929183604492604051978895869463ca446dd960e01b865260048601521660248401525af1908115610847575061083c5750565b61084590610650565b565b604051903d90823e3d90fd5b8380fd5b91909160009060018060a01b03825460081c1690813b1561017f5793829160649495836040519687809581946306e8995560e41b83526004830152604060248301526108b281518092816044860152602086860191016107c8565b601f01601f191681010301925af1908115610847575061083c575056fea264697066735822122007859365c8d3668b367f706f6feb0e48e249b42c26bf1f7c73c0e121a3b5f45c64736f6c63430008100033",
+  "deployedBytecode": "0x6040608081526004908136101561001557600080fd5b600091823560e01c80631b1c2c7f1461050057806354fd4d50146104e05780636b742b93146102cb578063a3a8ceb0146101835763cd8ce31f1461005857600080fd5b3461017f578160031936011261017f578035906001600160a01b03808316830361013e576024359283151580940361017b578160208754858851809481936353adc3e960e11b835260081c165afa908115610171576100c39184918991610143575b50163314610741565b84516100e5816100d7602082019485610799565b03601f19810183528261067a565b5190209060005460081c16803b1561013e57600092836044928751968795869463abfdcced60e01b865285015260248401525af1801561013357610127575051f35b61013090610650565b51f35b82513d6000823e3d90fd5b600080fd5b610164915060203d811161016a575b61015c818361067a565b810190610722565b386100ba565b503d610152565b86513d89823e3d90fd5b8580fd5b8280fd5b509190346102c7576101943661069c565b835483516353adc3e960e11b81529192916020916001600160a01b039190839082908a90829060081c86165afa90811561017157906101dd929188916102b05750163314610741565b61023a828551838101907f65787465726e616c2e636f6e74726163742e616464726573730000000000000082526102326039828951610222818c8b86860191016107c8565b810103601981018452018261067a565b5190206107eb565b8351908101917565787465726e616c2e636f6e74726163742e6e616d6560501b83526001600160601b03199060601b166036820152602a81526060810181811067ffffffffffffffff82111761029b57846101309596975052519020610857565b604187634e487b7160e01b6000525260246000fd5b6101649150843d861161016a5761015c818361067a565b5080fd5b503461017f576102da3661069c565b845484516353adc3e960e11b81526001600160a01b03949392602092889260089190911c8716919084818881865afa9081156104d65761032591899186916104bf5750163314610741565b8751610369603082878101946f636f6e74726163742e6164647265737360801b8652610359815180928b86860191016107c8565b810103601081018452018261067a565b51902090803b1561017f57602483928951948593849263070a51bb60e11b84528a8401525af18015610171576104ac575b5084519086818301836103d586836021916c636f6e74726163742e6e616d6560981b82526001600160601b03199060601b16600d8201520190565b03936103e9601f199586810183528261067a565b51902086825460081c1690813b1561017f578291602483928b519485938492633daecf3160e21b84528c8401525af180156104a25761048a575b505061043b9161044791875193849182019586610799565b0390810183528261067a565b5190209160005460081c1691823b1561013e576044600092838651958694859363abfdcced60e01b85528401528160248401525af1801561013357610127575051f35b61049390610650565b61049e578638610423565b8680fd5b88513d84823e3d90fd5b6104b890969196610650565b943861039a565b6101649150873d891161016a5761015c818361067a565b89513d86823e3d90fd5b5050346102c757816003193601126102c75760ff60209254169051908152f35b503461017f57826105103661069c565b825485516353adc3e960e11b81526001600160a01b039392602092839083908990829060081c89165afa9283156106465761055c8661043b956105f9958a916102b05750163314610741565b610593858a51838101906f636f6e74726163742e6164647265737360801b82526102326030828851610359818484018b8d016107c8565b6105eb895192828401846105cf89836021916c636f6e74726163742e6e616d6560981b82526001600160601b03199060601b16600d8201520190565b03946105e3601f199687810183528261067a565b519020610857565b885193849182019586610799565b51902090825460081c1692833b1561017f57604490838651958694859363abfdcced60e01b8552840152600160248401525af1801561063a57610127575051f35b505051903d90823e3d90fd5b88513d88823e3d90fd5b67ffffffffffffffff811161066457604052565b634e487b7160e01b600052604160045260246000fd5b90601f8019910116810190811067ffffffffffffffff82111761066457604052565b90604060031983011261013e576004356001600160a01b038116810361013e579167ffffffffffffffff60243581811161013e578260238201121561013e57806004013591821161066457604051926106ff601f8401601f19166020018561067a565b8284526024838301011161013e5781600092602460209301838601378301015290565b9081602091031261013e57516001600160a01b038116810361013e5790565b1561074857565b60405162461bcd60e51b815260206004820152602360248201527f4163636f756e74206973206e6f7420612074656d706f7261727920677561726460448201526234b0b760e91b6064820152608490fd5b6023916e636f6e74726163742e65786973747360881b82526001600160601b03199060601b16600f8201520190565b60005b8381106107db5750506000910152565b81810151838201526020016107cb565b600080546001600160a01b039391929060081c8416803b156108535783929183604492604051978895869463ca446dd960e01b865260048601521660248401525af1908115610847575061083c5750565b61084590610650565b565b604051903d90823e3d90fd5b8380fd5b91909160009060018060a01b03825460081c1690813b1561017f5793829160649495836040519687809581946306e8995560e41b83526004830152604060248301526108b281518092816044860152602086860191016107c8565b601f01601f191681010301925af1908115610847575061083c575056fea264697066735822122007859365c8d3668b367f706f6feb0e48e249b42c26bf1f7c73c0e121a3b5f45c64736f6c63430008100033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 2315,
+        "contract": "contracts/FrensInitialiser.sol:FrensInitialiser",
+        "label": "version",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_uint8"
+      },
+      {
+        "astId": 2318,
+        "contract": "contracts/FrensInitialiser.sol:FrensInitialiser",
+        "label": "frensStorage",
+        "offset": 1,
+        "slot": "0",
+        "type": "t_contract(IFrensStorage)5909"
+      }
+    ],
+    "types": {
+      "t_contract(IFrensStorage)5909": {
+        "encoding": "inplace",
+        "label": "contract IFrensStorage",
+        "numberOfBytes": "20"
+      },
+      "t_uint8": {
+        "encoding": "inplace",
+        "label": "uint8",
+        "numberOfBytes": "1"
+      }
+    }
+  }
+}

@@ -1,0 +1,1276 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "contract IFrensStorage",
+          "name": "frensStorage_",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getBoolFromStorage",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x60803461008357601f61020038819003918201601f19168301916001600160401b038311848410176100885780849260209460405283398101031261008357516001600160a01b03811681036100835760008054610100600160a81b03191660089290921b610100600160a81b0316919091179055604051610161908161009f8239f35b600080fd5b634e487b7160e01b600052604160045260246000fdfe608080604052600436101561001357600080fd5b600090813560e01c90816354fd4d501461010e5750638db53b4c1461003757600080fd5b346100df57602090816003193601126100df578054604051633d70e7e560e11b81526004803590820152919083908390602490829060081c6001600160a01b03165afa918215610101578192610094575b50506040519015158152f35b909150823d84116100fa575b601f8101601f1916820167ffffffffffffffff8111838210176100e65784918391604052810103126100e257519081151582036100df57503880610088565b80fd5b5080fd5b634e487b7160e01b84526041600452602484fd5b503d6100a0565b50604051903d90823e3d90fd5b9050346100e257816003193601126100e25760ff60209254168152f3fea264697066735822122077a27930518e2edf30069009804accd5eb358858681f90da7edb7c4a614b44e164736f6c63430008110033",
+    "sourceMap": "273:207:47:-:0;;;;;;;;;;;;;-1:-1:-1;;273:207:47;;;;-1:-1:-1;;;;;273:207:47;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;273:207:47;;;;;;-1:-1:-1;273:207:47;;-1:-1:-1;;;;;;273:207:47;;;;;;-1:-1:-1;;;;;273:207:47;;;;;;;;;;;;;;;;;-1:-1:-1;273:207:47;;;;;;-1:-1:-1;273:207:47;;;;;-1:-1:-1;273:207:47",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x608080604052600436101561001357600080fd5b600090813560e01c90816354fd4d501461010e5750638db53b4c1461003757600080fd5b346100df57602090816003193601126100df578054604051633d70e7e560e11b81526004803590820152919083908390602490829060081c6001600160a01b03165afa918215610101578192610094575b50506040519015158152f35b909150823d84116100fa575b601f8101601f1916820167ffffffffffffffff8111838210176100e65784918391604052810103126100e257519081151582036100df57503880610088565b80fd5b5080fd5b634e487b7160e01b84526041600452602484fd5b503d6100a0565b50604051903d90823e3d90fd5b9050346100e257816003193601126100e25760ff60209254168152f3fea264697066735822122077a27930518e2edf30069009804accd5eb358858681f90da7edb7c4a614b44e164736f6c63430008110033",
+    "sourceMap": "273:207:47:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;5553:26:2;;273:207:47;;;5553:26:2;;;273:207:47;;;;;;;;;;;;;-1:-1:-1;;;;;273:207:47;5553:26:2;;;;;;;;;;;273:207:47;;;;;;;;;;;5553:26:2;;;;;;;;;;;273:207:47;;;-1:-1:-1;;273:207:47;;;;;;;;;;;;;;;;;;5553:26:2;;273:207:47;;;;;;;;;;;;;5553:26:2;;;;;273:207:47;;;;;;;;-1:-1:-1;;;273:207:47;;;;;;;;5553:26:2;;;;;;273:207:47;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "getBoolFromStorage(bytes32)": "8db53b4c",
+    "version()": "54fd4d50"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IFrensStorage\",\"name\":\"frensStorage_\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"}],\"name\":\"getBoolFromStorage\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"version\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"test/foundry/TestHelper.sol\":\"BoolGetter\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":base64-sol/=node_modules/base64-sol/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\"],\"viaIR\":true},\"sources\":{\"contracts/FrensBase.sol\":{\"keccak256\":\"0x7374e6a194a565712df6aa0f2e80fa9e4ab6a179b5ed331b830e14075907e88f\",\"license\":\"GPL-3.0-only\",\"urls\":[\"bzz-raw://7bd6edaf892e5d24d2d843f78399c33776906acc98024b9572ac44292e771ae2\",\"dweb:/ipfs/QmTmSxTL1EDXhq5grFpWNiTie9oba4zmS7tZugtsh4L9GH\"]},\"contracts/interfaces/IFrensStorage.sol\":{\"keccak256\":\"0x460c440b2f1de0c6a41fff71e5f2c38117217a8aae946f6856ac720fc555a203\",\"license\":\"GPL-3.0-only\",\"urls\":[\"bzz-raw://f420d7f01fc1a3b71dd30f61cdd0ea9fc6196fdc7506f3fd5cff8a865658bd63\",\"dweb:/ipfs/QmeJKA3JWVuTThnTPnLiZqmefKD6Kv4AkxUUVfpW2emjeW\"]},\"node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol\":{\"keccak256\":\"0xd5fa74b4fb323776fa4a8158800fec9d5ac0fec0d6dd046dd93798632ada265f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://33017a30a99cc5411a9e376622c31fc4a55cfc6a335e2f57f00cbf24a817ff3f\",\"dweb:/ipfs/QmWNQtWTPhA7Lo8nbxbc8KFMvZwbFYB8fSeEQ3vuapSV4a\"]},\"test/foundry/TestHelper.sol\":{\"keccak256\":\"0x661367673c9dad11fcebbacbef6c5d0ae670307103e624c4ec201c125a22dd1a\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://980d227dcdc42abaefd67d0991c59d6c84f1167753e634a27cefe81eaced2f26\",\"dweb:/ipfs/QmS4Guqxc1SnjA9n4ob2f5AMU4EZaBcNDEBEw28Pt4heeb\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.17+commit.8df45f5f"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "contract IFrensStorage",
+              "name": "frensStorage_",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "key",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "getBoolFromStorage",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "version",
+          "outputs": [
+            {
+              "internalType": "uint8",
+              "name": "",
+              "type": "uint8"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":@ensdomains/=node_modules/@ensdomains/",
+        ":@openzeppelin/=node_modules/@openzeppelin/",
+        ":base64-sol/=node_modules/base64-sol/",
+        ":ds-test/=lib/forge-std/lib/ds-test/src/",
+        ":eth-gas-reporter/=node_modules/eth-gas-reporter/",
+        ":forge-std/=lib/forge-std/src/",
+        ":hardhat-deploy/=node_modules/hardhat-deploy/",
+        ":hardhat/=node_modules/hardhat/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "test/foundry/TestHelper.sol": "BoolGetter"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/FrensBase.sol": {
+        "keccak256": "0x7374e6a194a565712df6aa0f2e80fa9e4ab6a179b5ed331b830e14075907e88f",
+        "urls": [
+          "bzz-raw://7bd6edaf892e5d24d2d843f78399c33776906acc98024b9572ac44292e771ae2",
+          "dweb:/ipfs/QmTmSxTL1EDXhq5grFpWNiTie9oba4zmS7tZugtsh4L9GH"
+        ],
+        "license": "GPL-3.0-only"
+      },
+      "contracts/interfaces/IFrensStorage.sol": {
+        "keccak256": "0x460c440b2f1de0c6a41fff71e5f2c38117217a8aae946f6856ac720fc555a203",
+        "urls": [
+          "bzz-raw://f420d7f01fc1a3b71dd30f61cdd0ea9fc6196fdc7506f3fd5cff8a865658bd63",
+          "dweb:/ipfs/QmeJKA3JWVuTThnTPnLiZqmefKD6Kv4AkxUUVfpW2emjeW"
+        ],
+        "license": "GPL-3.0-only"
+      },
+      "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
+        "keccak256": "0xd5fa74b4fb323776fa4a8158800fec9d5ac0fec0d6dd046dd93798632ada265f",
+        "urls": [
+          "bzz-raw://33017a30a99cc5411a9e376622c31fc4a55cfc6a335e2f57f00cbf24a817ff3f",
+          "dweb:/ipfs/QmWNQtWTPhA7Lo8nbxbc8KFMvZwbFYB8fSeEQ3vuapSV4a"
+        ],
+        "license": "MIT"
+      },
+      "test/foundry/TestHelper.sol": {
+        "keccak256": "0x661367673c9dad11fcebbacbef6c5d0ae670307103e624c4ec201c125a22dd1a",
+        "urls": [
+          "bzz-raw://980d227dcdc42abaefd67d0991c59d6c84f1167753e634a27cefe81eaced2f26",
+          "dweb:/ipfs/QmS4Guqxc1SnjA9n4ob2f5AMU4EZaBcNDEBEw28Pt4heeb"
+        ],
+        "license": "UNLICENSED"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "test/foundry/TestHelper.sol",
+    "id": 34037,
+    "exportedSymbols": {
+      "BoolGetter": [
+        33987
+      ],
+      "FrensBase": [
+        836
+      ],
+      "IERC721Receiver": [
+        29014
+      ],
+      "IFrensStorage": [
+        4399
+      ],
+      "IMaliciousProxyInterface": [
+        33962
+      ],
+      "NftReceiver": [
+        34036
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "39:1028:47",
+    "nodes": [
+      {
+        "id": 33952,
+        "nodeType": "PragmaDirective",
+        "src": "39:24:47",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".13"
+        ]
+      },
+      {
+        "id": 33953,
+        "nodeType": "ImportDirective",
+        "src": "65:39:47",
+        "nodes": [],
+        "absolutePath": "contracts/FrensBase.sol",
+        "file": "../../contracts/FrensBase.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 34037,
+        "sourceUnit": 837,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 33954,
+        "nodeType": "ImportDirective",
+        "src": "105:66:47",
+        "nodes": [],
+        "absolutePath": "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+        "file": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 34037,
+        "sourceUnit": 29015,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 33962,
+        "nodeType": "ContractDefinition",
+        "src": "174:97:47",
+        "nodes": [
+          {
+            "id": 33961,
+            "nodeType": "FunctionDefinition",
+            "src": "213:53:47",
+            "nodes": [],
+            "functionSelector": "abfdcced",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setBool",
+            "nameLocation": "222:7:47",
+            "parameters": {
+              "id": 33959,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33956,
+                  "mutability": "mutable",
+                  "name": "_key",
+                  "nameLocation": "238:4:47",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33961,
+                  "src": "230:12:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 33955,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "230:7:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 33958,
+                  "mutability": "mutable",
+                  "name": "_value",
+                  "nameLocation": "249:6:47",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33961,
+                  "src": "244:11:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 33957,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "244:4:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "229:27:47"
+            },
+            "returnParameters": {
+              "id": 33960,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "265:0:47"
+            },
+            "scope": 33962,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IMaliciousProxyInterface",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          33962
+        ],
+        "name": "IMaliciousProxyInterface",
+        "nameLocation": "184:24:47",
+        "scope": 34037,
+        "usedErrors": []
+      },
+      {
+        "id": 33987,
+        "nodeType": "ContractDefinition",
+        "src": "273:207:47",
+        "nodes": [
+          {
+            "id": 33974,
+            "nodeType": "FunctionDefinition",
+            "src": "310:68:47",
+            "nodes": [],
+            "body": {
+              "id": 33973,
+              "nodeType": "Block",
+              "src": "376:2:47",
+              "nodes": [],
+              "statements": []
+            },
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "id": 33970,
+                    "name": "frensStorage_",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 33967,
+                    "src": "361:13:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IFrensStorage_$4399",
+                      "typeString": "contract IFrensStorage"
+                    }
+                  }
+                ],
+                "id": 33971,
+                "kind": "baseConstructorSpecifier",
+                "modifierName": {
+                  "id": 33969,
+                  "name": "FrensBase",
+                  "nameLocations": [
+                    "351:9:47"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 836,
+                  "src": "351:9:47"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "351:24:47"
+              }
+            ],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "parameters": {
+              "id": 33968,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33967,
+                  "mutability": "mutable",
+                  "name": "frensStorage_",
+                  "nameLocation": "336:13:47",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33974,
+                  "src": "322:27:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IFrensStorage_$4399",
+                    "typeString": "contract IFrensStorage"
+                  },
+                  "typeName": {
+                    "id": 33966,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 33965,
+                      "name": "IFrensStorage",
+                      "nameLocations": [
+                        "322:13:47"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 4399,
+                      "src": "322:13:47"
+                    },
+                    "referencedDeclaration": 4399,
+                    "src": "322:13:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IFrensStorage_$4399",
+                      "typeString": "contract IFrensStorage"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "321:29:47"
+            },
+            "returnParameters": {
+              "id": 33972,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "376:0:47"
+            },
+            "scope": 33987,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "id": 33986,
+            "nodeType": "FunctionDefinition",
+            "src": "381:97:47",
+            "nodes": [],
+            "body": {
+              "id": 33985,
+              "nodeType": "Block",
+              "src": "448:30:47",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 33982,
+                        "name": "key",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 33976,
+                        "src": "469:3:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "id": 33981,
+                      "name": "getBool",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 530,
+                      "src": "461:7:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_view$_t_bytes32_$returns$_t_bool_$",
+                        "typeString": "function (bytes32) view returns (bool)"
+                      }
+                    },
+                    "id": 33983,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "461:12:47",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 33980,
+                  "id": 33984,
+                  "nodeType": "Return",
+                  "src": "454:19:47"
+                }
+              ]
+            },
+            "functionSelector": "8db53b4c",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getBoolFromStorage",
+            "nameLocation": "390:18:47",
+            "parameters": {
+              "id": 33977,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33976,
+                  "mutability": "mutable",
+                  "name": "key",
+                  "nameLocation": "417:3:47",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33986,
+                  "src": "409:11:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 33975,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "409:7:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "408:13:47"
+            },
+            "returnParameters": {
+              "id": 33980,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33979,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33986,
+                  "src": "442:4:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 33978,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "442:4:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "441:6:47"
+            },
+            "scope": 33987,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 33963,
+              "name": "FrensBase",
+              "nameLocations": [
+                "296:9:47"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 836,
+              "src": "296:9:47"
+            },
+            "id": 33964,
+            "nodeType": "InheritanceSpecifier",
+            "src": "296:9:47"
+          }
+        ],
+        "canonicalName": "BoolGetter",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          33987,
+          836
+        ],
+        "name": "BoolGetter",
+        "nameLocation": "282:10:47",
+        "scope": 34037,
+        "usedErrors": []
+      },
+      {
+        "id": 34036,
+        "nodeType": "ContractDefinition",
+        "src": "482:582:47",
+        "nodes": [
+          {
+            "id": 34035,
+            "nodeType": "FunctionDefinition",
+            "src": "529:533:47",
+            "nodes": [],
+            "body": {
+              "id": 34034,
+              "nodeType": "Block",
+              "src": "691:371:47",
+              "nodes": [],
+              "statements": [
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    },
+                    "id": 34004,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 34002,
+                      "name": "operator",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 33991,
+                      "src": "761:8:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "==",
+                    "rightExpression": {
+                      "id": 34003,
+                      "name": "from",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 33993,
+                      "src": "773:4:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "761:16:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 34009,
+                  "nodeType": "IfStatement",
+                  "src": "758:68:47",
+                  "trueBody": {
+                    "expression": {
+                      "expression": {
+                        "expression": {
+                          "id": 34005,
+                          "name": "IERC721Receiver",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 29014,
+                          "src": "785:15:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_IERC721Receiver_$29014_$",
+                            "typeString": "type(contract IERC721Receiver)"
+                          }
+                        },
+                        "id": 34006,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "memberLocation": "801:16:47",
+                        "memberName": "onERC721Received",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 29013,
+                        "src": "785:32:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_declaration_nonpayable$_t_address_$_t_address_$_t_uint256_$_t_bytes_calldata_ptr_$returns$_t_bytes4_$",
+                          "typeString": "function IERC721Receiver.onERC721Received(address,address,uint256,bytes calldata) returns (bytes4)"
+                        }
+                      },
+                      "id": 34007,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberLocation": "818:8:47",
+                      "memberName": "selector",
+                      "nodeType": "MemberAccess",
+                      "src": "785:41:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes4",
+                        "typeString": "bytes4"
+                      }
+                    },
+                    "functionReturnParameters": 34001,
+                    "id": 34008,
+                    "nodeType": "Return",
+                    "src": "778:48:47"
+                  }
+                },
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 34012,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 34010,
+                      "name": "tokenId",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 33995,
+                      "src": "839:7:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "==",
+                    "rightExpression": {
+                      "hexValue": "31",
+                      "id": 34011,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "850:1:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_1_by_1",
+                        "typeString": "int_const 1"
+                      },
+                      "value": "1"
+                    },
+                    "src": "839:12:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 34017,
+                  "nodeType": "IfStatement",
+                  "src": "836:65:47",
+                  "trueBody": {
+                    "expression": {
+                      "expression": {
+                        "expression": {
+                          "id": 34013,
+                          "name": "IERC721Receiver",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 29014,
+                          "src": "860:15:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_IERC721Receiver_$29014_$",
+                            "typeString": "type(contract IERC721Receiver)"
+                          }
+                        },
+                        "id": 34014,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "memberLocation": "876:16:47",
+                        "memberName": "onERC721Received",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 29013,
+                        "src": "860:32:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_declaration_nonpayable$_t_address_$_t_address_$_t_uint256_$_t_bytes_calldata_ptr_$returns$_t_bytes4_$",
+                          "typeString": "function IERC721Receiver.onERC721Received(address,address,uint256,bytes calldata) returns (bytes4)"
+                        }
+                      },
+                      "id": 34015,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberLocation": "893:8:47",
+                      "memberName": "selector",
+                      "nodeType": "MemberAccess",
+                      "src": "860:41:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes4",
+                        "typeString": "bytes4"
+                      }
+                    },
+                    "functionReturnParameters": 34001,
+                    "id": 34016,
+                    "nodeType": "Return",
+                    "src": "853:48:47"
+                  }
+                },
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    },
+                    "id": 34024,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "arguments": [
+                        {
+                          "id": 34019,
+                          "name": "data",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 33997,
+                          "src": "924:4:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes_calldata_ptr",
+                            "typeString": "bytes calldata"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_bytes_calldata_ptr",
+                            "typeString": "bytes calldata"
+                          }
+                        ],
+                        "id": 34018,
+                        "name": "keccak256",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": -8,
+                        "src": "914:9:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
+                          "typeString": "function (bytes memory) pure returns (bytes32)"
+                        }
+                      },
+                      "id": 34020,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "914:15:47",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "==",
+                    "rightExpression": {
+                      "arguments": [
+                        {
+                          "hexValue": "30",
+                          "id": 34022,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "string",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "943:3:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_stringliteral_044852b2a670ade5407e78fb2863c51de9fcb96542a07186fe3aeda6bb8a116d",
+                            "typeString": "literal_string \"0\""
+                          },
+                          "value": "0"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_stringliteral_044852b2a670ade5407e78fb2863c51de9fcb96542a07186fe3aeda6bb8a116d",
+                            "typeString": "literal_string \"0\""
+                          }
+                        ],
+                        "id": 34021,
+                        "name": "keccak256",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": -8,
+                        "src": "933:9:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
+                          "typeString": "function (bytes memory) pure returns (bytes32)"
+                        }
+                      },
+                      "id": 34023,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "933:14:47",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "src": "914:33:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 34029,
+                  "nodeType": "IfStatement",
+                  "src": "911:86:47",
+                  "trueBody": {
+                    "expression": {
+                      "expression": {
+                        "expression": {
+                          "id": 34025,
+                          "name": "IERC721Receiver",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 29014,
+                          "src": "956:15:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_IERC721Receiver_$29014_$",
+                            "typeString": "type(contract IERC721Receiver)"
+                          }
+                        },
+                        "id": 34026,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "memberLocation": "972:16:47",
+                        "memberName": "onERC721Received",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 29013,
+                        "src": "956:32:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_declaration_nonpayable$_t_address_$_t_address_$_t_uint256_$_t_bytes_calldata_ptr_$returns$_t_bytes4_$",
+                          "typeString": "function IERC721Receiver.onERC721Received(address,address,uint256,bytes calldata) returns (bytes4)"
+                        }
+                      },
+                      "id": 34027,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberLocation": "989:8:47",
+                      "memberName": "selector",
+                      "nodeType": "MemberAccess",
+                      "src": "956:41:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes4",
+                        "typeString": "bytes4"
+                      }
+                    },
+                    "functionReturnParameters": 34001,
+                    "id": 34028,
+                    "nodeType": "Return",
+                    "src": "949:48:47"
+                  }
+                },
+                {
+                  "expression": {
+                    "expression": {
+                      "expression": {
+                        "id": 34030,
+                        "name": "IERC721Receiver",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 29014,
+                        "src": "1014:15:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_IERC721Receiver_$29014_$",
+                          "typeString": "type(contract IERC721Receiver)"
+                        }
+                      },
+                      "id": 34031,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberLocation": "1030:16:47",
+                      "memberName": "onERC721Received",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 29013,
+                      "src": "1014:32:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_declaration_nonpayable$_t_address_$_t_address_$_t_uint256_$_t_bytes_calldata_ptr_$returns$_t_bytes4_$",
+                        "typeString": "function IERC721Receiver.onERC721Received(address,address,uint256,bytes calldata) returns (bytes4)"
+                      }
+                    },
+                    "id": 34032,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "lValueRequested": false,
+                    "memberLocation": "1047:8:47",
+                    "memberName": "selector",
+                    "nodeType": "MemberAccess",
+                    "src": "1014:41:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "functionReturnParameters": 34001,
+                  "id": 34033,
+                  "nodeType": "Return",
+                  "src": "1007:48:47"
+                }
+              ]
+            },
+            "baseFunctions": [
+              29013
+            ],
+            "functionSelector": "150b7a02",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "onERC721Received",
+            "nameLocation": "538:16:47",
+            "parameters": {
+              "id": 33998,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33991,
+                  "mutability": "mutable",
+                  "name": "operator",
+                  "nameLocation": "572:8:47",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 34035,
+                  "src": "564:16:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 33990,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "564:7:47",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 33993,
+                  "mutability": "mutable",
+                  "name": "from",
+                  "nameLocation": "598:4:47",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 34035,
+                  "src": "590:12:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 33992,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "590:7:47",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 33995,
+                  "mutability": "mutable",
+                  "name": "tokenId",
+                  "nameLocation": "620:7:47",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 34035,
+                  "src": "612:15:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 33994,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "612:7:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 33997,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "652:4:47",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 34035,
+                  "src": "637:19:47",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 33996,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "637:5:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "554:108:47"
+            },
+            "returnParameters": {
+              "id": 34001,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 34000,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 34035,
+                  "src": "684:6:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes4",
+                    "typeString": "bytes4"
+                  },
+                  "typeName": {
+                    "id": 33999,
+                    "name": "bytes4",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "684:6:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "683:8:47"
+            },
+            "scope": 34036,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 33988,
+              "name": "IERC721Receiver",
+              "nameLocations": [
+                "506:15:47"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 29014,
+              "src": "506:15:47"
+            },
+            "id": 33989,
+            "nodeType": "InheritanceSpecifier",
+            "src": "506:15:47"
+          }
+        ],
+        "canonicalName": "NftReceiver",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          34036,
+          29014
+        ],
+        "name": "NftReceiver",
+        "nameLocation": "491:11:47",
+        "scope": 34037,
+        "usedErrors": []
+      }
+    ],
+    "license": "UNLICENSED"
+  },
+  "id": 47
+}

@@ -12,6 +12,7 @@ import "../../contracts/FrensStorage.sol";
 import "../../contracts/FactoryProxy.sol";
 import "../../contracts/StakingPool.sol";
 import "../../contracts/StakingPoolFactory.sol";
+import "../../contracts/FrensClaim.sol";
 import "../../contracts/FrensPoolShare.sol";
 import "../../contracts/interfaces/IStakingPoolFactory.sol";
 import "../../contracts/interfaces/IDepositContract.sol";
@@ -27,6 +28,7 @@ contract StakingPoolLockedTest is Test {
     StakingPool public stakingPool;
     FrensPoolShare public frensPoolShare;
     IStakingPoolFactory public proxy;
+    FrensClaim public frensClaim;
 
     //mainnet
     address payable public depCont = payable(0x00000000219ab540356cBB839Cbe05303d7705Fa);
@@ -74,6 +76,10 @@ contract StakingPoolLockedTest is Test {
       stakingPoolFactory = new StakingPoolFactory(frensStorage);
       //initialise Factory
       frensInitialiser.setContract(address(stakingPoolFactory), "StakingPoolFactory");
+      //deploy Claims
+      frensClaim = new FrensClaim(frensStorage);
+      //initialise Claims
+      frensInitialiser.setContract(address(frensClaim), "FrensClaim");
       //deploy MetaHelper
       frensMetaHelper = new FrensMetaHelper(frensStorage);
       //initialise Metahelper
@@ -236,7 +242,7 @@ contract StakingPoolLockedTest is Test {
         uint aliceShare = (uint(y) + address(stakingPool).balance) * aliceDeposit / 32000000000000000000;
         uint bobShare = (uint(y) + address(stakingPool).balance) - aliceShare;
         payable(stakingPool).transfer(y);
-        stakingPool.distribute();
+        stakingPool.distributeAndClaimAll();
         if(aliceShare == 1) aliceShare = 0;
         if(bobShare == 1) bobShare =0;
         uint aliceBalanceExpected = aliceBalance + aliceShare;
@@ -260,7 +266,7 @@ contract StakingPoolLockedTest is Test {
         stakingPool.stake();
         payable(stakingPool).transfer(y);
         vm.expectRevert("minimum of 100 wei to distribute");
-        stakingPool.distribute();
+        stakingPool.distributeAndClaimAll();
       }
     }
 

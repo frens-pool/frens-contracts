@@ -151,6 +151,51 @@
         }
       }
     },
+    "contracts/FrensClaim.sol": {
+      "lastModificationDate": 1673146067520,
+      "contentHash": "8907be1aac4cdaad1bb3fe400e55f657",
+      "sourceName": "contracts/FrensClaim.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "contracts/FrensBase.sol",
+        "contracts/interfaces/IFrensClaim.sol",
+        "contracts/interfaces/IFrensStorage.sol"
+      ],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "FrensClaim": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "FrensClaim.sol/FrensClaim.json"
+        }
+      }
+    },
     "contracts/FrensInitialiser.sol": {
       "lastModificationDate": 1672091492342,
       "contentHash": "bdc3044ca48c662cfcb16efec658b9a4",
@@ -404,8 +449,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1672692644318,
-      "contentHash": "1d296de94154072d61e1e91a2acd1a13",
+      "lastModificationDate": 1673139903587,
+      "contentHash": "47de2213c481903f7a674ff4175e78f2",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -439,6 +484,7 @@
       "imports": [
         "contracts/FrensBase.sol",
         "contracts/interfaces/IDepositContract.sol",
+        "contracts/interfaces/IFrensClaim.sol",
         "contracts/interfaces/IFrensPoolShare.sol",
         "contracts/interfaces/IFrensStorage.sol",
         "contracts/interfaces/IStakingPool.sol",
@@ -493,6 +539,7 @@
         "contracts/FrensBase.sol",
         "contracts/StakingPool.sol",
         "contracts/interfaces/IDepositContract.sol",
+        "contracts/interfaces/IFrensClaim.sol",
         "contracts/interfaces/IFrensPoolShare.sol",
         "contracts/interfaces/IFrensStorage.sol",
         "contracts/interfaces/IStakingPool.sol",
@@ -672,6 +719,47 @@
       "artifacts": {
         "IFrensArt": {
           "0.8.17+commit.8df45f5f.Linux.gcc": "IFrensArt.sol/IFrensArt.json"
+        }
+      }
+    },
+    "contracts/interfaces/IFrensClaim.sol": {
+      "lastModificationDate": 1673137721337,
+      "contentHash": "3a69a7fa770f96b84f3237f820011adf",
+      "sourceName": "contracts/interfaces/IFrensClaim.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "IFrensClaim": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "IFrensClaim.sol/IFrensClaim.json"
         }
       }
     },
@@ -1929,8 +2017,8 @@
       }
     },
     "test/foundry/DistributeRe-entrancyTest.t.sol": {
-      "lastModificationDate": 1672693236438,
-      "contentHash": "80dbb4aa56f2f67b09a2a9e9eac9225c",
+      "lastModificationDate": 1673145114446,
+      "contentHash": "a47736c744232d611935fe2dc9207a3e",
       "sourceName": "test/foundry/DistributeRe-entrancyTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -1976,6 +2064,7 @@
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IENS.sol",
         "contracts/interfaces/IFrensArt.sol",
+        "contracts/interfaces/IFrensClaim.sol",
         "contracts/interfaces/IFrensMetaHelper.sol",
         "contracts/interfaces/IFrensPoolShare.sol",
         "contracts/interfaces/IFrensPoolShareTokenURI.sol",
@@ -2018,8 +2107,8 @@
       }
     },
     "test/foundry/FrensPoolShareTest.t.sol": {
-      "lastModificationDate": 1672637576870,
-      "contentHash": "dd256e3f2c9f32e8e50d7b9e57868a03",
+      "lastModificationDate": 1673145546746,
+      "contentHash": "5f3a2e554c52faf8d8071cd518483372",
       "sourceName": "test/foundry/FrensPoolShareTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2054,6 +2143,7 @@
         "contracts/FactoryProxy.sol",
         "contracts/FrensArt.sol",
         "contracts/FrensBase.sol",
+        "contracts/FrensClaim.sol",
         "contracts/FrensInitialiser.sol",
         "contracts/FrensMetaHelper.sol",
         "contracts/FrensPoolShare.sol",
@@ -2065,6 +2155,7 @@
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IENS.sol",
         "contracts/interfaces/IFrensArt.sol",
+        "contracts/interfaces/IFrensClaim.sol",
         "contracts/interfaces/IFrensMetaHelper.sol",
         "contracts/interfaces/IFrensPoolShare.sol",
         "contracts/interfaces/IFrensPoolShareTokenURI.sol",
@@ -2104,8 +2195,8 @@
       }
     },
     "test/foundry/MiscTest.t.sol": {
-      "lastModificationDate": 1672637562822,
-      "contentHash": "c52043e7c22e0f9c89ad178377b2323f",
+      "lastModificationDate": 1673145536002,
+      "contentHash": "405164548fa663fdc77f0239a65e05a8",
       "sourceName": "test/foundry/MiscTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2140,6 +2231,7 @@
         "contracts/FactoryProxy.sol",
         "contracts/FrensArt.sol",
         "contracts/FrensBase.sol",
+        "contracts/FrensClaim.sol",
         "contracts/FrensInitialiser.sol",
         "contracts/FrensMetaHelper.sol",
         "contracts/FrensPoolShare.sol",
@@ -2151,6 +2243,7 @@
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IENS.sol",
         "contracts/interfaces/IFrensArt.sol",
+        "contracts/interfaces/IFrensClaim.sol",
         "contracts/interfaces/IFrensMetaHelper.sol",
         "contracts/interfaces/IFrensPoolShare.sol",
         "contracts/interfaces/IFrensPoolShareTokenURI.sol",
@@ -2190,8 +2283,8 @@
       }
     },
     "test/foundry/StakingPoolLockedTest.t.sol": {
-      "lastModificationDate": 1672637583799,
-      "contentHash": "623e1e35c4a5b5fef294ede77472e60f",
+      "lastModificationDate": 1673145725125,
+      "contentHash": "b236fc08756e50b33627406615f9b824",
       "sourceName": "test/foundry/StakingPoolLockedTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2226,6 +2319,7 @@
         "contracts/FactoryProxy.sol",
         "contracts/FrensArt.sol",
         "contracts/FrensBase.sol",
+        "contracts/FrensClaim.sol",
         "contracts/FrensInitialiser.sol",
         "contracts/FrensMetaHelper.sol",
         "contracts/FrensPoolShare.sol",
@@ -2237,6 +2331,7 @@
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IENS.sol",
         "contracts/interfaces/IFrensArt.sol",
+        "contracts/interfaces/IFrensClaim.sol",
         "contracts/interfaces/IFrensMetaHelper.sol",
         "contracts/interfaces/IFrensPoolShare.sol",
         "contracts/interfaces/IFrensPoolShareTokenURI.sol",
@@ -2275,8 +2370,8 @@
       }
     },
     "test/foundry/StakingPoolTest.t.sol": {
-      "lastModificationDate": 1672683698451,
-      "contentHash": "821690164fd9ecae7697df182b787593",
+      "lastModificationDate": 1673145673652,
+      "contentHash": "3a311b5cf997c7b887ba49df0a88bfad",
       "sourceName": "test/foundry/StakingPoolTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2311,6 +2406,7 @@
         "contracts/FactoryProxy.sol",
         "contracts/FrensArt.sol",
         "contracts/FrensBase.sol",
+        "contracts/FrensClaim.sol",
         "contracts/FrensInitialiser.sol",
         "contracts/FrensMetaHelper.sol",
         "contracts/FrensPoolShare.sol",
@@ -2322,6 +2418,7 @@
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IENS.sol",
         "contracts/interfaces/IFrensArt.sol",
+        "contracts/interfaces/IFrensClaim.sol",
         "contracts/interfaces/IFrensMetaHelper.sol",
         "contracts/interfaces/IFrensPoolShare.sol",
         "contracts/interfaces/IFrensPoolShareTokenURI.sol",

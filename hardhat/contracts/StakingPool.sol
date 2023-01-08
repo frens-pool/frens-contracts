@@ -7,6 +7,7 @@ import "@openzeppelin/contracts/interfaces/IERC721Enumerable.sol";
 import "./interfaces/IDepositContract.sol";
 import "./interfaces/IFrensPoolShare.sol";
 import "./interfaces/IStakingPool.sol";
+import "./interfaces/IFrensClaim.sol";
 import "./FrensBase.sol";
 
 
@@ -146,13 +147,40 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     require(_getStateHash() == _getStringHash("staked"), "use withdraw when not staked");
     uint contractBalance = address(this).balance;
     require(contractBalance > 100, "minimum of 100 wei to distribute");
+    IFrensClaim frensClaim = IFrensClaim(getAddress(keccak256(abi.encodePacked("contract.address", "FrensClaim"))));
     uint[] memory idsInPool = getIdsInThisPool();
     for(uint i=0; i<idsInPool.length; i++) {
       uint id = idsInPool[i];
       address tokenOwner = frensPoolShare.ownerOf(id);
       uint share = _getShare(id, contractBalance);
-      payable(tokenOwner).transfer(share);
+      addUint(keccak256(abi.encodePacked("claimable.amount", tokenOwner)), share);
     }
+    payable(address(frensClaim)).transfer(contractBalance);
+  }
+
+  function distributeAndClaim() public {
+    distribute();
+    claim(msg.sender);
+  }
+
+  function distributeAndClaimAll() public {
+    distribute();
+    uint[] memory idsInPool = getIdsInThisPool();
+    for(uint i=0; i<idsInPool.length; i++) { //this is expensive for large pools
+      uint id = idsInPool[i];
+      address tokenOwner = frensPoolShare.ownerOf(id);
+      claim(tokenOwner);
+    }
+  }
+
+  function claim() public {
+    IFrensClaim frensClaim = IFrensClaim(getAddress(keccak256(abi.encodePacked("contract.address", "FrensClaim"))));
+    frensClaim.claim(msg.sender);
+  }
+
+  function claim(address claimant) public {
+    IFrensClaim frensClaim = IFrensClaim(getAddress(keccak256(abi.encodePacked("contract.address", "FrensClaim"))));
+    frensClaim.claim(claimant);
   }
 
   function unstake() public onlyOwner{
@@ -186,10 +214,11 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   }
 
   function getDistributableShare(uint _id) public view returns(uint) {
+    uint claimable = getUint(keccak256(abi.encodePacked("claimable.amount", frensPoolShare.ownerOf(_id))));
     if(_getStateHash() == _getStringHash("acceptingDeposits")) {
-      return 0;
+      return claimable;
     } else {
-      return getShare(_id);
+      return(getShare(_id) + claimable);
     }
   }
 
@@ -234,9 +263,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   }
 
   // to support receiving ETH by default
-  receive() external payable {
-
-  }
+  receive() external payable {}
 
   fallback() external payable {}
 }

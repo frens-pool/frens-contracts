@@ -18,6 +18,7 @@ import "../../contracts/FactoryProxy.sol";
 import "../../contracts/StakingPool.sol";
 import "../../contracts/StakingPoolFactory.sol";
 import "../../contracts/FrensPoolShare.sol";
+import "../../contracts/FrensClaim.sol";
 import "../../contracts/interfaces/IStakingPoolFactory.sol";
 import "../../contracts/interfaces/IDepositContract.sol";
 import "./TestHelper.sol";
@@ -35,6 +36,7 @@ contract StakingPoolTest is Test {
     StakingPool public stakingPool2;
     FrensPoolShare public frensPoolShare;
     IStakingPoolFactory public proxy;
+    FrensClaim public frensClaim;
 
     //mainnet
     address payable public depCont = payable(0x00000000219ab540356cBB839Cbe05303d7705Fa);
@@ -81,6 +83,10 @@ contract StakingPoolTest is Test {
       stakingPoolFactory = new StakingPoolFactory(frensStorage);
       //initialise Factory
       frensInitialiser.setContract(address(stakingPoolFactory), "StakingPoolFactory");
+      //deploy Claims
+      frensClaim = new FrensClaim(frensStorage);
+      //initialise Claims
+      frensInitialiser.setContract(address(frensClaim), "FrensClaim");
       //deploy MetaHelper
       frensMetaHelper = new FrensMetaHelper(frensStorage);
       //initialise Metahelper
@@ -273,7 +279,7 @@ contract StakingPoolTest is Test {
       assertFalse(keccak256(depositContract.get_deposit_count()) == deposit_count_hash);
     }
 
-    function testDistribute(uint32 x, uint32 y) public {
+    function testDistributeandClaimAll(uint32 x, uint32 y) public {
       uint maxUint32 = 4294967295;
       uint aliceDeposit = uint(x) * 31999999999999999999 / maxUint32;
       uint bobDeposit = 32000000000000000000 - aliceDeposit;
@@ -284,7 +290,7 @@ contract StakingPoolTest is Test {
         stakingPool.depositToPool{value: bobDeposit}();
         payable(stakingPool).transfer(y);
         vm.expectRevert("use withdraw when not staked");
-        stakingPool.distribute();
+        stakingPool.distributeAndClaimAll();
         startHoax(contOwner);
         stakingPool.stake(pubkey, withdrawal_credentials, signature, deposit_data_root);
         uint aliceBalance = address(alice).balance;
@@ -292,7 +298,7 @@ contract StakingPoolTest is Test {
         uint aliceShare = (uint(y) + address(stakingPool).balance) * aliceDeposit / 32000000000000000000;
         uint bobShare = (uint(y) + address(stakingPool).balance) - aliceShare;
         payable(stakingPool).transfer(y); //this happens twice, because the previous two lines use the existing balance (after the first deposit to test the revert) to calculate shares.
-        stakingPool.distribute();
+        stakingPool.distributeAndClaimAll();
         if(aliceShare == 1) aliceShare = 0;
         if(bobShare == 1) bobShare =0;
         uint aliceBalanceExpected = aliceBalance + aliceShare;
@@ -317,7 +323,7 @@ contract StakingPoolTest is Test {
         stakingPool.stake(pubkey, withdrawal_credentials, signature, deposit_data_root);
         payable(stakingPool).transfer(y);
         vm.expectRevert("minimum of 100 wei to distribute");
-        stakingPool.distribute();
+        stakingPool.distributeAndClaimAll();
       }
 
     }

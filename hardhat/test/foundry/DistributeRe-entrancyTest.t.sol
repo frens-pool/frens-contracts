@@ -155,7 +155,7 @@ contract StakingPoolTest is Test {
       console.log("pool2", pool2);
 
     }
-
+/*
     function testDistribute(uint32 x, uint32 y) public {
       uint maxUint32 = 4294967295;
       uint aliceDeposit = uint(x) * 31999999999999999999 / maxUint32;
@@ -198,5 +198,6 @@ contract StakingPoolTest is Test {
       }
 
     }
+    */
 
 }

@@ -39,6 +39,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   var FrensInitialiserOld = 0;
   var FrensPoolShareOld = 0;
   var StakingPoolFactoryOld = 0;
+  var FrensClaimOld = 0;
   var FrensMetaHelperOld = 0;
   var FrensPoolShareTokenURIOld = 0;
   var FrensArtOld = 0;
@@ -61,6 +62,10 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
 
   try{
     StakingPoolFactoryOld = await ethers.getContract("StakingPoolFactory", deployer);
+  } catch(e) {}
+
+  try{
+    FrensClaimOld = await ethers.getContract("FrensClaim", deployer);
   } catch(e) {}
 
   try{
@@ -213,6 +218,29 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     const factoryInit = await FrensInitialiser.setContract(StakingPoolFactory.address, "StakingPoolFactory");
     await factoryInit.wait();
     console.log('\x1b[36m%s\x1b[0m', "StakingPoolFactory updated", StakingPoolFactory.address);
+  }
+
+  await deploy("FrensClaim", {
+    from: deployer,
+    args: [
+      FrensStorage.address //goerli
+     ],
+    log: true,
+    waitConfirmations: 5,
+  });
+
+  const FrensClaim = await ethers.getContract("FrensClaim", deployer);
+
+  if(FrensClaimOld == 0 || reinitialiseEverything) {
+    const factoryInit = await FrensInitialiser.setContract(FrensClaim.address, "FrensClaim");
+    await factoryInit.wait();
+    console.log('\x1b[33m%s\x1b[0m', "FrensClaim initialised", FrensClaim.address);
+  } else if(FrensClaimOld.address != FrensClaim.address){
+    const factoryDel = await FrensInitialiser.deleteContract(FrensClaimOld.address, "FrensClaim");
+    await factoryDel.wait();
+    const factoryInit = await FrensInitialiser.setContract(FrensClaim.address, "FrensClaim");
+    await factoryInit.wait();
+    console.log('\x1b[36m%s\x1b[0m', "FrensClaim updated", FrensClaim.address);
   }
 
   await deploy("FrensMetaHelper", {

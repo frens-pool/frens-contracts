@@ -1,0 +1,247 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "claimant",
+          "type": "address"
+        }
+      ],
+      "name": "claim",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "claim",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "claim()": "4e71d92d",
+    "claim(address)": "1e83409a"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"claimant\",\"type\":\"address\"}],\"name\":\"claim\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"claim\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interfaces/IFrensClaim.sol\":\"IFrensClaim\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":base64-sol/=node_modules/base64-sol/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\"],\"viaIR\":true},\"sources\":{\"contracts/interfaces/IFrensClaim.sol\":{\"keccak256\":\"0x2928f60e0fa3ec849ca19d1728ae11ecfc85fdb0bd7ef60f5d64b30a6474594f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://60f22a3d36d3dd0eca819d4d67529e5896c31c6390121ec0b8a32d663244a655\",\"dweb:/ipfs/QmNuAaqXkXRc2foSLhvAUp6JH4862WpVSvM95ujRa9Va5Z\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.17+commit.8df45f5f"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "claimant",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "claim"
+        },
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "claim"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":@ensdomains/=node_modules/@ensdomains/",
+        ":@openzeppelin/=node_modules/@openzeppelin/",
+        ":base64-sol/=node_modules/base64-sol/",
+        ":ds-test/=lib/forge-std/lib/ds-test/src/",
+        ":eth-gas-reporter/=node_modules/eth-gas-reporter/",
+        ":forge-std/=lib/forge-std/src/",
+        ":hardhat-deploy/=node_modules/hardhat-deploy/",
+        ":hardhat/=node_modules/hardhat/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/interfaces/IFrensClaim.sol": "IFrensClaim"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/interfaces/IFrensClaim.sol": {
+        "keccak256": "0x2928f60e0fa3ec849ca19d1728ae11ecfc85fdb0bd7ef60f5d64b30a6474594f",
+        "urls": [
+          "bzz-raw://60f22a3d36d3dd0eca819d4d67529e5896c31c6390121ec0b8a32d663244a655",
+          "dweb:/ipfs/QmNuAaqXkXRc2foSLhvAUp6JH4862WpVSvM95ujRa9Va5Z"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/interfaces/IFrensClaim.sol",
+    "id": 4365,
+    "exportedSymbols": {
+      "IFrensClaim": [
+        4364
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "0:173:15",
+    "nodes": [
+      {
+        "id": 4355,
+        "nodeType": "PragmaDirective",
+        "src": "0:31:15",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          ">=",
+          "0.8",
+          ".0",
+          "<",
+          "0.9",
+          ".0"
+        ]
+      },
+      {
+        "id": 4364,
+        "nodeType": "ContractDefinition",
+        "src": "64:109:15",
+        "nodes": [
+          {
+            "id": 4358,
+            "nodeType": "FunctionDefinition",
+            "src": "97:26:15",
+            "nodes": [],
+            "functionSelector": "4e71d92d",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "claim",
+            "nameLocation": "106:5:15",
+            "parameters": {
+              "id": 4356,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "111:2:15"
+            },
+            "returnParameters": {
+              "id": 4357,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "122:0:15"
+            },
+            "scope": 4364,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 4363,
+            "nodeType": "FunctionDefinition",
+            "src": "129:42:15",
+            "nodes": [],
+            "functionSelector": "1e83409a",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "claim",
+            "nameLocation": "138:5:15",
+            "parameters": {
+              "id": 4361,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4360,
+                  "mutability": "mutable",
+                  "name": "claimant",
+                  "nameLocation": "152:8:15",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4363,
+                  "src": "144:16:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4359,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "144:7:15",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "143:18:15"
+            },
+            "returnParameters": {
+              "id": 4362,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "170:0:15"
+            },
+            "scope": 4364,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IFrensClaim",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          4364
+        ],
+        "name": "IFrensClaim",
+        "nameLocation": "74:11:15",
+        "scope": 4365,
+        "usedErrors": []
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 15
+}

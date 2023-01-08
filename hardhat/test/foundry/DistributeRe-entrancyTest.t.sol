@@ -145,14 +145,14 @@ contract StakingPoolTest is Test {
       //connect to staking pool
       stakingPool = StakingPool(payable(pool));
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){
-      console.log("pool", pool);
+      //console.log("pool", pool);
 
       //create a second staking pool through proxy contract
       (address pool2) = proxy.create(contOwner, false);
       //connect to staking pool
       stakingPool2 = StakingPool(payable(pool2));
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){
-      console.log("pool2", pool2);
+      //console.log("pool2", pool2);
 
     }
 /*

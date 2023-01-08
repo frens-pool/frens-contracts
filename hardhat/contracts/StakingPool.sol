@@ -143,6 +143,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
 
   //TODO: think about other options for distribution
   //TODO: should this include an option to swap for SSV and pay operators?
+  //TODO: is this where we extract fes?
   function distribute() public {
     require(_getStateHash() == _getStringHash("staked"), "use withdraw when not staked");
     uint contractBalance = address(this).balance;
@@ -155,7 +156,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
       uint share = _getShare(id, contractBalance);
       addUint(keccak256(abi.encodePacked("claimable.amount", tokenOwner)), share);
     }
-    payable(address(frensClaim)).transfer(contractBalance);
+    payable(address(frensClaim)).transfer(contractBalance); //dust -> claim contract instead of pools - the gas to calculate and leave dust in pool >> lifetime expected dust/pool
   }
 
   function distributeAndClaim() public {
@@ -174,8 +175,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   }
 
   function claim() public {
-    IFrensClaim frensClaim = IFrensClaim(getAddress(keccak256(abi.encodePacked("contract.address", "FrensClaim"))));
-    frensClaim.claim(msg.sender);
+    claim(msg.sender);
   }
 
   function claim(address claimant) public {

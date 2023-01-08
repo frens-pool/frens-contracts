@@ -11,19 +11,16 @@ contract FrensClaim is IFrensClaim, FrensBase {
         //?
     }
 
-    function _claim(address claimant) internal {
+    function claim(address claimant) public {
         uint amount = getUint(keccak256(abi.encodePacked("claimable.amount", claimant)));
         setUint(keccak256(abi.encodePacked("claimable.amount", claimant)), 0);
         payable(claimant).transfer(amount);
     }
 
     function claim() override external {
-        _claim(msg.sender);
+        claim(msg.sender);
     }
 
-    function claim(address claimant) override external {
-        _claim(claimant);
-    }
 
     // to support receiving ETH by default
     receive() external payable {}

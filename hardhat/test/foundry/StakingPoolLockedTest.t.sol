@@ -105,7 +105,7 @@ contract StakingPoolLockedTest is Test {
       //connect to staking pool
       stakingPool = StakingPool(payable(pool));
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){
-      console.log("pool", pool);
+     // console.log("pool", pool);
     }
 
     function testOwner() public {

@@ -26,7 +26,6 @@ contract FrensPoolShare is IFrensPoolShare, ERC721Enumerable, Ownable, FrensBase
     return _exists(_id);
   }
 
-  //does frontend use this? otherwise it can be deleted
   function getPoolById(uint _id) public view returns(address){
     return getAddress(keccak256(abi.encodePacked("pool.for.id", _id)));
   }
@@ -37,7 +36,14 @@ contract FrensPoolShare is IFrensPoolShare, ERC721Enumerable, Ownable, FrensBase
   }
 
   function renderTokenById(uint256 id) public view returns (string memory){
-    IFrensArt frensArt = IFrensArt(getAddress(keccak256(abi.encodePacked("contract.address", "FrensArt"))));
+    address pool = getPoolById(id);
+    address artForPool  = getAddress(keccak256(abi.encodePacked("pool.specific.art.address", pool)));
+      IFrensArt frensArt;
+      if(artForPool == address(0)) {
+        frensArt = IFrensArt(getAddress(keccak256(abi.encodePacked("contract.address", "FrensArt"))));
+      } else {
+        frensArt = IFrensArt(artForPool);
+      }
     return frensArt.renderTokenById(id);
   }
 

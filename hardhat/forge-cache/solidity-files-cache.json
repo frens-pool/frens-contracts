@@ -291,8 +291,8 @@
       }
     },
     "contracts/FrensPoolShare.sol": {
-      "lastModificationDate": 1672636687940,
-      "contentHash": "baf9b3f70e17bd313580d964dfd4e67d",
+      "lastModificationDate": 1673212748213,
+      "contentHash": "7d3f4b7dec873c14d86933352bfd1e36",
       "sourceName": "contracts/FrensPoolShare.sol",
       "solcConfig": {
         "settings": {
@@ -351,8 +351,8 @@
       }
     },
     "contracts/FrensPoolShareTokenURI.sol": {
-      "lastModificationDate": 1672091492342,
-      "contentHash": "e50518009bb0c6938f2b18cb88f626bd",
+      "lastModificationDate": 1673212682644,
+      "contentHash": "353f0cce556c8809ca1c28ec8765ef6b",
       "sourceName": "contracts/FrensPoolShareTokenURI.sol",
       "solcConfig": {
         "settings": {
@@ -449,8 +449,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1673195336717,
-      "contentHash": "6178a69bd3bba827b64eed68a193f91a",
+      "lastModificationDate": 1673213707957,
+      "contentHash": "b6c7e29fc77187d9b10d6e624773bd79",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -484,6 +484,7 @@
       "imports": [
         "contracts/FrensBase.sol",
         "contracts/interfaces/IDepositContract.sol",
+        "contracts/interfaces/IFrensArt.sol",
         "contracts/interfaces/IFrensClaim.sol",
         "contracts/interfaces/IFrensPoolShare.sol",
         "contracts/interfaces/IFrensStorage.sol",
@@ -539,6 +540,7 @@
         "contracts/FrensBase.sol",
         "contracts/StakingPool.sol",
         "contracts/interfaces/IDepositContract.sol",
+        "contracts/interfaces/IFrensArt.sol",
         "contracts/interfaces/IFrensClaim.sol",
         "contracts/interfaces/IFrensPoolShare.sol",
         "contracts/interfaces/IFrensStorage.sol",

@@ -343,10 +343,23 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     console.log('\x1b[33m%s\x1b[0m', "FRENS Group Contracts Deployed");
   }
 
-  const newPool = await StakingPoolFactory.create("0x521B2cE927FD6d0D473789Bd3c70B296BBce613e", false);
+  const newPool = await StakingPoolFactory.create("0x42f58dd8528c302eeC4dCbC71159bA737908D6Fa", false);
   
   newPoolResult = await newPool.wait();
   console.log("new pool", newPoolResult.logs[0].address);
+/*
+  await deploy("FrensArtTest", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    args: [
+      FrensStorage.address
+     ],
+    log: true,
+    waitConfirmations: 5,
+  });
 
+  const FrensArtTest = await ethers.getContract("FrensArtTest", deployer);
+  console.log("FrensArtTest", FrensArtTest.address);
+*/
 };
 module.exports.tags = ["FrensPoolShare", "StakingPoolFactory", "StakingPool", "FrensStorage", "FrensInitialiser", "FrensPoolShareTokenURI"];

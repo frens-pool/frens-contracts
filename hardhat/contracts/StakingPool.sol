@@ -8,6 +8,7 @@ import "./interfaces/IDepositContract.sol";
 import "./interfaces/IFrensPoolShare.sol";
 import "./interfaces/IStakingPool.sol";
 import "./interfaces/IFrensClaim.sol";
+import "./interfaces/IFrensArt.sol";
 import "./FrensBase.sol";
 
 
@@ -254,6 +255,13 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     uint uintFromAddress = uint256(uint160(a));
     bytes memory withdralDesired = abi.encodePacked(uintFromAddress + 0x0100000000000000000000000000000000000000000000000000000000000000);
     return withdralDesired;
+  }
+
+  function setArt(address newArtContract) public onlyOwner {
+    IFrensArt newFrensArt = IFrensArt(newArtContract);
+    string memory newArt = newFrensArt.renderTokenById(1);
+    require(bytes(newArt).length != 0, "invalid art contract");
+    setAddress(keccak256(abi.encodePacked("pool.specific.art.address", address(this))), newArtContract);
   }
 
 //REMOVE rugpull is for testing only and should not be in the mainnet version

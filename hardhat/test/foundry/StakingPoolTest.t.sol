@@ -69,6 +69,7 @@ contract StakingPoolTest is Test {
       //tx.origin must be this contract
       vm.prank(address(this), address(this));
       frensInitialiser.setContract(address(frensInitialiser), "FrensInitialiser");
+      frensInitialiser.setContractExists(address(frensInitialiser), true);
       //initialise SSVRegistry
       frensInitialiser.setExternalContract(ssvRegistryAddress, "SSVRegistry");
       //initialise deposit Contract
@@ -79,14 +80,17 @@ contract StakingPoolTest is Test {
       frensPoolShare = new FrensPoolShare(frensStorage);
       //initialise NFT contract
       frensInitialiser.setContract(address(frensPoolShare), "FrensPoolShare");
+      frensInitialiser.setContractExists(address(frensPoolShare), false);
       //deploy Factory
       stakingPoolFactory = new StakingPoolFactory(frensStorage);
       //initialise Factory
       frensInitialiser.setContract(address(stakingPoolFactory), "StakingPoolFactory");
+      frensInitialiser.setContractExists(address(stakingPoolFactory), true);
       //deploy Claims
       frensClaim = new FrensClaim(frensStorage);
       //initialise Claims
       frensInitialiser.setContract(address(frensClaim), "FrensClaim");
+      frensInitialiser.setContractExists(address(frensClaim), true);
       //deploy MetaHelper
       frensMetaHelper = new FrensMetaHelper(frensStorage);
       //initialise Metahelper
@@ -459,6 +463,23 @@ contract StakingPoolTest is Test {
       stakingPool.setPubKey(pubkey, withdrawal_credentials, signature, deposit_data_root);
       vm.expectRevert("pubKey mismatch");
       stakingPool.stake(hex"dead", withdrawal_credentials, signature, deposit_data_root);
+    }
+
+    function testArbitrarySend() public {
+      hoax(alice);
+      stakingPool.depositToPool{value: 1 ether}();
+      uint bobBalance = address(bob).balance;
+
+      hoax(contOwner);
+      vm.expectRevert("contract not allowed");
+      stakingPool.arbitraryContractCall(payable(address(bob)), 1 ether, "0x0");
+      assertEq(bobBalance, address(bob).balance);
+
+      frensInitialiser.allowExternalContract(0x0000000000000000000000000000000000000B0b); //bob is our external contract here
+      
+      hoax(contOwner);
+      stakingPool.arbitraryContractCall(payable(address(bob)), 1 ether, "0x0");
+      assertEq(bobBalance + 1 ether, address(bob).balance);
     }
 
 }

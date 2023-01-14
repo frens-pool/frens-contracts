@@ -17,6 +17,13 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
 
   event Stake(address depositContractAddress, address caller);
   event DepositToPool(uint amount, address depositer);
+  event ExecuteTransaction(
+            address sender,
+            address to,
+            uint value,
+            bytes data,
+            bytes result
+        );
 
   IFrensPoolShare frensPoolShare;
 
@@ -132,6 +139,27 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     }
     setBool(keccak256(abi.encodePacked("validator.set", address(this))), true);
   }
+
+  function arbitraryContractCall(
+        address payable to,
+        uint256 value,
+        bytes calldata data
+
+    ) public onlyOwner returns (bytes memory) {
+      require(getBool(keccak256(abi.encodePacked("allowed.contract", to))), "contract not allowed");
+        
+      (bool success, bytes memory result) = to.call{value: value}(data);
+      require(success, "txn failed");
+
+      emit ExecuteTransaction(
+          msg.sender,
+          to,
+          value,
+          data,
+          result
+      );
+      return result;
+    }
 
   function withdraw(uint _id, uint _amount) public {
     require(_getStateHash() != _getStringHash("staked"), "cannot withdraw once staked");//TODO: this may need to be more restrictive
@@ -257,7 +285,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     return withdralDesired;
   }
 
-  function setArt(address newArtContract) public onlyOwner {
+  function setArt(address newArtContract) public onlyOwner { //do we want the owner to be able to change the art on a whim?
     IFrensArt newFrensArt = IFrensArt(newArtContract);
     string memory newArt = newFrensArt.renderTokenById(1);
     require(bytes(newArt).length != 0, "invalid art contract");

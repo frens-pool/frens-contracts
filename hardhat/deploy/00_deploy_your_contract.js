@@ -134,6 +134,8 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   if(FrensInitialiserOld == 0 || reinitialiseEverything) {
     const initialiserInit = await FrensInitialiser.setContract(FrensInitialiser.address, "FrensInitialiser");
     await initialiserInit.wait();
+    const frensInitBoolTrue = await FrensInitialiser.setContractExists(FrensInitialiser.address, true); //grants privileges to write to FrensStorage
+    await frensInitBoolTrue.wait();
     //ssvRegistry
     const ssvInit = await FrensInitialiser.setExternalContract(SSVRegistry, "SSVRegistry");
     await ssvInit.wait();
@@ -145,7 +147,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     await ENSInit.wait();
     console.log('\x1b[33m%s\x1b[0m', "initialiser initialised", FrensInitialiser.address);
   } else if(FrensInitialiserOld.address != FrensInitialiser.address) {
-    const newInitExist = await FrensInitialiserOld.setContractExists(FrensInitializer.address, true); //grants privileges to write to FrensStorage
+    const newInitExist = await FrensInitialiserOld.setContractExists(FrensInitialiser.address, true); //grants privileges to write to FrensStorage
     await newInitExist.wait();
     const initialiserDel = await FrensInitialiser.deleteContract(FrensInitialiserOld.address,"FrensInitialiser");
     await initialiserDel.wait();
@@ -211,12 +213,16 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   if(StakingPoolFactoryOld == 0 || reinitialiseEverything) {
     const factoryInit = await FrensInitialiser.setContract(StakingPoolFactory.address, "StakingPoolFactory");
     await factoryInit.wait();
+    const factoryBoolTrue = await FrensInitialiser.setContractExists(StakingPoolFactory.address, true); //grants privileges to write to FrensStorage
+    await factoryBoolTrue.wait();
     console.log('\x1b[33m%s\x1b[0m', "StakingPoolFactory initialised", StakingPoolFactory.address);
   } else if(StakingPoolFactoryOld.address != StakingPoolFactory.address){
     const factoryDel = await FrensInitialiser.deleteContract(StakingPoolFactoryOld.address, "StakingPoolFactory");
     await factoryDel.wait();
     const factoryInit = await FrensInitialiser.setContract(StakingPoolFactory.address, "StakingPoolFactory");
     await factoryInit.wait();
+    const factoryBoolTrue = await FrensInitialiser.setContractExists(StakingPoolFactory.address, true); //grants privileges to write to FrensStorage
+    await factoryBoolTrue.wait();
     console.log('\x1b[36m%s\x1b[0m', "StakingPoolFactory updated", StakingPoolFactory.address);
   }
 
@@ -232,14 +238,18 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   const FrensClaim = await ethers.getContract("FrensClaim", deployer);
 
   if(FrensClaimOld == 0 || reinitialiseEverything) {
-    const factoryInit = await FrensInitialiser.setContract(FrensClaim.address, "FrensClaim");
-    await factoryInit.wait();
+    const frensClaimInit = await FrensInitialiser.setContract(FrensClaim.address, "FrensClaim");
+    await frensClaimInit.wait();
+    const frensClaimBoolTrue = await FrensInitialiser.setContractExists(FrensClaim.address, true); //grants privileges to write to FrensStorage
+    await frensClaimBoolTrue.wait();
     console.log('\x1b[33m%s\x1b[0m', "FrensClaim initialised", FrensClaim.address);
   } else if(FrensClaimOld.address != FrensClaim.address){
-    const factoryDel = await FrensInitialiser.deleteContract(FrensClaimOld.address, "FrensClaim");
-    await factoryDel.wait();
-    const factoryInit = await FrensInitialiser.setContract(FrensClaim.address, "FrensClaim");
-    await factoryInit.wait();
+    const frensClaimDel = await FrensInitialiser.deleteContract(FrensClaimOld.address, "FrensClaim");
+    await frensClaimDel.wait();
+    const frensClaimInit = await FrensInitialiser.setContract(FrensClaim.address, "FrensClaim");
+    await frensClaimInit.wait();
+    const frensClaimBoolTrue = await FrensInitialiser.setContractExists(FrensClaim.address, true); //grants privileges to write to FrensStorage
+    await frensClaimBoolTrue.wait();
     console.log('\x1b[36m%s\x1b[0m', "FrensClaim updated", FrensClaim.address);
   }
 

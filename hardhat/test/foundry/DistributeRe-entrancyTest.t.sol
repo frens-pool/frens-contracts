@@ -18,6 +18,7 @@ import "../../contracts/FactoryProxy.sol";
 import "../../contracts/StakingPool.sol";
 import "../../contracts/StakingPoolFactory.sol";
 import "../../contracts/FrensPoolShare.sol";
+import "../../contracts/FrensClaim.sol";
 import "../../contracts/interfaces/IStakingPoolFactory.sol";
 import "../../contracts/interfaces/IDepositContract.sol";
 import "./TestHelper.sol";
@@ -74,6 +75,7 @@ contract StakingPoolTest is Test {
     StakingPool public stakingPool2;
     FrensPoolShare public frensPoolShare;
     IStakingPoolFactory public proxy;
+    FrensClaim public frensClaim;
 
     //mainnet
     address payable public depCont = payable(0x00000000219ab540356cBB839Cbe05303d7705Fa);
@@ -106,6 +108,7 @@ contract StakingPoolTest is Test {
       //tx.origin must be this contract
       vm.prank(address(this), address(this));
       frensInitialiser.setContract(address(frensInitialiser), "FrensInitialiser");
+      frensInitialiser.setContractExists(address(frensInitialiser), true);
       //initialise SSVRegistry
       frensInitialiser.setExternalContract(ssvRegistryAddress, "SSVRegistry");
       //initialise deposit Contract
@@ -116,12 +119,17 @@ contract StakingPoolTest is Test {
       frensPoolShare = new FrensPoolShare(frensStorage);
       //initialise NFT contract
       frensInitialiser.setContract(address(frensPoolShare), "FrensPoolShare");
+      frensInitialiser.setContractExists(address(frensPoolShare), false);
       //deploy Factory
       stakingPoolFactory = new StakingPoolFactory(frensStorage);
       //initialise Factory
       frensInitialiser.setContract(address(stakingPoolFactory), "StakingPoolFactory");
-      //deploy MetaHelper
-      frensMetaHelper = new FrensMetaHelper(frensStorage);
+      frensInitialiser.setContractExists(address(stakingPoolFactory), true);
+      //deploy Claims
+      frensClaim = new FrensClaim(frensStorage);
+      //initialise Claims
+      frensInitialiser.setContract(address(frensClaim), "FrensClaim");
+      frensInitialiser.setContractExists(address(frensClaim), true);
       //initialise Metahelper
       frensInitialiser.setContract(address(frensMetaHelper), "FrensMetaHelper");
       frensInitialiser.setContractExists(address(frensMetaHelper), false);

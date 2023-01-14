@@ -16,7 +16,6 @@ contract FrensInitialiser is FrensBase {
   function setContract(address _contractAddress, string memory _contractName) public onlyGuardian{
     setAddress(keccak256(abi.encodePacked("contract.address", _contractName)), _contractAddress);
     setString(keccak256(abi.encodePacked("contract.name", _contractAddress)), _contractName);
-    setBool(keccak256(abi.encodePacked("contract.exists", _contractAddress)), true);
   }
 
   function deleteContract(address _contractAddress, string memory _contractName) public onlyGuardian {
@@ -28,6 +27,14 @@ contract FrensInitialiser is FrensBase {
   function setExternalContract(address _contractAddress, string memory _contractName) public onlyGuardian {
     setAddress(keccak256(abi.encodePacked("external.contract.address", _contractName)), _contractAddress);
     setString(keccak256(abi.encodePacked("external.contract.name", _contractAddress)), _contractName);
+  }
+
+  function allowExternalContract(address _contractAddress) public onlyGuardian {
+    setBool(keccak256(abi.encodePacked("allowed.contract", _contractAddress)), true);
+  }
+
+  function disAllowExternalContract(address _contractAddress) public onlyGuardian {
+    setBool(keccak256(abi.encodePacked("allowed.contract", _contractAddress)), false);
   }
 
   ///add deletes

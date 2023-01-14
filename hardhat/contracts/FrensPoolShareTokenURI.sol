@@ -77,7 +77,7 @@ contract FrensPoolShareTokenURI is IFrensPoolShareTokenURI, FrensBase {
                   '"}], "image": "',
                   'data:image/svg+xml;base64,',
                   image,
-                  '"}'
+                  '"}' 
                 )
               )
             )

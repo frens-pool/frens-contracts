@@ -69,6 +69,7 @@ contract MiscTest is Test {
       //tx.origin must be this contract
       vm.prank(address(this), address(this));
       frensInitialiser.setContract(address(frensInitialiser), "FrensInitialiser");
+      frensInitialiser.setContractExists(address(frensInitialiser), true);
       //initialise SSVRegistry
       frensInitialiser.setExternalContract(ssvRegistryAddress, "SSVRegistry");
       //initialise deposit Contract
@@ -84,10 +85,12 @@ contract MiscTest is Test {
       stakingPoolFactory = new StakingPoolFactory(frensStorage);
       //initialise Factory
       frensInitialiser.setContract(address(stakingPoolFactory), "StakingPoolFactory");
+      frensInitialiser.setContractExists(address(stakingPoolFactory), true);
       //deploy Claims
       frensClaim = new FrensClaim(frensStorage);
       //initialise Claims
       frensInitialiser.setContract(address(frensClaim), "FrensClaim");
+      frensInitialiser.setContractExists(address(frensClaim), true);
       //deploy MetaHelper
       frensMetaHelper = new FrensMetaHelper(frensStorage);
       //initialise Metahelper

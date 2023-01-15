@@ -18,6 +18,13 @@
     },
     {
       "inputs": [],
+      "name": "claim",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "depositToPool",
       "outputs": [],
       "stateMutability": "payable",
@@ -26,6 +33,27 @@
     {
       "inputs": [],
       "name": "distribute",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "distributeAndClaim",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "distributeAndClaimAll",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "exitPool",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -198,13 +226,6 @@
         }
       ],
       "name": "stake",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "unstake",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

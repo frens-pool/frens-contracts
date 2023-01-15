@@ -20,8 +20,7 @@ contract FrensArt is IFrensArt, FrensBase {
   function renderTokenById(uint256 id) public view returns (string memory) {
     IStakingPool stakingPool = IStakingPool(payable(getAddress(keccak256(abi.encodePacked("pool.for.id", id)))));
     IFrensMetaHelper metaHelper = IFrensMetaHelper(getAddress(keccak256(abi.encodePacked("contract.address", "FrensMetaHelper"))));
-    uint depositForId = getUint(keccak256(abi.encodePacked("deposit.amount", id)));
-    string memory depositString = metaHelper.getEthDecimalString(depositForId);
+    string memory depositString = metaHelper.getDepositStringForId(id);
     uint shareForId = stakingPool.getDistributableShare(id);
     string memory shareString = metaHelper.getEthDecimalString(shareForId);
     string memory poolColor = metaHelper.getColor(address(stakingPool));

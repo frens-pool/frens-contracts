@@ -13,6 +13,12 @@ interface IStakingPool{
 
   function distribute() external;
 
+  function distributeAndClaim() external;
+
+  function distributeAndClaimAll() external;
+
+  function claim() external;
+
   function getIdsInThisPool() external view returns(uint[] memory);
 
   function getShare(uint _id) external view returns(uint);
@@ -41,6 +47,6 @@ interface IStakingPool{
 
   function stake() external;
 
-    function unstake() external;
+    function exitPool() external;
 
 }

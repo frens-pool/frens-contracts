@@ -57,8 +57,8 @@
       }
     },
     "contracts/FrensArt.sol": {
-      "lastModificationDate": 1672273389574,
-      "contentHash": "72259a2c33031739766e5652f86148ff",
+      "lastModificationDate": 1673755806329,
+      "contentHash": "cebfb50ed50b54225f307225d2a4aa7f",
       "sourceName": "contracts/FrensArt.sol",
       "solcConfig": {
         "settings": {
@@ -241,8 +241,8 @@
       }
     },
     "contracts/FrensMetaHelper.sol": {
-      "lastModificationDate": 1672275834173,
-      "contentHash": "b6e40e2bf99d3b012e2405a91cc2aecd",
+      "lastModificationDate": 1673756128362,
+      "contentHash": "75f11d50ad66169600da97dfcbe80d94",
       "sourceName": "contracts/FrensMetaHelper.sol",
       "solcConfig": {
         "settings": {
@@ -281,6 +281,7 @@
         "contracts/interfaces/IFrensStorage.sol",
         "contracts/interfaces/IReverseResolver.sol",
         "contracts/interfaces/ISSVRegistry.sol",
+        "contracts/interfaces/IStakingPool.sol",
         "node_modules/@openzeppelin/contracts/utils/Strings.sol"
       ],
       "versionRequirement": ">=0.8.0, <0.9.0",
@@ -351,8 +352,8 @@
       }
     },
     "contracts/FrensPoolShareTokenURI.sol": {
-      "lastModificationDate": 1673725505961,
-      "contentHash": "6a7a8f0222d245e62338a8b4a31e1590",
+      "lastModificationDate": 1673755733862,
+      "contentHash": "dce5343b23f0ff4a4c8ab0d7e6d1eaa7",
       "sourceName": "contracts/FrensPoolShareTokenURI.sol",
       "solcConfig": {
         "settings": {
@@ -449,8 +450,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1673730571475,
-      "contentHash": "578dda0ae241d695539d7886a8f8039d",
+      "lastModificationDate": 1673757801620,
+      "contentHash": "70c686dc5d2f90f579d7187e78c10fb7",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -766,8 +767,8 @@
       }
     },
     "contracts/interfaces/IFrensMetaHelper.sol": {
-      "lastModificationDate": 1672269152627,
-      "contentHash": "865f337eeb7cb34d7d17c40768d16ca9",
+      "lastModificationDate": 1673756144270,
+      "contentHash": "b90a5100ee63d5a9acfd7e2703d7bded",
       "sourceName": "contracts/interfaces/IFrensMetaHelper.sol",
       "solcConfig": {
         "settings": {
@@ -1017,8 +1018,8 @@
       }
     },
     "contracts/interfaces/IStakingPool.sol": {
-      "lastModificationDate": 1672356059219,
-      "contentHash": "999266ed351794b146bf63af3b9565db",
+      "lastModificationDate": 1673753824839,
+      "contentHash": "5fc92e968ee39f4b02d5af5f9b347ecf",
       "sourceName": "contracts/interfaces/IStakingPool.sol",
       "solcConfig": {
         "settings": {

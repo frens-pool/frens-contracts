@@ -27,13 +27,12 @@ contract FrensPoolShareTokenURI is IFrensPoolShareTokenURI, FrensBase {
       address poolAddress = getAddress(keccak256(abi.encodePacked("pool.for.id", id)));
       IStakingPool stakingPool = IStakingPool(payable(poolAddress));
       IFrensMetaHelper metaHelper = IFrensMetaHelper(getAddress(keccak256(abi.encodePacked("contract.address", "FrensMetaHelper"))));
-      uint depositForId = getUint(keccak256(abi.encodePacked("deposit.amount", id)));
-      string memory depositString = metaHelper.getEthDecimalString(depositForId);
+      string memory poolState = stakingPool.getState();
+      string memory depositString = metaHelper.getDepositStringForId(id);
       uint shareForId = stakingPool.getDistributableShare(id);
       string memory shareString = metaHelper.getEthDecimalString(shareForId);
       string memory stakingPoolAddress = Strings.toHexString(uint160(poolAddress), 20);
       (uint32[] memory poolOperators, string memory pubKeyString) = metaHelper.getOperatorsForPool(poolAddress);
-      string memory poolState = stakingPool.getState();
       string memory name = string(abi.encodePacked('fren pool share #',id.toString()));
       string memory description = string(abi.encodePacked(
         'this fren has a deposit of ',depositString,

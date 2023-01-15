@@ -6,6 +6,7 @@ import "./interfaces/ISSVRegistry.sol";
 import "./interfaces/IFrensMetaHelper.sol";
 import "./interfaces/IENS.sol";
 import "./interfaces/IReverseResolver.sol";
+import "./interfaces/IStakingPool.sol";
 import "./FrensBase.sol";
 import './ToColor.sol';
 import "@openzeppelin/contracts/utils/Strings.sol";
@@ -19,11 +20,20 @@ contract FrensMetaHelper is IFrensMetaHelper, FrensBase {
     //hi fren
   }
 
-  function getColor(address a) public pure returns(string memory){
+  function getColor(address a) external pure returns(string memory){
     bytes32 colorRandomness = keccak256(abi.encodePacked(address(a)));
     bytes3 colorBytes = bytes2(colorRandomness[0]) | ( bytes2(colorRandomness[1]) >> 8 ) | ( bytes3(colorRandomness[2]) >> 16 );
     string memory color = colorBytes.toColor();
     return color;
+  }
+
+  function getDepositStringForId(uint id) external view returns(string memory) {
+    address poolAddress = getAddress(keccak256(abi.encodePacked("pool.for.id", id)));
+    IStakingPool stakingPool = IStakingPool(payable(poolAddress));
+    string memory poolState = stakingPool.getState();
+    if(keccak256(abi.encodePacked("exited")) == keccak256(abi.encodePacked(poolState))) return "0"; //if the pool is is the exited state, this could be misleading
+    uint depositForId = getUint(keccak256(abi.encodePacked("deposit.amount", id)));
+    return getEthDecimalString(depositForId);
   }
 
   function getEthDecimalString(uint amountInWei) public pure returns(string memory){
@@ -36,7 +46,7 @@ contract FrensMetaHelper is IFrensMetaHelper, FrensBase {
     return string.concat(leftOfDecimal, ".", rod);
   }
 
-  function getOperatorsForPool(address poolAddress) public view returns (uint32[] memory, string memory) {
+  function getOperatorsForPool(address poolAddress) external view returns (uint32[] memory, string memory) {
     bytes memory poolPubKey = getBytes(keccak256(abi.encodePacked("validator.public.key", poolAddress)));
     string memory pubKeyString = _iToHex(poolPubKey);
     ISSVRegistry ssvRegistry = ISSVRegistry(getAddress(keccak256(abi.encodePacked("external.contract.address", "SSVRegistry"))));
@@ -55,7 +65,7 @@ contract FrensMetaHelper is IFrensMetaHelper, FrensBase {
     return string(abi.encodePacked("0x", converted));
   }
 
-  function getEns(address addr) public view returns(bool, string memory){
+  function getEns(address addr) external view returns(bool, string memory){
     IENS ens = IENS(getAddress(keccak256(abi.encodePacked("external.contract.address", "ENS"))));
     bytes32 node = _node(addr);
     address revResAddr = ens.resolver(node);

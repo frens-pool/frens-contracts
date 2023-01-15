@@ -464,7 +464,7 @@ contract StakingPoolTest is Test {
       vm.expectRevert("pubKey mismatch");
       stakingPool.stake(hex"dead", withdrawal_credentials, signature, deposit_data_root);
     }
-
+/*
     function testArbitrarySend() public {
       hoax(alice);
       stakingPool.depositToPool{value: 1 ether}();
@@ -481,5 +481,5 @@ contract StakingPoolTest is Test {
       stakingPool.arbitraryContractCall(payable(address(bob)), 1 ether, "0x0");
       assertEq(bobBalance + 1 ether, address(bob).balance);
     }
-
+*/
 }

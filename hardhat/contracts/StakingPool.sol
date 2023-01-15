@@ -17,13 +17,13 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
 
   event Stake(address depositContractAddress, address caller);
   event DepositToPool(uint amount, address depositer);
-  event ExecuteTransaction(
+ /* event ExecuteTransaction(
             address sender,
             address to,
             uint value,
             bytes data,
             bytes result
-        );
+        );*/
 
   IFrensPoolShare frensPoolShare;
 
@@ -116,7 +116,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     setBytes32(keccak256(abi.encodePacked("deposit_data_root", address(this))), deposit_data_root);
     setBool(keccak256(abi.encodePacked("validator.set", address(this))), true);
   }
-
+/*
   function arbitraryContractCall(
         address payable to,
         uint256 value,
@@ -134,7 +134,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
       );
       return result;
     }
-
+*/
   function withdraw(uint _id, uint _amount) external {
     require(_getStateHash() != _getStringHash("staked"), "cannot withdraw once staked");//TODO: this may need to be more restrictive
     require(msg.sender == frensPoolShare.ownerOf(_id), "not the owner");

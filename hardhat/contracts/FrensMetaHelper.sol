@@ -17,7 +17,7 @@ contract FrensMetaHelper is IFrensMetaHelper, FrensBase {
   using Strings for uint256;
 
   constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage) {
-    //hi fren
+    version = 2;
   }
 
   function getColor(address a) external pure returns(string memory){

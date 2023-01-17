@@ -14,6 +14,7 @@ contract FrensArt is IFrensArt, FrensBase {
 
   constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage){
     frensPoolShare = IFrensPoolShare(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolShare"))));
+    version = 2;
   }
 
   // Visibility is `public` to enable it being called by other contracts for composition.

@@ -18,6 +18,7 @@ import "../../contracts/FactoryProxy.sol";
 import "../../contracts/StakingPool.sol";
 import "../../contracts/StakingPoolFactory.sol";
 import "../../contracts/FrensClaim.sol";
+import "../../contracts/FrensPoolSetter.sol";
 import "../../contracts/FrensPoolShare.sol";
 import "../../contracts/interfaces/IStakingPoolFactory.sol";
 import "../../contracts/interfaces/IDepositContract.sol";
@@ -37,6 +38,7 @@ contract MiscTest is Test {
     FrensPoolShare public frensPoolShare;
     IStakingPoolFactory public proxy;
     FrensClaim public frensClaim;
+    FrensPoolSetter public frensPoolSetter;
 
     //mainnet
     address payable public depCont = payable(0x00000000219ab540356cBB839Cbe05303d7705Fa);
@@ -91,6 +93,11 @@ contract MiscTest is Test {
       //initialise Claims
       frensInitialiser.setContract(address(frensClaim), "FrensClaim");
       frensInitialiser.setContractExists(address(frensClaim), true);
+      //deploy PoolSetter
+      frensPoolSetter = new FrensPoolSetter(frensStorage);
+      //initialise PoolSetter
+      frensInitialiser.setContract(address(frensPoolSetter), "FrensPoolSetter");
+      frensInitialiser.setContractExists(address(frensPoolSetter), true);
       //deploy MetaHelper
       frensMetaHelper = new FrensMetaHelper(frensStorage);
       //initialise Metahelper

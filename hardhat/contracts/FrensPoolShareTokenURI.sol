@@ -20,6 +20,7 @@ contract FrensPoolShareTokenURI is IFrensPoolShareTokenURI, FrensBase {
 
   constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage){
     frensPoolShare = IFrensPoolShare(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolShare"))));
+    version = 2;
   }
 
     function tokenURI(uint256 id) public view returns (string memory) {

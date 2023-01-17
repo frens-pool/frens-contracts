@@ -40,6 +40,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   var FrensPoolShareOld = 0;
   var StakingPoolFactoryOld = 0;
   var FrensClaimOld = 0;
+  var FrensPoolSetterOld = 0;
   var FrensMetaHelperOld = 0;
   var FrensPoolShareTokenURIOld = 0;
   var FrensArtOld = 0;
@@ -66,6 +67,10 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
 
   try{
     FrensClaimOld = await ethers.getContract("FrensClaim", deployer);
+  } catch(e) {}
+
+  try{
+    FrensPoolSetterOld = await ethers.getContract("FrensPoolSetter", deployer);
   } catch(e) {}
 
   try{
@@ -253,6 +258,33 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     console.log('\x1b[36m%s\x1b[0m', "FrensClaim updated", FrensClaim.address);
   }
 
+  await deploy("FrensPoolSetter", {
+    from: deployer,
+    args: [
+      FrensStorage.address //goerli
+     ],
+    log: true,
+    waitConfirmations: 5,
+  });
+
+  const FrensPoolSetter = await ethers.getContract("FrensPoolSetter", deployer);
+
+  if(FrensPoolSetterOld == 0 || reinitialiseEverything) {
+    const FrensPoolSetterInit = await FrensInitialiser.setContract(FrensPoolSetter.address, "FrensPoolSetter");
+    await FrensPoolSetterInit.wait();
+    const FrensPoolSetterBoolTrue = await FrensInitialiser.setContractExists(FrensPoolSetter.address, true); //grants privileges to write to FrensStorage
+    await FrensPoolSetterBoolTrue.wait();
+    console.log('\x1b[33m%s\x1b[0m', "FrensPoolSetter initialised", FrensPoolSetter.address);
+  } else if(FrensPoolSetterOld.address != FrensPoolSetter.address){
+    const FrensPoolSetterDel = await FrensInitialiser.deleteContract(FrensPoolSetterOld.address, "FrensPoolSetter");
+    await FrensPoolSetterDel.wait();
+    const FrensPoolSetterInit = await FrensInitialiser.setContract(FrensPoolSetter.address, "FrensPoolSetter");
+    await FrensPoolSetterInit.wait();
+    const FrensPoolSetterBoolTrue = await FrensInitialiser.setContractExists(FrensPoolSetter.address, true); //grants privileges to write to FrensStorage
+    await FrensPoolSetterBoolTrue.wait();
+    console.log('\x1b[36m%s\x1b[0m', "FrensPoolSetter updated", FrensPoolSetter.address);
+  }
+
   await deploy("FrensMetaHelper", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
@@ -341,6 +373,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     from: deployer,
     args: [
       "0x521B2cE927FD6d0D473789Bd3c70B296BBce613e",
+      false,
       FrensStorage.address
     ],
     log: true,

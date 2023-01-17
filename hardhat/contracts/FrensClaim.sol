@@ -8,7 +8,7 @@ import "./FrensBase.sol";
 contract FrensClaim is IFrensClaim, FrensBase {
 
     constructor(IFrensStorage frensStorage_) FrensBase(frensStorage_){
-        //?
+        version = 2;
     }
 
     function claim(address claimant) public {

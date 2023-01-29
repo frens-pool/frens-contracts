@@ -15,16 +15,21 @@ contract StakingPoolFactory is IStakingPoolFactory, FrensBase {
   );
 
   constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage){
-    version = 2;
+    version = 0;
   }
 
   function create(
     address owner_, 
-    bool validatorLocked
+    bool validatorLocked// ,THESE AR NOT MAINNET READY YET
+    //bool frensLocked,
+    //uint poolMin,
+    //uint poolMax
     ) public override returns(address) {
     StakingPool stakingPool = new StakingPool(owner_, validatorLocked, frensStorage);
-    setBool(keccak256(abi.encodePacked("pool.exists", address(stakingPool))), true);
-    setBool(keccak256(abi.encodePacked("validator.locked", address(stakingPool))), validatorLocked);
+    //Should these be moved to a setter contract so that the pool/factory can be updated by FrensManager
+    IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
+    bool success = frensPoolSetter.create(address(stakingPool), validatorLocked);//, frensLocked, poolMin, poolMax);
+    assert(success);
     emit Create(address(stakingPool), msg.sender, owner_);
     return(address(stakingPool));
   }

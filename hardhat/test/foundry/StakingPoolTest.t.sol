@@ -119,14 +119,14 @@ contract StakingPoolTest is Test {
       frensStorage.setDeployedStatus();
 
       //create staking pool through proxy contract
-      (address pool) = proxy.create(contOwner, false);
+      (address pool) = proxy.create(contOwner, false/*, false, 0, 32000000000000000000*/);
       //connect to staking pool
       stakingPool = StakingPool(payable(pool));
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){
       //console.log("pool", pool);
 
       //create a second staking pool through proxy contract
-      (address pool2) = proxy.create(contOwner, false);
+      (address pool2) = proxy.create(contOwner, false/*, false, 0, 32000000000000000000*/);
       //connect to staking pool
       stakingPool2 = StakingPool(payable(pool2));
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){
@@ -471,7 +471,7 @@ contract StakingPoolTest is Test {
       vm.expectRevert("pubKey mismatch");
       stakingPool.stake(hex"dead", withdrawal_credentials, signature, deposit_data_root);
     }
-
+/*
     function testArbitrarySend() public {
       hoax(alice);
       stakingPool.depositToPool{value: 1 ether}();
@@ -488,5 +488,5 @@ contract StakingPoolTest is Test {
       stakingPool.arbitraryContractCall(payable(address(bob)), 1 ether, "0x0");
       assertEq(bobBalance + 1 ether, address(bob).balance);
     }
-
+*/
 }

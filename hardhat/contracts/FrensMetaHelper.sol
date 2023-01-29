@@ -17,7 +17,7 @@ contract FrensMetaHelper is IFrensMetaHelper, FrensBase {
   using Strings for uint256;
 
   constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage) {
-    version = 2;
+    version = 0;
   }
 
   function getColor(address a) external pure returns(string memory){
@@ -38,9 +38,9 @@ contract FrensMetaHelper is IFrensMetaHelper, FrensBase {
 
   function getEthDecimalString(uint amountInWei) public pure returns(string memory){
     string memory leftOfDecimal = (amountInWei / 1 ether).toString();
-    uint rightOfDecimal = (amountInWei % 1 ether) / 10**14;
+    uint rightOfDecimal = (amountInWei % 1 ether) / 10**15;
     string memory rod = rightOfDecimal.toString();
-    if(rightOfDecimal < 1000) rod = string.concat("0", rod);
+    //if(rightOfDecimal < 1000) rod = string.concat("0", rod);
     if(rightOfDecimal < 100) rod = string.concat("0", rod);
     if(rightOfDecimal < 10) rod = string.concat("0", rod);
     return string.concat(leftOfDecimal, ".", rod);
@@ -49,8 +49,8 @@ contract FrensMetaHelper is IFrensMetaHelper, FrensBase {
   function getOperatorsForPool(address poolAddress) external view returns (uint32[] memory, string memory) {
     bytes memory poolPubKey = getBytes(keccak256(abi.encodePacked("validator.public.key", poolAddress)));
     string memory pubKeyString = _iToHex(poolPubKey);
-    ISSVRegistry ssvRegistry = ISSVRegistry(getAddress(keccak256(abi.encodePacked("external.contract.address", "SSVRegistry"))));
-    uint32[] memory poolOperators = ssvRegistry.getOperatorsByValidator(poolPubKey);
+    //ISSVRegistry ssvRegistry = ISSVRegistry(getAddress(keccak256(abi.encodePacked("external.contract.address", "SSVRegistry"))));
+    uint32[] memory poolOperators;// = ssvRegistry.getOperatorsByValidator(poolPubKey);
     return(poolOperators, pubKeyString);
   }
 

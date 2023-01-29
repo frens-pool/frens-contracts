@@ -20,7 +20,7 @@ contract FrensPoolShareTokenURI is IFrensPoolShareTokenURI, FrensBase {
 
   constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage){
     frensPoolShare = IFrensPoolShare(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolShare"))));
-    version = 2;
+    version = 0;
   }
 
     function tokenURI(uint256 id) public view returns (string memory) {
@@ -33,16 +33,16 @@ contract FrensPoolShareTokenURI is IFrensPoolShareTokenURI, FrensBase {
       uint shareForId = stakingPool.getDistributableShare(id);
       string memory shareString = metaHelper.getEthDecimalString(shareForId);
       string memory stakingPoolAddress = Strings.toHexString(uint160(poolAddress), 20);
-      (uint32[] memory poolOperators, string memory pubKeyString) = metaHelper.getOperatorsForPool(poolAddress);
+      (/*uint32[] memory poolOperators*/, string memory pubKeyString) = metaHelper.getOperatorsForPool(poolAddress);
       string memory name = string(abi.encodePacked('fren pool share #',id.toString()));
       string memory description = string(abi.encodePacked(
         'this fren has a deposit of ',depositString,
         ' Eth in pool ', stakingPoolAddress,
         ', with claimable balance of ', shareString, ' Eth'));
-      string memory image = Base64.encode(bytes(generateSVGofTokenById(id, poolAddress)));
+     string memory image = Base64.encode(bytes(generateSVGofTokenById(id, poolAddress)));
 
 
-  //TODO: add pool owner to traits and possibly art (Add ENS integration for art - only display if ENS exists for address)
+  
       return
         string(
           abi.encodePacked(
@@ -66,7 +66,7 @@ contract FrensPoolShareTokenURI is IFrensPoolShareTokenURI, FrensBase {
                   shareString, ' Eth',
                   '"},{"trait_type": "pool state", "value": "',
                   poolState,
-                  '"},{"trait_type": "operator1", "value": "',
+                 /* '"},{"trait_type": "operator1", "value": "',
                   poolOperators.length == 0 ? "Not Set" : uint(poolOperators[0]).toString(),
                   '"},{"trait_type": "operator2", "value": "',
                   poolOperators.length == 0 ? "Not Set" : uint(poolOperators[1]).toString(),
@@ -74,7 +74,7 @@ contract FrensPoolShareTokenURI is IFrensPoolShareTokenURI, FrensBase {
                   poolOperators.length == 0 ? "Not Set" : uint(poolOperators[2]).toString(),
                   '"},{"trait_type": "operator4", "value": "',
                   poolOperators.length == 0 ? "Not Set" : uint(poolOperators[3]).toString(),
-                  '"}], "image": "',
+                 */ '"}], "image": "',
                   'data:image/svg+xml;base64,',
                   image,
                   '"}' 
@@ -82,7 +82,7 @@ contract FrensPoolShareTokenURI is IFrensPoolShareTokenURI, FrensBase {
               )
             )
           )
-        );
+        ); 
     }
 
     function generateSVGofTokenById(uint256 id, address pool) internal view returns (string memory) {
@@ -94,7 +94,7 @@ contract FrensPoolShareTokenURI is IFrensPoolShareTokenURI, FrensBase {
         frensArt = IFrensArt(artForPool);
       }
       string memory svg = string(abi.encodePacked(
-        '<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">',
+        '<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">',
           frensArt.renderTokenById(id),
         '</svg>'
       ));

@@ -8,10 +8,10 @@ import "./FrensBase.sol";
 contract FrensClaim is IFrensClaim, FrensBase {
 
     constructor(IFrensStorage frensStorage_) FrensBase(frensStorage_){
-        version = 2;
+        version = 0;
     }
 
-    function claim(address claimant) public {
+    function claim(address claimant) override public {
         uint amount = getUint(keccak256(abi.encodePacked("claimable.amount", claimant)));
         setUint(keccak256(abi.encodePacked("claimable.amount", claimant)), 0);
         payable(claimant).transfer(amount);

@@ -6,7 +6,18 @@ import "./FrensBase.sol";
 contract FrensPoolSetter is FrensBase {
 
     constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage){
-        version = 2;
+        version = 0;
+    }
+
+    function create(address stakingPool, bool validatorLocked/*, bool frensLocked, uint poolMin, uint poolMax*/) external returns(bool) {
+        string memory callingContract = getString(keccak256(abi.encodePacked("contract.name", msg.sender)));
+        require(keccak256(abi.encodePacked(callingContract)) == keccak256(abi.encodePacked("StakingPoolFactory")), "only factory can call");
+        setBool(keccak256(abi.encodePacked("pool.exists", stakingPool)), true);
+        setBool(keccak256(abi.encodePacked("validator.locked", stakingPool)), validatorLocked);
+        //setBool(keccak256(abi.encodePacked("frens.locked", stakingPool)), frensLocked);
+        //setUint(keccak256(abi.encodePacked("pool.min", stakingPool)), poolMin);
+        //setUint(keccak256(abi.encodePacked("pool.max", stakingPool)), poolMax);
+        return true;
     }
 
     function depositToPool(uint depositAmount) external onlyStakingPool(msg.sender) returns(bool) {
@@ -16,6 +27,8 @@ contract FrensPoolSetter is FrensBase {
         addUint(keccak256(abi.encodePacked("total.deposits", msg.sender)), depositAmount); //increase total.deposits of this pool by msg.value
         pushUint(keccak256(abi.encodePacked("ids.in.pool", msg.sender)), id); //add id to list of ids in pool
         setAddress(keccak256(abi.encodePacked("pool.for.id", id)), msg.sender); //set this as the pool for id
+        bool transferLocked = getBool(keccak256(abi.encodePacked("frens.locked", msg.sender)));
+        setBool(keccak256(abi.encodePacked("transfer.locked", id)), transferLocked); //set transfer lock if  pool is locked (use rageQuit if locked)
         return true;
     }
 
@@ -52,6 +65,18 @@ contract FrensPoolSetter is FrensBase {
 
     function setArt(address newArtContract) external onlyStakingPool(msg.sender) returns(bool) { 
         setAddress(keccak256(abi.encodePacked("pool.specific.art.address", msg.sender)), newArtContract);
+        return true;
+    }
+
+    function rageQuit(uint id, uint price) external onlyStakingPool(msg.sender) returns(bool) {
+        setBool(keccak256(abi.encodePacked("rage.quitting", id)), true);
+        setUint(keccak256(abi.encodePacked("rage.time", id)), block.timestamp);
+        setUint(keccak256(abi.encodePacked("rage.price", id)), price);
+        return true;
+    }
+
+    function unlockTransfer(uint id) external onlyStakingPool(msg.sender) returns(bool) {
+        setBool(keccak256(abi.encodePacked("transfer.locked", id)), false);
         return true;
     }
 }

@@ -7,7 +7,7 @@ import "./FrensBase.sol";
 contract FactoryProxy is FrensBase {
 
     constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage){
-        //construct dn
+        version = 0;
     }
 
     function _delegate(address implementation) internal {

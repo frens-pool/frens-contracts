@@ -6,7 +6,7 @@ import "./FrensBase.sol";
 contract FrensInitialiser is FrensBase {
 
   constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage) {
-    //nothing?
+    version = 0;
   }
   //set boolean
   function setContractExists(address _contractAddress, bool _exists) public onlyGuardian{

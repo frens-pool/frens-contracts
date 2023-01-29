@@ -14,7 +14,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract FrensPoolShare is IFrensPoolShare, ERC721Enumerable, Ownable, FrensBase {
 
   constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage) ERC721("staking con amigos", "FRENS") {
-    version = 2;
+    version = 0;
   }
 
   function mint(address userAddress) public onlyStakingPool(msg.sender) {
@@ -45,6 +45,13 @@ contract FrensPoolShare is IFrensPoolShare, ERC721Enumerable, Ownable, FrensBase
         frensArt = IFrensArt(artForPool);
       }
     return frensArt.renderTokenById(id);
+  }
+
+  function _beforeTokenTransfer(address from, address to, uint tokenId) internal override {
+    super._beforeTokenTransfer(from, to, tokenId);
+    if(from != address(0) && to != address(0)){
+      require(!getBool(keccak256(abi.encodePacked("transfer.locked", tokenId))), "not transferable");
+    } 
   }
 
 }

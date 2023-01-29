@@ -111,7 +111,7 @@ contract StakingPoolLockedTest is Test {
       frensStorage.setDeployedStatus();
 
       //create staking pool through proxy contract
-      (address pool) = proxy.create(contOwner, true);
+      (address pool) = proxy.create(contOwner, true/*, false, 0, 32000000000000000000*/);
       //connect to staking pool
       stakingPool = StakingPool(payable(pool));
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){

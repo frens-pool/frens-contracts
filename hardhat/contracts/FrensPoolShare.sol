@@ -54,4 +54,9 @@ contract FrensPoolShare is IFrensPoolShare, ERC721Enumerable, Ownable, FrensBase
     } 
   }
 
+  function burn(uint tokenId) public onlyStakingPool(msg.sender) {
+    require(msg.sender == getAddress(keccak256(abi.encodePacked("pool.for.id", tokenId))), "cannot burn shares from other pools");
+    _burn(tokenId);
+  }
+
 }

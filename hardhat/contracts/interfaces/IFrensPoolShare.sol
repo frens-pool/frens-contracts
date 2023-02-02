@@ -8,6 +8,8 @@ interface IFrensPoolShare is IERC721Enumerable{
 
   function mint(address userAddress) external;
 
+  function burn(uint tokenId) external;
+
   function exists(uint _id) external view returns(bool);
 
   function getPoolById(uint _id) external view returns(address);

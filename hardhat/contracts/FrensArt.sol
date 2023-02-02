@@ -54,7 +54,7 @@ contract FrensArt is IFrensArt, FrensBase {
           ensExists ? 'Pool created by: ' : 'frens.fun',
           ownerEns,
           '</textPath>',
-      '</text>'
+      '</text>'   
       
       ));
 

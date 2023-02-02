@@ -17,7 +17,7 @@ import "./FrensBase.sol";
 contract StakingPool is IStakingPool, Ownable, FrensBase {
 
   event Stake(address depositContractAddress, address caller);
-  event DepositToPool(uint amount, address depositer);
+  event DepositToPool(uint amount, address depositer, uint id);
   event ExecuteTransaction(
             address sender,
             address to,
@@ -50,8 +50,9 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
     bool success = frensPoolSetter.depositToPool(msg.value);
     assert(success);
+    uint id = getUint(keccak256(abi.encodePacked("token.id"))); //retrieve token id
     frensPoolShare.mint(msg.sender); //mint nft
-    emit DepositToPool(msg.value,  msg.sender); 
+    emit DepositToPool(msg.value,  msg.sender, id); 
   }
 
   function addToDeposit(uint _id) external payable {
@@ -75,7 +76,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
       bytes memory pubKeyFromStorage = getBytes(keccak256(abi.encodePacked("pubKey", address(this)))); 
       require(keccak256(pubKeyFromStorage) == keccak256(pubKey), "pubKey mismatch");
     }else { //if validator info has not previously been enteren, enter it, then stake
-      setPubKey(
+      _setPubKey(
         pubKey,
         withdrawal_credentials,
         signature,
@@ -105,7 +106,16 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     bytes calldata withdrawal_credentials,
     bytes calldata signature,
     bytes32 deposit_data_root
-  ) public{
+  ) public onlyOwner{
+    _setPubKey(pubKey, withdrawal_credentials, signature, deposit_data_root);
+  }
+
+  function _setPubKey(
+    bytes calldata pubKey,
+    bytes calldata withdrawal_credentials,
+    bytes calldata signature,
+    bytes32 deposit_data_root
+  ) internal{
     //get expected withdrawal_credentials based on contract address
     bytes memory withdrawalCredFromAddr = _toWithdrawalCred(address(this));
     //compare expected withdrawal_credentials to provided
@@ -120,7 +130,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     bool success = frensPoolSetter.setPubKey(pubKey, withdrawal_credentials, signature, deposit_data_root);
     assert(success);
   }
-/* not ready for mainnet release
+/* not ready for mainnet release?
   function arbitraryContractCall(
         address payable to,
         uint256 value,
@@ -162,6 +172,13 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     uint contractBalance = address(this).balance;
     require(contractBalance > 100, "minimum of 100 wei to distribute");
     IFrensClaim frensClaim = IFrensClaim(getAddress(keccak256(abi.encodePacked("contract.address", "FrensClaim"))));
+    uint feePercent = getUint(keccak256(abi.encodePacked("protocol.fee")));
+    if(feePercent > 0){
+      address feeRecipient = getAddress(keccak256(abi.encodePacked("fee.recipient")));
+      uint feeAmount = feePercent * contractBalance / 100;
+      payable(feeRecipient).transfer(feeAmount);
+      contractBalance = address(this).balance;
+    }
     uint[] memory idsInPool = getIdsInThisPool();
     for(uint i=0; i<idsInPool.length; i++) {
       uint id = idsInPool[i];

@@ -38,6 +38,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   var FrensStorageOld = 0;
   var FactoryProxyOld = 0;
   var FrensInitialiserOld = 0;
+  var FrensManagerOld = 0;
   var FrensPoolShareOld = 0;
   var StakingPoolFactoryOld = 0;
   var FrensClaimOld = 0;
@@ -56,6 +57,10 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
 
   try{
     FrensInitialiserOld = await ethers.getContract("FrensInitialiser", deployer);
+  } catch(e) {}
+
+  try{
+    FrensManagerOld = await ethers.getContract("FrensManager", deployer);
   } catch(e) {}
 
   try{
@@ -162,7 +167,35 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     console.log('\x1b[36m%s\x1b[0m', "initialiser updated", FrensInitialiser.address);
   }
 
-    if(FrensPoolShareOld == 0 || chainId == 31337){ //should not update NFT contract on testnet or mainnet
+  await deploy("FrensManager", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    args: [  FrensStorage.address ],
+    log: true,
+    waitConfirmations: 5,
+  });
+
+  const FrensManager = await ethers.getContract("FrensManager", deployer);
+
+  if(FrensManagerOld == 0 || reinitialiseEverything) {
+    const managerInit = await FrensInitialiser.setContract(FrensManager.address, "FrensManager");
+    await managerInit.wait();
+    const frensManageBoolTrue = await FrensInitialiser.setContractExists(FrensManager.address, true); //grants privileges to write to FrensStorage
+    await frensManageBoolTrue.wait();
+   
+    console.log('\x1b[33m%s\x1b[0m', "manager initialised", FrensManager.address);
+  } else if(FrensManagerOld.address != FrensManager.address) {
+    const managerDel = await FrensInitialiser.deleteContract(FrensManagerOld.address,"FrensManager");
+    await managerDel.wait();
+    const managerInit = await FrensInitialiser.setContract(FrensManager.address, "FrensManager");
+    await managerInit.wait();
+    const newManageExist = await FrensInitialiser.setContractExists(FrensManager.address, true); //grants privileges to write to FrensStorage
+    await newManageExist.wait();
+    console.log('\x1b[36m%s\x1b[0m', "manager updated", FrensManager.address);
+  }
+
+
+  if(FrensPoolShareOld == 0 || chainId == 31337){ //should not update NFT contract on testnet or mainnet
     await deploy("FrensPoolShare", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,

@@ -44,7 +44,7 @@ contract FrensPoolSetter is FrensBase {
     bytes calldata signature,
     bytes32 deposit_data_root
     ) external onlyStakingPool(msg.sender) returns(bool) {
-        setBytes(keccak256(abi.encodePacked("pubKey", msg.sender)), pubKey);
+        setBytes(keccak256(abi.encodePacked("validator.public.key", msg.sender)), pubKey);
         setBytes(keccak256(abi.encodePacked("withdrawal_credentials", msg.sender)), withdrawal_credentials);
         setBytes(keccak256(abi.encodePacked("signature", msg.sender)), signature);
         setBytes32(keccak256(abi.encodePacked("deposit_data_root", msg.sender)), deposit_data_root);

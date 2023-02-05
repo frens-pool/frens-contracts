@@ -20,8 +20,8 @@ contract StakingPoolFactory is IStakingPoolFactory, FrensBase {
 
   function create(
     address owner_, 
-    bool validatorLocked// ,THESE AR NOT MAINNET READY YET
-    //bool frensLocked,
+    bool validatorLocked// ,
+    //bool frensLocked, //THESE ARE NOT MAINNET READY YET
     //uint poolMin,
     //uint poolMax
     ) public override returns(address) {

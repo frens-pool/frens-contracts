@@ -156,7 +156,7 @@ contract FrensManagerTest is Test {
 
     frensManager.deleteContract(address(frensArt), "FrensArt");
     vm.expectRevert();
-    frensPoolShare.tokenURI(1);    
+    frensPoolShare.renderTokenById(1);    
   }
 /*
   function testDisallow() public {

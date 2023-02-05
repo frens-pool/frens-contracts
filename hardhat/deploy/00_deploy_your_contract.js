@@ -32,7 +32,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     DepositContract = "0xff50ed3d0ec03aC01D4C79aAd74928BFF48a7b2b";
   }else if(chainId ==31337){ //assumes we are forking goerli to test
     SSVRegistry = "0xb9e155e65B5c4D66df28Da8E9a0957f06F11Bc04";
-    DepositContract = "0x00000000219ab540356cBB839Cbe05303d7705Fa";
+    DepositContract = "0xff50ed3d0ec03aC01D4C79aAd74928BFF48a7b2b";
   }
 
   var FrensStorageOld = 0;

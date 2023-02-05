@@ -138,6 +138,7 @@ contract StakingPoolTest is Test {
     address pool3 = stakingPoolFactory.create(contOwner, false/*, false, 0, 32000000000000000000*/);
     StakingPool stakingPool3 = StakingPool(payable(pool3));
     vm.expectRevert("not enough eth");
+    hoax(contOwner);
     stakingPool3.stake();
   }
 

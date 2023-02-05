@@ -17,6 +17,11 @@ contract FrensManager is FrensBase {
     setString(keccak256(abi.encodePacked("contract.name", _contractAddress)), _contractName);
   }
 
+  function setFees(address recipient, uint percent) public onlyGuardian{
+    require(percent < 100, "don't do em like that");
+    setAddress(keccak256(abi.encodePacked("fee.recipient")), recipient);
+    setUint(keccak256(abi.encodePacked("protocol.fee")), percent);
+  }
 
   function deleteContract(address _contractAddress, string memory _contractName) public onlyGuardian {
     requireNotExist(_contractAddress);

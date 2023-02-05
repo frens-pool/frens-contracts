@@ -3,7 +3,7 @@ pragma solidity >=0.8.0 <0.9.0;
 
 interface IFrensMetaHelper {
 
-  function getColor(address a) external pure returns(string memory);
+  //function getColor(address a) external pure returns(string memory);
 
   function getEthDecimalString(uint amountInWei) external pure returns(string memory);
 

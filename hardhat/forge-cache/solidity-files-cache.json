@@ -57,8 +57,8 @@
       }
     },
     "contracts/FrensArt.sol": {
-      "lastModificationDate": 1674964292350,
-      "contentHash": "526c4afcd3fcc21ac3d7cdce7d973877",
+      "lastModificationDate": 1675014298299,
+      "contentHash": "7639087fe3308e99e2e75790ed3f4bab",
       "sourceName": "contracts/FrensArt.sol",
       "solcConfig": {
         "settings": {
@@ -241,8 +241,8 @@
       }
     },
     "contracts/FrensManager.sol": {
-      "lastModificationDate": 1674933551529,
-      "contentHash": "ce79499692849e0994d60ef2f943f4e9",
+      "lastModificationDate": 1675381346915,
+      "contentHash": "ce7a82afe27b1dda15395c1ac693b4f2",
       "sourceName": "contracts/FrensManager.sol",
       "solcConfig": {
         "settings": {
@@ -380,8 +380,8 @@
       }
     },
     "contracts/FrensPoolShare.sol": {
-      "lastModificationDate": 1674933584211,
-      "contentHash": "e09163fbf72b18f5a6580c874a411d58",
+      "lastModificationDate": 1675372403612,
+      "contentHash": "6b4618076e90fd82af25f0c8d6850432",
       "sourceName": "contracts/FrensPoolShare.sol",
       "solcConfig": {
         "settings": {
@@ -440,8 +440,8 @@
       }
     },
     "contracts/FrensPoolShareTokenURI.sol": {
-      "lastModificationDate": 1674966203440,
-      "contentHash": "b7daba5d20a6e0e6772c2ef00ff50f8f",
+      "lastModificationDate": 1675550083020,
+      "contentHash": "a7e600bd9c2b5ff943e8263843232bc9",
       "sourceName": "contracts/FrensPoolShareTokenURI.sol",
       "solcConfig": {
         "settings": {
@@ -538,8 +538,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1674932980966,
-      "contentHash": "aedfee901997a3c1e0eb8f7a2b0789c8",
+      "lastModificationDate": 1675565050279,
+      "contentHash": "43220962895cd6ca5e24ffe45214b7c6",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -594,8 +594,8 @@
       }
     },
     "contracts/StakingPoolFactory.sol": {
-      "lastModificationDate": 1674960086055,
-      "contentHash": "ee604b1d25eb84ed8fe219e9c9b358f8",
+      "lastModificationDate": 1675565029635,
+      "contentHash": "abf6017f912db3445153a62cf45a88a3",
       "sourceName": "contracts/StakingPoolFactory.sol",
       "solcConfig": {
         "settings": {
@@ -939,8 +939,8 @@
       }
     },
     "contracts/interfaces/IFrensPoolShare.sol": {
-      "lastModificationDate": 1672636629499,
-      "contentHash": "e8dab1eab803bf26b3747fb7efeb07c3",
+      "lastModificationDate": 1675371189885,
+      "contentHash": "a5206fb8a8e17770895c95a23852266b",
       "sourceName": "contracts/interfaces/IFrensPoolShare.sol",
       "solcConfig": {
         "settings": {
@@ -2334,8 +2334,8 @@
       }
     },
     "test/foundry/FrensManagerTest.t.sol": {
-      "lastModificationDate": 1674934110346,
-      "contentHash": "dd6b459069c20822a1c32ec222f34c5f",
+      "lastModificationDate": 1675549089447,
+      "contentHash": "9ea3af6f95d2c71a08b6fa4da74c8453",
       "sourceName": "test/foundry/FrensManagerTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2605,8 +2605,8 @@
       }
     },
     "test/foundry/StakingPoolFactoryTest.t.sol": {
-      "lastModificationDate": 1674933869415,
-      "contentHash": "99e1256a0d3265f5353fbadb5a82fe00",
+      "lastModificationDate": 1675567421571,
+      "contentHash": "23bca3ecded9b6ac05298346c3f1200b",
       "sourceName": "test/foundry/StakingPoolFactoryTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2784,8 +2784,8 @@
       }
     },
     "test/foundry/StakingPoolTest.t.sol": {
-      "lastModificationDate": 1674934205044,
-      "contentHash": "5d7bd57ce5ce2a994e0a99317a23f947",
+      "lastModificationDate": 1675559189703,
+      "contentHash": "e832d6b6a7ed60942352364d6d4e28e3",
       "sourceName": "test/foundry/StakingPoolTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2822,6 +2822,7 @@
         "contracts/FrensBase.sol",
         "contracts/FrensClaim.sol",
         "contracts/FrensInitialiser.sol",
+        "contracts/FrensManager.sol",
         "contracts/FrensMetaHelper.sol",
         "contracts/FrensPoolSetter.sol",
         "contracts/FrensPoolShare.sol",

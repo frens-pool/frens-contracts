@@ -8,30 +8,26 @@ import "./interfaces/IENS.sol";
 import "./interfaces/IReverseResolver.sol";
 import "./interfaces/IStakingPool.sol";
 import "./FrensBase.sol";
-import './ToColor.sol';
+//import './ToColor.sol';
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract FrensMetaHelper is IFrensMetaHelper, FrensBase {
 
-  using ToColor for bytes3;
+  //using ToColor for bytes3;
   using Strings for uint256;
 
   constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage) {
     version = 0;
   }
-
+/* not used in the current art
   function getColor(address a) external pure returns(string memory){
     bytes32 colorRandomness = keccak256(abi.encodePacked(address(a)));
     bytes3 colorBytes = bytes2(colorRandomness[0]) | ( bytes2(colorRandomness[1]) >> 8 ) | ( bytes3(colorRandomness[2]) >> 16 );
     string memory color = colorBytes.toColor();
     return color;
   }
-
+*/
   function getDepositStringForId(uint id) external view returns(string memory) {
-    address poolAddress = getAddress(keccak256(abi.encodePacked("pool.for.id", id)));
-    IStakingPool stakingPool = IStakingPool(payable(poolAddress));
-    string memory poolState = stakingPool.getState();
-    if(keccak256(abi.encodePacked("exited")) == keccak256(abi.encodePacked(poolState))) return "0"; //if the pool is is the exited state, this could be misleading
     uint depositForId = getUint(keccak256(abi.encodePacked("deposit.amount", id)));
     return getEthDecimalString(depositForId);
   }

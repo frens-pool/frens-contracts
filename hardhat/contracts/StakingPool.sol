@@ -83,10 +83,14 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
         deposit_data_root
       );
     }
-    stake();
+    _stake();
   }
 
-  function stake() public {
+  function stake() external onlyOwner{
+    _stake();
+  }
+
+  function _stake() internal {
     require(address(this).balance >= 32 ether, "not enough eth"); 
     require(currentState == State.acceptingDeposits, "wrong state");
     require(getBool(keccak256(abi.encodePacked("validator.set", address(this)))), "validator not set");
@@ -160,9 +164,6 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     payable(msg.sender).transfer(_amount);
   }
 
-  //TODO: think about other options for distribution
-  //TODO: should this include an option to swap for SSV and pay operators?
-  //TODO: is this where we extract fes?
   function distribute() public {
     require(currentState != State.acceptingDeposits, "use withdraw when not staked");
     _distribute();
@@ -246,7 +247,14 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     bool success = frensPoolSetter.unlockTransfer(id);
     assert(success);
   }
-  */
+  
+
+  function burn(uint tokenId) public { //this is only here to test the urn method in frensPoolShare
+    address tokenOwner = frensPoolShare.ownerOf(tokenId);
+    require(msg.sender == tokenOwner);
+    frensPoolShare.burn(tokenId);
+  }
+*/
   //getters
 
   function _getShare(uint _id, uint _contractBalance) internal view returns(uint) {
@@ -308,7 +316,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
 
   //setters
 
-  function setArt(address newArtContract) external onlyOwner { //do we want the owner to be able to change the art on a whim?
+  function setArt(address newArtContract) external onlyOwner { 
     IFrensArt newFrensArt = IFrensArt(newArtContract);
     string memory newArt = newFrensArt.renderTokenById(1);
     require(bytes(newArt).length != 0, "invalid art contract");

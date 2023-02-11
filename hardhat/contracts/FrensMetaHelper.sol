@@ -43,7 +43,7 @@ contract FrensMetaHelper is IFrensMetaHelper, FrensBase {
   }
 
   function getOperatorsForPool(address poolAddress) external view returns (uint32[] memory, string memory) {
-    bytes memory poolPubKey = getBytes(keccak256(abi.encodePacked("validator.public.key", poolAddress)));
+    bytes memory poolPubKey = getBytes(keccak256(abi.encodePacked("pubKey", poolAddress)));
     string memory pubKeyString = _iToHex(poolPubKey);
     //ISSVRegistry ssvRegistry = ISSVRegistry(getAddress(keccak256(abi.encodePacked("external.contract.address", "SSVRegistry"))));
     uint32[] memory poolOperators;// = ssvRegistry.getOperatorsByValidator(poolPubKey);

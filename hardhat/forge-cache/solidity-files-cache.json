@@ -285,8 +285,8 @@
       }
     },
     "contracts/FrensMetaHelper.sol": {
-      "lastModificationDate": 1674963294265,
-      "contentHash": "f2e4ce715b54a5b8a73512d012aceafc",
+      "lastModificationDate": 1675569437783,
+      "contentHash": "4749d001909bc000249dd5b7b0dbe191",
       "sourceName": "contracts/FrensMetaHelper.sol",
       "solcConfig": {
         "settings": {
@@ -319,7 +319,6 @@
       },
       "imports": [
         "contracts/FrensBase.sol",
-        "contracts/ToColor.sol",
         "contracts/interfaces/IENS.sol",
         "contracts/interfaces/IFrensMetaHelper.sol",
         "contracts/interfaces/IFrensStorage.sol",
@@ -336,7 +335,7 @@
       }
     },
     "contracts/FrensPoolSetter.sol": {
-      "lastModificationDate": 1674933452786,
+      "lastModificationDate": 1676097230116,
       "contentHash": "337d54c2521ac8d4196c10271582eaa3",
       "sourceName": "contracts/FrensPoolSetter.sol",
       "solcConfig": {
@@ -440,7 +439,7 @@
       }
     },
     "contracts/FrensPoolShareTokenURI.sol": {
-      "lastModificationDate": 1675550083020,
+      "lastModificationDate": 1675559299126,
       "contentHash": "a7e600bd9c2b5ff943e8263843232bc9",
       "sourceName": "contracts/FrensPoolShareTokenURI.sol",
       "solcConfig": {
@@ -538,8 +537,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1675565050279,
-      "contentHash": "43220962895cd6ca5e24ffe45214b7c6",
+      "lastModificationDate": 1676096371188,
+      "contentHash": "05fe4161a67bff9e7e76cbb5ae79ab6a",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -594,8 +593,8 @@
       }
     },
     "contracts/StakingPoolFactory.sol": {
-      "lastModificationDate": 1675565029635,
-      "contentHash": "abf6017f912db3445153a62cf45a88a3",
+      "lastModificationDate": 1675569898775,
+      "contentHash": "9f02eeae746f9212da44eda6edd3fda9",
       "sourceName": "contracts/StakingPoolFactory.sol",
       "solcConfig": {
         "settings": {
@@ -857,8 +856,8 @@
       }
     },
     "contracts/interfaces/IFrensMetaHelper.sol": {
-      "lastModificationDate": 1673756144270,
-      "contentHash": "b90a5100ee63d5a9acfd7e2703d7bded",
+      "lastModificationDate": 1675569425659,
+      "contentHash": "159d374618854f10297b8d7761d2a13a",
       "sourceName": "contracts/interfaces/IFrensMetaHelper.sol",
       "solcConfig": {
         "settings": {
@@ -2196,7 +2195,6 @@
         "contracts/FrensStorage.sol",
         "contracts/StakingPool.sol",
         "contracts/StakingPoolFactory.sol",
-        "contracts/ToColor.sol",
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IENS.sol",
         "contracts/interfaces/IFrensArt.sol",
@@ -2289,7 +2287,6 @@
         "contracts/FrensStorage.sol",
         "contracts/StakingPool.sol",
         "contracts/StakingPoolFactory.sol",
-        "contracts/ToColor.sol",
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IENS.sol",
         "contracts/interfaces/IFrensArt.sol",
@@ -2380,7 +2377,6 @@
         "contracts/FrensStorage.sol",
         "contracts/StakingPool.sol",
         "contracts/StakingPoolFactory.sol",
-        "contracts/ToColor.sol",
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IENS.sol",
         "contracts/interfaces/IFrensArt.sol",
@@ -2470,7 +2466,6 @@
         "contracts/FrensStorage.sol",
         "contracts/StakingPool.sol",
         "contracts/StakingPoolFactory.sol",
-        "contracts/ToColor.sol",
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IENS.sol",
         "contracts/interfaces/IFrensArt.sol",
@@ -2560,7 +2555,6 @@
         "contracts/FrensStorage.sol",
         "contracts/StakingPool.sol",
         "contracts/StakingPoolFactory.sol",
-        "contracts/ToColor.sol",
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IENS.sol",
         "contracts/interfaces/IFrensArt.sol",
@@ -2650,7 +2644,6 @@
         "contracts/FrensStorage.sol",
         "contracts/StakingPool.sol",
         "contracts/StakingPoolFactory.sol",
-        "contracts/ToColor.sol",
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IENS.sol",
         "contracts/interfaces/IFrensArt.sol",
@@ -2740,7 +2733,6 @@
         "contracts/FrensStorage.sol",
         "contracts/StakingPool.sol",
         "contracts/StakingPoolFactory.sol",
-        "contracts/ToColor.sol",
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IENS.sol",
         "contracts/interfaces/IFrensArt.sol",
@@ -2784,7 +2776,7 @@
       }
     },
     "test/foundry/StakingPoolTest.t.sol": {
-      "lastModificationDate": 1675559189703,
+      "lastModificationDate": 1676096371224,
       "contentHash": "e832d6b6a7ed60942352364d6d4e28e3",
       "sourceName": "test/foundry/StakingPoolTest.t.sol",
       "solcConfig": {
@@ -2830,7 +2822,6 @@
         "contracts/FrensStorage.sol",
         "contracts/StakingPool.sol",
         "contracts/StakingPoolFactory.sol",
-        "contracts/ToColor.sol",
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IENS.sol",
         "contracts/interfaces/IFrensArt.sol",

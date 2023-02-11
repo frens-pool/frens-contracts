@@ -402,12 +402,13 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   }
 
 //deploying a pool for verification purposes only (is this necessary?)
+/*
   await deploy("StakingPool", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
     args: [
       "0x521B2cE927FD6d0D473789Bd3c70B296BBce613e",
-      false,
+      true,
       FrensStorage.address
     ],
     log: true,
@@ -419,8 +420,8 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     await setDeployed.wait();
     console.log('\x1b[33m%s\x1b[0m', "FRENS Group Contracts Deployed");
   }
-
-  const newPool = await StakingPoolFactory.create("0x42f58dd8528c302eeC4dCbC71159bA737908D6Fa", false/*, false, 0, 32000000000000000000n*/);
+*/
+  const newPool = await StakingPoolFactory.create("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6", true/*, false, 0, 32000000000000000000n*/);
   
   newPoolResult = await newPool.wait();
   console.log("new pool", newPoolResult.logs[0].address);
@@ -439,4 +440,4 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   console.log("FrensArtTest", FrensArtTest.address);
 */
 };
-module.exports.tags = ["FrensPoolShare", "StakingPoolFactory", "StakingPool", "FrensStorage", "FrensInitialiser", "FrensPoolShareTokenURI"];
+module.exports.tags = ["FactoryProxy", "FrensArt", "FrensClaim", "FrensInitialiser", "FrensManager", "FrensMetaHelper", "FrensPoolSetter", "FrensPoolShare", "FrensPoolShareTokenURI", "FrensStorage", "StakingPoolFactory", "StakingPool"];

@@ -155,7 +155,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     }
 */
   function withdraw(uint _id, uint _amount) external {
-    require(currentState == State.acceptingDeposits, "cannot withdraw once staked");//TODO: this may need to be more restrictive
+    require(currentState == State.acceptingDeposits, "cannot withdraw once staked");
     require(msg.sender == frensPoolShare.ownerOf(_id), "not the owner");
     require(getUint(keccak256(abi.encodePacked("deposit.amount", _id))) >= _amount, "not enough deposited");
     IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
@@ -172,7 +172,6 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   function _distribute() internal {
     uint contractBalance = address(this).balance;
     require(contractBalance > 100, "minimum of 100 wei to distribute");
-    IFrensClaim frensClaim = IFrensClaim(getAddress(keccak256(abi.encodePacked("contract.address", "FrensClaim"))));
     uint feePercent = getUint(keccak256(abi.encodePacked("protocol.fee")));
     if(feePercent > 0){
       address feeRecipient = getAddress(keccak256(abi.encodePacked("fee.recipient")));
@@ -189,6 +188,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
       bool success = frensPoolSetter.distribute(tokenOwner, share);
       assert(success);
     }
+    IFrensClaim frensClaim = IFrensClaim(getAddress(keccak256(abi.encodePacked("contract.address", "FrensClaim"))));
     payable(address(frensClaim)).transfer(contractBalance); //dust -> claim contract instead of pools - the gas to calculate and leave dust in pool >> lifetime expected dust/pool
 
   }
@@ -249,7 +249,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   }
   
 
-  function burn(uint tokenId) public { //this is only here to test the urn method in frensPoolShare
+  function burn(uint tokenId) public { //this is only here to test the burn method in frensPoolShare
     address tokenOwner = frensPoolShare.ownerOf(tokenId);
     require(msg.sender == tokenOwner);
     frensPoolShare.burn(tokenId);
@@ -272,6 +272,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   }
 
   function getShare(uint _id) public view returns(uint) {
+    require(frensPoolShare.getPoolById(_id) == address(this), "wrong pool for id");
     uint contractBalance = address(this).balance;
     return _getShare(_id, contractBalance);
   }

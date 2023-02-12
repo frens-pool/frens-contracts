@@ -158,7 +158,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     require(currentState == State.acceptingDeposits, "cannot withdraw once staked");
     require(msg.sender == frensPoolShare.ownerOf(_id), "not the owner");
     require(getUint(keccak256(abi.encodePacked("deposit.amount", _id))) >= _amount, "not enough deposited");
-    require(frensPoolShare.getPoolById(_id) == address(this), "wrong pool for id");
+    require(getAddress(keccak256(abi.encodePacked("pool.for.id", _id))) == address(this), "wrong staking pool");
     IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
     bool success = frensPoolSetter.withdraw(_id, _amount);
     assert(success);
@@ -273,7 +273,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   }
 
   function getShare(uint _id) public view returns(uint) {
-    require(frensPoolShare.getPoolById(_id) == address(this), "wrong pool for id");
+    require(getAddress(keccak256(abi.encodePacked("pool.for.id", _id))) == address(this), "wrong staking pool");
     uint contractBalance = address(this).balance;
     return _getShare(_id, contractBalance);
   }
@@ -299,6 +299,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   }
 
   function getDepositAmount(uint _id) public view returns(uint){
+    require(getAddress(keccak256(abi.encodePacked("pool.for.id", _id))) == address(this), "wrong staking pool");
     return getUint(keccak256(abi.encodePacked("deposit.amount", _id)));
   }
 

@@ -23,7 +23,7 @@ contract FrensPoolSetter is FrensBase {
     function depositToPool(uint depositAmount) external onlyStakingPool(msg.sender) returns(bool) {
         addUint(keccak256(abi.encodePacked("token.id")), 1); //increment token id
         uint id = getUint(keccak256(abi.encodePacked("token.id"))); //retrieve token id
-        setUint(keccak256(abi.encodePacked("deposit.amount", id)), depositAmount); //assign msg.value to the deposit.amount of token id
+        setUint(keccak256(abi.encodePacked("deposit.amount", msg.sender, id)), depositAmount); //assign msg.value to the deposit.amount of token id
         addUint(keccak256(abi.encodePacked("total.deposits", msg.sender)), depositAmount); //increase total.deposits of this pool by msg.value
         pushUint(keccak256(abi.encodePacked("ids.in.pool", msg.sender)), id); //add id to list of ids in pool
         setAddress(keccak256(abi.encodePacked("pool.for.id", id)), msg.sender); //set this as the pool for id
@@ -33,7 +33,8 @@ contract FrensPoolSetter is FrensBase {
     }
 
     function addToDeposit(uint id, uint amount) external onlyStakingPool(msg.sender) returns(bool) {
-        addUint(keccak256(abi.encodePacked("deposit.amount", id)), amount); //add msg.value to deposit.amount for id
+        require(getAddress(keccak256(abi.encodePacked("pool.for.id", id))) == msg.sender, "wrong staking pool"); //id must be associated with this pool
+        addUint(keccak256(abi.encodePacked("deposit.amount", msg.sender, id)), amount); //add msg.value to deposit.amount for id
         addUint(keccak256(abi.encodePacked("total.deposits", msg.sender)), amount); //add msg.value to total.deposits for pool
         return true;
     }
@@ -53,13 +54,9 @@ contract FrensPoolSetter is FrensBase {
     }
 
     function withdraw(uint _id, uint _amount) external onlyStakingPool(msg.sender) returns(bool) {
-        subUint(keccak256(abi.encodePacked("deposit.amount", _id)), _amount);
+        require(getAddress(keccak256(abi.encodePacked("pool.for.id", _id))) == msg.sender, "wrong staking pool");
+        subUint(keccak256(abi.encodePacked("deposit.amount", msg.sender, _id)), _amount);
         subUint(keccak256(abi.encodePacked("total.deposits", msg.sender)), _amount);
-        return true;
-    }
-
-    function distribute(address tokenOwner, uint share) external onlyStakingPool(msg.sender) returns(bool) {
-        addUint(keccak256(abi.encodePacked("claimable.amount", tokenOwner)), share);
         return true;
     }
 

@@ -19,6 +19,44 @@
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "ids",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "distribute",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_id",
+          "type": "uint256"
+        }
+      ],
+      "name": "getShare",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
     }
   ],
   "bytecode": {
@@ -33,9 +71,11 @@
   },
   "methodIdentifiers": {
     "claim()": "4e71d92d",
-    "claim(address)": "1e83409a"
+    "claim(address)": "1e83409a",
+    "distribute(uint256[])": "4ea4f8e6",
+    "getShare(uint256)": "cfb5a5f8"
   },
-  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"claimant\",\"type\":\"address\"}],\"name\":\"claim\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"claim\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interfaces/IFrensClaim.sol\":\"IFrensClaim\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":base64-sol/=node_modules/base64-sol/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\"],\"viaIR\":true},\"sources\":{\"contracts/interfaces/IFrensClaim.sol\":{\"keccak256\":\"0x2928f60e0fa3ec849ca19d1728ae11ecfc85fdb0bd7ef60f5d64b30a6474594f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://60f22a3d36d3dd0eca819d4d67529e5896c31c6390121ec0b8a32d663244a655\",\"dweb:/ipfs/QmNuAaqXkXRc2foSLhvAUp6JH4862WpVSvM95ujRa9Va5Z\"]}},\"version\":1}",
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"claimant\",\"type\":\"address\"}],\"name\":\"claim\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"claim\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"}],\"name\":\"distribute\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_id\",\"type\":\"uint256\"}],\"name\":\"getShare\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interfaces/IFrensClaim.sol\":\"IFrensClaim\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":base64-sol/=node_modules/base64-sol/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\"],\"viaIR\":true},\"sources\":{\"contracts/interfaces/IFrensClaim.sol\":{\"keccak256\":\"0x2d1915d0a27801c2434920d4a0e3e8afad0927dd68fbc65a17c4066da758c495\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3092fb85c9156bbabdc4ba3c9793a8c8b4ea2f7b4bae9252941e44df347a412b\",\"dweb:/ipfs/QmdhYxhMfwW5UUsHFp72SSp3BXFcdZzpZvPyt3ziEtuTaK\"]}},\"version\":1}",
   "metadata": {
     "compiler": {
       "version": "0.8.17+commit.8df45f5f"
@@ -60,6 +100,44 @@
           "stateMutability": "nonpayable",
           "type": "function",
           "name": "claim"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256[]",
+              "name": "ids",
+              "type": "uint256[]"
+            }
+          ],
+          "stateMutability": "payable",
+          "type": "function",
+          "name": "distribute",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_id",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "getShare",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
         }
       ],
       "devdoc": {
@@ -99,10 +177,10 @@
     },
     "sources": {
       "contracts/interfaces/IFrensClaim.sol": {
-        "keccak256": "0x2928f60e0fa3ec849ca19d1728ae11ecfc85fdb0bd7ef60f5d64b30a6474594f",
+        "keccak256": "0x2d1915d0a27801c2434920d4a0e3e8afad0927dd68fbc65a17c4066da758c495",
         "urls": [
-          "bzz-raw://60f22a3d36d3dd0eca819d4d67529e5896c31c6390121ec0b8a32d663244a655",
-          "dweb:/ipfs/QmNuAaqXkXRc2foSLhvAUp6JH4862WpVSvM95ujRa9Va5Z"
+          "bzz-raw://3092fb85c9156bbabdc4ba3c9793a8c8b4ea2f7b4bae9252941e44df347a412b",
+          "dweb:/ipfs/QmdhYxhMfwW5UUsHFp72SSp3BXFcdZzpZvPyt3ziEtuTaK"
         ],
         "license": "MIT"
       }
@@ -111,19 +189,19 @@
   },
   "ast": {
     "absolutePath": "contracts/interfaces/IFrensClaim.sol",
-    "id": 4365,
+    "id": 5053,
     "exportedSymbols": {
       "IFrensClaim": [
-        4364
+        5052
       ]
     },
     "nodeType": "SourceUnit",
-    "src": "0:173:15",
+    "src": "0:314:16",
     "nodes": [
       {
-        "id": 4355,
+        "id": 5028,
         "nodeType": "PragmaDirective",
-        "src": "0:31:15",
+        "src": "0:31:16",
         "nodes": [],
         "literals": [
           "solidity",
@@ -136,62 +214,239 @@
         ]
       },
       {
-        "id": 4364,
+        "id": 5052,
         "nodeType": "ContractDefinition",
-        "src": "64:109:15",
+        "src": "64:250:16",
         "nodes": [
           {
-            "id": 4358,
+            "id": 5036,
             "nodeType": "FunctionDefinition",
-            "src": "97:26:15",
+            "src": "97:73:16",
+            "nodes": [],
+            "functionSelector": "4ea4f8e6",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "distribute",
+            "nameLocation": "106:10:16",
+            "parameters": {
+              "id": 5032,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5031,
+                  "mutability": "mutable",
+                  "name": "ids",
+                  "nameLocation": "133:3:16",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5036,
+                  "src": "117:19:16",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_calldata_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 5029,
+                      "name": "uint",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "117:4:16",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 5030,
+                    "nodeType": "ArrayTypeName",
+                    "src": "117:6:16",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "116:21:16"
+            },
+            "returnParameters": {
+              "id": 5035,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5034,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5036,
+                  "src": "164:4:16",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 5033,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "164:4:16",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "163:6:16"
+            },
+            "scope": 5052,
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 5043,
+            "nodeType": "FunctionDefinition",
+            "src": "176:56:16",
+            "nodes": [],
+            "functionSelector": "cfb5a5f8",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getShare",
+            "nameLocation": "185:8:16",
+            "parameters": {
+              "id": 5039,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5038,
+                  "mutability": "mutable",
+                  "name": "_id",
+                  "nameLocation": "199:3:16",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5043,
+                  "src": "194:8:16",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5037,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "194:4:16",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "193:10:16"
+            },
+            "returnParameters": {
+              "id": 5042,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5041,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5043,
+                  "src": "226:4:16",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5040,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "226:4:16",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "225:6:16"
+            },
+            "scope": 5052,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 5046,
+            "nodeType": "FunctionDefinition",
+            "src": "238:26:16",
             "nodes": [],
             "functionSelector": "4e71d92d",
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "claim",
-            "nameLocation": "106:5:15",
+            "nameLocation": "247:5:16",
             "parameters": {
-              "id": 4356,
+              "id": 5044,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "111:2:15"
+              "src": "252:2:16"
             },
             "returnParameters": {
-              "id": 4357,
+              "id": 5045,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "122:0:15"
+              "src": "263:0:16"
             },
-            "scope": 4364,
+            "scope": 5052,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
-            "id": 4363,
+            "id": 5051,
             "nodeType": "FunctionDefinition",
-            "src": "129:42:15",
+            "src": "270:42:16",
             "nodes": [],
             "functionSelector": "1e83409a",
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "claim",
-            "nameLocation": "138:5:15",
+            "nameLocation": "279:5:16",
             "parameters": {
-              "id": 4361,
+              "id": 5049,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4360,
+                  "id": 5048,
                   "mutability": "mutable",
                   "name": "claimant",
-                  "nameLocation": "152:8:15",
+                  "nameLocation": "293:8:16",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4363,
-                  "src": "144:16:15",
+                  "scope": 5051,
+                  "src": "285:16:16",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -199,10 +454,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 4359,
+                    "id": 5047,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "144:7:15",
+                    "src": "285:7:16",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -212,15 +467,15 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "143:18:15"
+              "src": "284:18:16"
             },
             "returnParameters": {
-              "id": 4362,
+              "id": 5050,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "170:0:15"
+              "src": "311:0:16"
             },
-            "scope": 4364,
+            "scope": 5052,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
@@ -233,15 +488,15 @@
         "contractKind": "interface",
         "fullyImplemented": false,
         "linearizedBaseContracts": [
-          4364
+          5052
         ],
         "name": "IFrensClaim",
-        "nameLocation": "74:11:15",
-        "scope": 4365,
+        "nameLocation": "74:11:16",
+        "scope": 5053,
         "usedErrors": []
       }
     ],
     "license": "MIT"
   },
-  "id": 15
+  "id": 16
 }

@@ -26,7 +26,6 @@ contract StakingPoolFactory is IStakingPoolFactory, FrensBase {
     //uint poolMax
     ) public override returns(address) {
     StakingPool stakingPool = new StakingPool(owner_, validatorLocked, frensStorage);
-    //Should these be moved to a setter contract so that the pool/factory can be updated by FrensManager
     IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
     bool success = frensPoolSetter.create(address(stakingPool), validatorLocked);//, frensLocked, poolMin, poolMax);
     assert(success);

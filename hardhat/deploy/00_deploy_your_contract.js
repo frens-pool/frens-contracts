@@ -401,30 +401,16 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     console.log('\x1b[36m%s\x1b[0m', "FrensArt updated", FrensArt.address);
   }
 
-//deploying a pool for verification purposes only (is this necessary?)
-/*
-  await deploy("StakingPool", {
-    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
-    from: deployer,
-    args: [
-      "0x521B2cE927FD6d0D473789Bd3c70B296BBce613e",
-      true,
-      FrensStorage.address
-    ],
-    log: true,
-    waitConfirmations: 5,
-  });
-
-  if(reinitialiseEverything){
-    const setDeployed = await FrensStorage.setDeployedStatus();
-    await setDeployed.wait();
-    console.log('\x1b[33m%s\x1b[0m', "FRENS Group Contracts Deployed");
-  }
-*/
   const newPool = await StakingPoolFactory.create("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6", true/*, false, 0, 32000000000000000000n*/);
   
   newPoolResult = await newPool.wait();
-  console.log("new pool", newPoolResult.logs[0].address);
+  console.log('\x1b[36m%s\x1b[0m',"New StakingPool", newPoolResult.logs[0].address);
+
+ if(chainId == 1){
+    const setGuard = await FrensStorage.setGuardian("0x6B5F5497Dd1FaFfC62faf6dCFC0e7f616058De0b");
+    await setGuard.wait();
+    console.log('\x1b[36m%s\x1b[0m', "New guardian set", "0x6B5F5497Dd1FaFfC62faf6dCFC0e7f616058De0b");
+  }
 /*
   await deploy("FrensArtTest", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy

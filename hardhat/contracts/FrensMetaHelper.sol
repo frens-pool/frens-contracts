@@ -43,6 +43,11 @@ contract FrensMetaHelper is IFrensMetaHelper, FrensBase {
     return string.concat(leftOfDecimal, ".", rod);
   }
 
+  function getPoolString(uint id) external view returns (string memory) {
+    address poolAddress = getAddress(keccak256(abi.encodePacked("pool.for.id", id)));
+    return Strings.toHexString(uint160(poolAddress), 20);
+  }
+
   function getOperatorsForPool(address poolAddress) external view returns (uint32[] memory, string memory) {
     bytes memory poolPubKey = getBytes(keccak256(abi.encodePacked("pubKey", poolAddress)));
     string memory pubKeyString = _iToHex(poolPubKey);

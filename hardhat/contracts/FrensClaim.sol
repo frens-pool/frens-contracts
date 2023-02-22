@@ -16,7 +16,6 @@ contract FrensClaim is IFrensClaim, FrensBase {
         version = 0;
     }
 
-
     function distribute(uint[] calldata ids) external payable onlyStakingPool(msg.sender) returns(bool) {
         for(uint i=0; i<ids.length; i++) {
             uint id = ids[i];
@@ -38,9 +37,9 @@ contract FrensClaim is IFrensClaim, FrensBase {
         uint depAmt = getUint(keccak256(abi.encodePacked("deposit.amount", pool, _id)));
         uint totDeps = getUint(keccak256(abi.encodePacked("total.deposits", pool)));
         if(depAmt == 0) return 0;
-        uint calcedShare =  _contractBalance * depAmt / totDeps;
+            uint calcedShare =  _contractBalance * depAmt / totDeps;
         if(calcedShare > 1){
-        return(calcedShare - 1); //steal 1 wei to avoid rounding errors drawing balance negative
+            return(calcedShare - 1); //steal 1 wei to avoid rounding errors drawing balance negative
         }else return 0;
     }
 
@@ -53,7 +52,6 @@ contract FrensClaim is IFrensClaim, FrensBase {
     function claim() override external {
         claim(msg.sender);
     }
-
 
     // to support receiving ETH by default
     receive() external payable {}

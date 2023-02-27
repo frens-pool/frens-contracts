@@ -30,9 +30,10 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   } else if(chainId == 5) {
     SSVRegistry = "0xb9e155e65B5c4D66df28Da8E9a0957f06F11Bc04";
     DepositContract = "0xff50ed3d0ec03aC01D4C79aAd74928BFF48a7b2b";
-  }else if(chainId ==31337){ //assumes we are forking goerli to test
+  }else if(chainId ==31337){ 
     SSVRegistry = "0xb9e155e65B5c4D66df28Da8E9a0957f06F11Bc04";
-    DepositContract = "0xff50ed3d0ec03aC01D4C79aAd74928BFF48a7b2b";
+    //DepositContract = "0xff50ed3d0ec03aC01D4C79aAd74928BFF48a7b2b";//forking goerli to test
+    DepositContract = "0x00000000219ab540356cBB839Cbe05303d7705Fa";//forking mainnet to test
   }
 
   var FrensStorageOld = 0;
@@ -41,11 +42,15 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   var FrensManagerOld = 0;
   var FrensPoolShareOld = 0;
   var StakingPoolFactoryOld = 0;
-  var FrensClaimOld = 0;
+  //var FrensClaimOld = 0;
   var FrensPoolSetterOld = 0;
+  var FrensOracleOld = 0;
   var FrensMetaHelperOld = 0;
   var FrensPoolShareTokenURIOld = 0;
   var FrensArtOld = 0;
+  var PmFontOld = 0;
+  var FrensLogoOld = 0;
+  var WavesOld = 0;
 
   try{
     FrensStorageOld = await ethers.getContract("FrensStorage", deployer);
@@ -70,13 +75,17 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   try{
     StakingPoolFactoryOld = await ethers.getContract("StakingPoolFactory", deployer);
   } catch(e) {}
-
+/*
   try{
     FrensClaimOld = await ethers.getContract("FrensClaim", deployer);
   } catch(e) {}
-
+*/
   try{
     FrensPoolSetterOld = await ethers.getContract("FrensPoolSetter", deployer);
+  } catch(e) {}
+
+  try{
+    FrensMetaHelperOld = await ethers.getContract("FrensOracle", deployer);
   } catch(e) {}
 
   try{
@@ -89,6 +98,18 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
 
   try{
     FrensArtOld = await ethers.getContract("FrensArt", deployer);
+  } catch(e) {}
+
+  try{
+    PmFontOld = await ethers.getContract("PmFont", deployer);
+  } catch(e) {}
+
+  try{
+    FrensLogoOld = await ethers.getContract("FrensLogo", deployer);
+  } catch(e) {}
+
+  try{
+    WavesOld = await ethers.getContract("Waves", deployer);
   } catch(e) {}
 
   
@@ -264,7 +285,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     await factoryBoolTrue.wait();
     console.log('\x1b[36m%s\x1b[0m', "StakingPoolFactory updated", StakingPoolFactory.address);
   }
-
+/*
   await deploy("FrensClaim", {
     from: deployer,
     args: [
@@ -283,15 +304,14 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     await frensClaimBoolTrue.wait();
     console.log('\x1b[33m%s\x1b[0m', "FrensClaim initialised", FrensClaim.address);
   } else if(FrensClaimOld.address != FrensClaim.address){
-    const frensClaimDel = await FrensInitialiser.deleteContract(FrensClaimOld.address, "FrensClaim");
-    await frensClaimDel.wait();
+    //cdo not delete old contract - will break old pools.
     const frensClaimInit = await FrensInitialiser.setContract(FrensClaim.address, "FrensClaim");
     await frensClaimInit.wait();
     const frensClaimBoolTrue = await FrensInitialiser.setContractExists(FrensClaim.address, true); //grants privileges to write to FrensStorage
     await frensClaimBoolTrue.wait();
     console.log('\x1b[36m%s\x1b[0m', "FrensClaim updated", FrensClaim.address);
   }
-
+*/
   await deploy("FrensPoolSetter", {
     from: deployer,
     args: [
@@ -317,6 +337,34 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     const FrensPoolSetterBoolTrue = await FrensInitialiser.setContractExists(FrensPoolSetter.address, true); //grants privileges to write to FrensStorage
     await FrensPoolSetterBoolTrue.wait();
     console.log('\x1b[36m%s\x1b[0m', "FrensPoolSetter updated", FrensPoolSetter.address);
+  }
+
+  await deploy("FrensOracle", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    args: [
+      FrensStorage.address
+     ],
+    log: true,
+    waitConfirmations: 5,
+  });
+
+  const FrensOracle = await ethers.getContract("FrensOracle", deployer);
+
+  if(FrensOracleOld == 0 || reinitialiseEverything){
+    const meatInit = await FrensInitialiser.setContract(FrensOracle.address, "FrensOracle");
+    await meatInit.wait();
+    const metaBoolFalse = await FrensInitialiser.setContractExists(FrensOracle.address, false); //removes privileges to write to FrensStorage
+    await metaBoolFalse.wait();
+    console.log('\x1b[33m%s\x1b[0m', "FrensOracle initialised", FrensOracle.address);
+  } else if(FrensOracleOld.address != FrensOracle.address){
+    const metaDel = await FrensInitialiser.deleteContract(FrensOracleOld.address, "FrensOracle");
+    await metaDel.wait();
+    const meatInit = await FrensInitialiser.setContract(FrensOracle.address, "FrensOracle");
+    await meatInit.wait();
+    const metaBoolFalse = await FrensInitialiser.setContractExists(FrensOracle.address, false); //removes privileges to write to FrensStorage
+    await metaBoolFalse.wait();
+    console.log('\x1b[36m%s\x1b[0m', "FrensOracle updated", FrensOracle.address);
   }
 
   await deploy("FrensMetaHelper", {
@@ -399,6 +447,104 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     const artBoolFalse = await FrensInitialiser.setContractExists(FrensArt.address, false); //removes privileges to write to FrensStorage
     await artBoolFalse.wait();
     console.log('\x1b[36m%s\x1b[0m', "FrensArt updated", FrensArt.address);
+  }
+
+  await deploy("PmFont", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    args: [
+      
+     ],
+    log: true,
+    waitConfirmations: 5,
+  });
+
+  const PmFont = await ethers.getContract("PmFont", deployer);
+
+  if(PmFontOld == 0 || reinitialiseEverything){
+    const artInit = await FrensInitialiser.setContract(PmFont.address, "PmFont");
+    await artInit.wait();
+    const artBoolFalse = await FrensInitialiser.setContractExists(PmFont.address, false); //removes privileges to write to FrensStorage
+    await artBoolFalse.wait();
+    console.log('\x1b[33m%s\x1b[0m', "PmFont initialised", PmFont.address);
+  } else if(PmFontOld.address != PmFont.address){
+    const artDel = await FrensInitialiser.deleteContract(PmFontOld.address, "PmFont");
+    await artDel.wait();
+    const artInit = await FrensInitialiser.setContract(PmFont.address, "PmFont");
+    await artInit.wait();
+    const artBoolFalse = await FrensInitialiser.setContractExists(PmFont.address, false); //removes privileges to write to FrensStorage
+    await artBoolFalse.wait();
+    console.log('\x1b[36m%s\x1b[0m', "PmFont updated", PmFont.address);
+  }
+
+  await deploy("FrensLogo", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    args: [
+      
+     ],
+    log: true,
+    waitConfirmations: 5,
+  });
+
+  const FrensLogo = await ethers.getContract("FrensLogo", deployer);
+
+  if(FrensLogoOld == 0 || reinitialiseEverything){
+    const artInit = await FrensInitialiser.setContract(FrensLogo.address, "FrensLogo");
+    await artInit.wait();
+    const artBoolFalse = await FrensInitialiser.setContractExists(FrensLogo.address, false); //removes privileges to write to FrensStorage
+    await artBoolFalse.wait();
+    console.log('\x1b[33m%s\x1b[0m', "FrensLogo initialised", FrensLogo.address);
+  } else if(FrensLogoOld.address != FrensLogo.address){
+    const artDel = await FrensInitialiser.deleteContract(FrensLogoOld.address, "FrensLogo");
+    await artDel.wait();
+    const artInit = await FrensInitialiser.setContract(FrensLogo.address, "FrensLogo");
+    await artInit.wait();
+    const artBoolFalse = await FrensInitialiser.setContractExists(FrensLogo.address, false); //removes privileges to write to FrensStorage
+    await artBoolFalse.wait();
+    console.log('\x1b[36m%s\x1b[0m', "FrensLogo updated", FrensLogo.address);
+  }
+
+  await deploy("Waves", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    args: [
+      
+     ],
+    log: true,
+    waitConfirmations: 5,
+  });
+
+  const Waves = await ethers.getContract("Waves", deployer);
+
+  if(WavesOld == 0 || reinitialiseEverything){
+    const artInit = await FrensInitialiser.setContract(Waves.address, "Waves");
+    await artInit.wait();
+    const artBoolFalse = await FrensInitialiser.setContractExists(Waves.address, false); //removes privileges to write to FrensStorage
+    await artBoolFalse.wait();
+    console.log('\x1b[33m%s\x1b[0m', "Waves initialised", Waves.address);
+  } else if(WavesOld.address != Waves.address){
+    const artDel = await FrensInitialiser.deleteContract(WavesOld.address, "Waves");
+    await artDel.wait();
+    const artInit = await FrensInitialiser.setContract(Waves.address, "Waves");
+    await artInit.wait();
+    const artBoolFalse = await FrensInitialiser.setContractExists(Waves.address, false); //removes privileges to write to FrensStorage
+    await artBoolFalse.wait();
+    console.log('\x1b[36m%s\x1b[0m', "Waves updated", Waves.address);
+  }
+
+  if(chainId == 31337){
+    await deploy("StakingPool", {//need abi
+      // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+      from: deployer,
+      args: [
+        "0x42f58dd8528c302eeC4dCbC71159bA737908D6Fa",
+        false,
+        FrensStorage.address
+      ],
+      log: true,
+      waitConfirmations: 5,
+    });
   }
 
   const newPool = await StakingPoolFactory.create("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6", true/*, false, 0, 32000000000000000000n*/);

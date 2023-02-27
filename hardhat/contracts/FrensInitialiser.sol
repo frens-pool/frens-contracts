@@ -8,7 +8,7 @@ contract FrensInitialiser is FrensBase {
   constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage) {
     version = 0;
   }
-  //set boolean
+  //set boolean (this is the dangerous one)
   function setContractExists(address _contractAddress, bool _exists) public onlyGuardian{
     setBool(keccak256(abi.encodePacked("contract.exists", _contractAddress)), _exists);
   }

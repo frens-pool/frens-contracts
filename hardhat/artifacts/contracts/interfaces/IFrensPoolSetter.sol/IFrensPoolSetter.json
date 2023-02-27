@@ -30,6 +30,35 @@
     {
       "inputs": [
         {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "exited",
+          "type": "bool"
+        }
+      ],
+      "name": "claim",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "address",
           "name": "stakingPool",
           "type": "address"
@@ -60,30 +89,6 @@
         }
       ],
       "name": "depositToPool",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "tokenOwner",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "share",
-          "type": "uint256"
-        }
-      ],
-      "name": "distribute",
       "outputs": [
         {
           "internalType": "bool",

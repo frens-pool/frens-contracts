@@ -10,6 +10,9 @@ import "forge-std/Test.sol";
 
 //Frens Contracts
 import "../../contracts/FrensArt.sol";
+import "../../contracts/PmFont.sol";
+import "../../contracts/FrensLogo.sol";
+import "../../contracts/Waves.sol";
 import "../../contracts/FrensInitialiser.sol";
 import "../../contracts/FrensMetaHelper.sol";
 import "../../contracts/FrensPoolShareTokenURI.sol";
@@ -28,6 +31,9 @@ import "./TestHelper.sol";
 
 contract FrensManagerTest is Test {
     FrensArt public frensArt;
+    PmFont public pmFont;
+    FrensLogo public frensLogo;
+    Waves public waves;
     FrensInitialiser public frensInitialiser;
     FrensMetaHelper public frensMetaHelper;
     FrensPoolShareTokenURI public frensPoolShareTokenURI;
@@ -118,6 +124,20 @@ contract FrensManagerTest is Test {
       frensArt = new FrensArt(frensStorage);
       //initialise art
       frensManager.setContract(address(frensArt), "FrensArt");
+      
+      //deploy pm font
+      pmFont = new PmFont();
+      //initialise pm font
+      frensManager.setContract(address(pmFont), "PmFont");
+      //deploy logo
+      frensLogo = new FrensLogo();
+      //initialise logo
+      frensManager.setContract(address(frensLogo), "FrensLogo");
+      //deploy Waves
+      waves = new Waves();
+      //initialise waves
+      frensManager.setContract(address(waves), "Waves");
+
       //frensInitialiser.setContractExists(address(frensArt), false);
       //set contracts as deployed
       //tx.origin must be this contract

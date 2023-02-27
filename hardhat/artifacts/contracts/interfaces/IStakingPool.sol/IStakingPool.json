@@ -17,7 +17,13 @@
       "type": "function"
     },
     {
-      "inputs": [],
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
       "name": "claim",
       "outputs": [],
       "stateMutability": "nonpayable",
@@ -28,27 +34,6 @@
       "name": "depositToPool",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "distribute",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "distributeAndClaim",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "distributeAndClaimAll",
-      "outputs": [],
-      "stateMutability": "nonpayable",
       "type": "function"
     },
     {

@@ -27,6 +27,7 @@ contract FrensPoolSetter is FrensBase {
         addUint(keccak256(abi.encodePacked("total.deposits", msg.sender)), depositAmount); //increase total.deposits of this pool by msg.value
         pushUint(keccak256(abi.encodePacked("ids.in.pool", msg.sender)), id); //add id to list of ids in pool
         setAddress(keccak256(abi.encodePacked("pool.for.id", id)), msg.sender); //set this as the pool for id
+        setUint(keccak256(abi.encodePacked("fren.past.claims", msg.sender, id)), 1); //this avoids future rounding errors in future claims causing pool baance to go negative
         bool transferLocked = getBool(keccak256(abi.encodePacked("frens.locked", msg.sender)));
         setBool(keccak256(abi.encodePacked("transfer.locked", id)), transferLocked); //set transfer lock if  pool is locked (use rageQuit if locked)
         return true;
@@ -60,6 +61,14 @@ contract FrensPoolSetter is FrensBase {
         return true;
     }
 
+    function claim(uint id, uint amount, bool exited) external onlyStakingPool(msg.sender) returns(bool){
+        require(getAddress(keccak256(abi.encodePacked("pool.for.id", id))) == msg.sender, "wrong staking pool");
+        addUint(keccak256(abi.encodePacked("fren.past.claims", msg.sender, id)), amount);
+        addUint(keccak256(abi.encodePacked("total.claims", msg.sender)), amount);
+        if(exited) setBool(keccak256(abi.encodePacked("fren.exited", msg.sender, id)), true);
+        return true;
+    }
+
     function setArt(address newArtContract) external onlyStakingPool(msg.sender) returns(bool) { 
         setAddress(keccak256(abi.encodePacked("pool.specific.art.address", msg.sender)), newArtContract);
         return true;
@@ -76,4 +85,12 @@ contract FrensPoolSetter is FrensBase {
         setBool(keccak256(abi.encodePacked("transfer.locked", id)), false);
         return true;
     }
+    /*
+    function exitPool(uint[] ids) external onlyStakingPool(msg.sender) returns(bool) {
+        for(uint i; i = 0; i++) {
+            setUint(keccak256(abi.encodePacked("deposit.amount", msg.sender, id)), 0);
+        }
+        setUint(keccak256(abi.encodePacked("total.deposits", msg.sender)), 1); //1 wei to avoid divide by zero errors
+    }
+    */
 }

@@ -13,7 +13,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 //should ownable be replaces with an equivalent in storage/base? (needs to interface with opensea properly)
 contract FrensPoolShare is IFrensPoolShare, ERC721Enumerable, Ownable, FrensBase {
 
-  constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage) ERC721("Staking with frens", "FRENS") {
+  constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage) ERC721("FRENS Share", "FRENS") {
     version = 0;
   }
 

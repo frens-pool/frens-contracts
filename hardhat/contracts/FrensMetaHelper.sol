@@ -29,6 +29,9 @@ contract FrensMetaHelper is IFrensMetaHelper, FrensBase {
 */
   function getDepositStringForId(uint id) external view returns(string memory) {
     address pool = getAddress(keccak256(abi.encodePacked("pool.for.id", id)));
+    if(getBool(keccak256(abi.encodePacked("fren.exited", msg.sender, id)))){
+      return "0";
+    }
     uint depositForId = getUint(keccak256(abi.encodePacked("deposit.amount", pool, id)));
     return getEthDecimalString(depositForId);
   }

@@ -39,8 +39,9 @@ contract FrensPoolShareTokenURI is IFrensPoolShareTokenURI, FrensBase {
         'this fren has a deposit of ',depositString,
         ' Eth in pool ', stakingPoolAddress,
         ', with claimable balance of ', shareString, ' Eth'));
-     string memory image = Base64.encode(bytes(generateSVGofTokenById(id, poolAddress)));
-
+      string memory image = Base64.encode(bytes(generateSVGofTokenById(id, poolAddress)));
+      (bool ensExists, string memory ownerEns) = metaHelper.getEns(stakingPool.owner());
+      string memory creator = ensExists ? ownerEns : Strings.toHexString(uint160(stakingPool.owner()), 20);
 
   
       return
@@ -66,6 +67,8 @@ contract FrensPoolShareTokenURI is IFrensPoolShareTokenURI, FrensBase {
                   shareString, ' Eth',
                   '"},{"trait_type": "pool state", "value": "',
                   poolState,
+                  '"},{"trait_type": "pool creator", "value": "',
+                  creator,
                  // '"},{"trait_type": "operator1", "value": "',
                  // poolOperators.length == 0 ? "Not Set" : uint(poolOperators[0]).toString(),
                  // '"},{"trait_type": "operator2", "value": "',

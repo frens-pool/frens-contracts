@@ -11,13 +11,13 @@ interface IStakingPool{
 
   function withdraw(uint _id, uint _amount) external;
 
-  function distribute() external;
+  //function distribute() external;
 
-  function distributeAndClaim() external;
+  //function distributeAndClaim() external;
 
-  function distributeAndClaimAll() external;
+  //function distributeAndClaimAll() external;
 
-  function claim() external;
+  function claim(uint id) external;
 
   function getIdsInThisPool() external view returns(uint[] memory);
 
